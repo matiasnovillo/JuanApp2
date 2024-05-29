@@ -3,6 +3,7 @@ using JuanApp2.Areas.BasicCore.Entities;
 using JuanApp2.Areas.BasicCore.Interfaces;
 using JuanApp.Formularios;
 using Microsoft.Extensions.DependencyInjection;
+using JuanApp.Formularios.Entrada;
 
 namespace JuanApp
 {
@@ -60,7 +61,9 @@ namespace JuanApp
 
         private void btnCaja_Click(object sender, EventArgs e)
         {
+            ConsultaCaja ConsultaCaja = new(_serviceProvider);
 
+            ConsultaCaja.ShowDialog();
         }
     }
 }

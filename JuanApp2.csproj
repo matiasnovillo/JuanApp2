@@ -9,13 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Formularios\Entrada\**" />
     <Compile Remove="Formularios\Herramientas\**" />
     <Compile Remove="Formularios\Salida\**" />
-    <EmbeddedResource Remove="Formularios\Entrada\**" />
     <EmbeddedResource Remove="Formularios\Herramientas\**" />
     <EmbeddedResource Remove="Formularios\Salida\**" />
-    <None Remove="Formularios\Entrada\**" />
     <None Remove="Formularios\Herramientas\**" />
     <None Remove="Formularios\Salida\**" />
   </ItemGroup>

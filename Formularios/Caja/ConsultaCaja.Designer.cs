@@ -1,6 +1,6 @@
 ﻿namespace JuanApp.Formularios.Entrada
 {
-    partial class ConsultaEntrada
+    partial class ConsultaCaja
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaEntrada));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaCaja));
             toolStrip1 = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             menuItemMain = new ToolStripMenuItem();
@@ -45,7 +45,7 @@
             txtBuscar = new TextBox();
             btnAgregar = new Button();
             lblNeto = new Label();
-            txtNetoTotal = new TextBox();
+            txtCaja = new TextBox();
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
@@ -211,17 +211,17 @@
             lblNeto.ForeColor = SystemColors.Window;
             lblNeto.Location = new Point(12, 363);
             lblNeto.Name = "lblNeto";
-            lblNeto.Size = new Size(138, 31);
+            lblNeto.Size = new Size(71, 31);
             lblNeto.TabIndex = 12;
-            lblNeto.Text = "Neto TOTAL:";
+            lblNeto.Text = "CAJA:";
             // 
-            // txtNetoTotal
+            // txtCaja
             // 
-            txtNetoTotal.Location = new Point(12, 395);
-            txtNetoTotal.Name = "txtNetoTotal";
-            txtNetoTotal.ReadOnly = true;
-            txtNetoTotal.Size = new Size(194, 38);
-            txtNetoTotal.TabIndex = 13;
+            txtCaja.Location = new Point(12, 395);
+            txtCaja.Name = "txtCaja";
+            txtCaja.ReadOnly = true;
+            txtCaja.Size = new Size(194, 38);
+            txtCaja.TabIndex = 13;
             // 
             // numericUpDownRegistrosPorPagina
             // 
@@ -251,7 +251,7 @@
             pnlFiltersAndSearchBar.Controls.Add(btnBuscar);
             pnlFiltersAndSearchBar.Controls.Add(numericUpDownRegistrosPorPagina);
             pnlFiltersAndSearchBar.Controls.Add(lblFechaInicio);
-            pnlFiltersAndSearchBar.Controls.Add(txtNetoTotal);
+            pnlFiltersAndSearchBar.Controls.Add(txtCaja);
             pnlFiltersAndSearchBar.Controls.Add(dateTimePickerFechaInicio);
             pnlFiltersAndSearchBar.Controls.Add(lblNeto);
             pnlFiltersAndSearchBar.Controls.Add(lblFechaFin);
@@ -310,7 +310,7 @@
         private TextBox txtBuscar;
         private Button btnAgregar;
         private Label lblNeto;
-        private TextBox txtNetoTotal;
+        private TextBox txtCaja;
         private NumericUpDown numericUpDownRegistrosPorPagina;
         private Label label1;
         private Panel pnlFiltersAndSearchBar;

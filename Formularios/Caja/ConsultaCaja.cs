@@ -1,80 +1,71 @@
-﻿using JuanApp.Areas.JuanApp.Interfaces;
+﻿using JuanApp2.Areas.JuanApp2.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
-using JuanApp.Areas.BasicCore.Entities;
-using JuanApp.Areas.JuanApp.Entities;
-using DocumentFormat.OpenXml.InkML;
-using Microsoft.Win32;
-using System.Linq;
-using System.Windows.Forms;
-using JuanApp.Areas.JuanApp.Repositories;
 
 namespace JuanApp.Formularios.Entrada
 {
-    public partial class ConsultaEntrada : Form
+    public partial class ConsultaCaja : Form
     {
-        private readonly IEntradaRepository _entradaRepository;
-        private readonly IEntradaService _entradaService;
+        private readonly ICajaRepository _cajaRepository;
         private readonly ServiceProvider _serviceProvider;
 
-        public ConsultaEntrada(ServiceProvider serviceProvider)
+        public ConsultaCaja(ServiceProvider serviceProvider)
         {
             try
             {
                 _serviceProvider = serviceProvider;
 
-                _entradaRepository = serviceProvider.GetRequiredService<IEntradaRepository>();
-                _entradaService = serviceProvider.GetRequiredService<IEntradaService>();
+                _cajaRepository = serviceProvider.GetRequiredService<ICajaRepository>();
 
                 InitializeComponent();
 
-                DataGridViewTextBoxColumn col0 = new();
-                col0.DataPropertyName = "EntradaId";
-                col0.HeaderText = "ID del sistema";
-                DataGridViewEntrada.Columns.Add(col0);
+                //DataGridViewTextBoxColumn col0 = new();
+                //col0.DataPropertyName = "EntradaId";
+                //col0.HeaderText = "ID del sistema";
+                //DataGridViewEntrada.Columns.Add(col0);
 
-                DataGridViewTextBoxColumn col2 = new();
-                col2.DataPropertyName = "NroDePesaje";
-                col2.HeaderText = "Nº de pesaje";
-                DataGridViewEntrada.Columns.Add(col2);
+                //DataGridViewTextBoxColumn col2 = new();
+                //col2.DataPropertyName = "NroDePesaje";
+                //col2.HeaderText = "Nº de pesaje";
+                //DataGridViewEntrada.Columns.Add(col2);
 
-                DataGridViewTextBoxColumn col3 = new();
-                col3.DataPropertyName = "CodigoDeProducto";
-                col3.HeaderText = "Código de producto";
-                DataGridViewEntrada.Columns.Add(col3);
+                //DataGridViewTextBoxColumn col3 = new();
+                //col3.DataPropertyName = "CodigoDeProducto";
+                //col3.HeaderText = "Código de producto";
+                //DataGridViewEntrada.Columns.Add(col3);
 
-                DataGridViewTextBoxColumn col4 = new();
-                col4.DataPropertyName = "NombreDeProducto";
-                col4.HeaderText = "Nombre de producto";
-                col4.Width = 250;
-                DataGridViewEntrada.Columns.Add(col4);
+                //DataGridViewTextBoxColumn col4 = new();
+                //col4.DataPropertyName = "NombreDeProducto";
+                //col4.HeaderText = "Nombre de producto";
+                //col4.Width = 250;
+                //DataGridViewEntrada.Columns.Add(col4);
 
-                DataGridViewTextBoxColumn col5 = new();
-                col5.DataPropertyName = "TexContenido";
-                col5.HeaderText = "Tex. Contenido";
-                DataGridViewEntrada.Columns.Add(col5);
+                //DataGridViewTextBoxColumn col5 = new();
+                //col5.DataPropertyName = "TexContenido";
+                //col5.HeaderText = "Tex. Contenido";
+                //DataGridViewEntrada.Columns.Add(col5);
 
-                DataGridViewTextBoxColumn col6 = new();
-                col6.DataPropertyName = "Neto";
-                col6.HeaderText = "Neto";
-                DataGridViewEntrada.Columns.Add(col6);
+                //DataGridViewTextBoxColumn col6 = new();
+                //col6.DataPropertyName = "Neto";
+                //col6.HeaderText = "Neto";
+                //DataGridViewEntrada.Columns.Add(col6);
 
-                DataGridViewTextBoxColumn col7 = new();
-                col7.DataPropertyName = "DateTimeLastModification";
-                col7.HeaderText = "Fecha de creacion";
-                DataGridViewEntrada.Columns.Add(col7);
+                //DataGridViewTextBoxColumn col7 = new();
+                //col7.DataPropertyName = "DateTimeLastModification";
+                //col7.HeaderText = "Fecha de creacion";
+                //DataGridViewEntrada.Columns.Add(col7);
 
-                DataGridViewButtonColumn colActualizar = new();
-                colActualizar.HeaderText = "Actualizar";
-                colActualizar.Text = "Actualizar";
-                colActualizar.UseColumnTextForButtonValue = true;
-                DataGridViewEntrada.Columns.Add(colActualizar);
+                //DataGridViewButtonColumn colActualizar = new();
+                //colActualizar.HeaderText = "Actualizar";
+                //colActualizar.Text = "Actualizar";
+                //colActualizar.UseColumnTextForButtonValue = true;
+                //DataGridViewEntrada.Columns.Add(colActualizar);
 
-                DataGridViewButtonColumn colBorrar = new();
-                colBorrar.HeaderText = "Borrar";
-                colBorrar.Text = "Borrar";
-                colBorrar.UseColumnTextForButtonValue = true;
-                DataGridViewEntrada.Columns.Add(colBorrar);
+                //DataGridViewButtonColumn colBorrar = new();
+                //colBorrar.HeaderText = "Borrar";
+                //colBorrar.Text = "Borrar";
+                //colBorrar.UseColumnTextForButtonValue = true;
+                //DataGridViewEntrada.Columns.Add(colBorrar);
 
                 WindowState = FormWindowState.Maximized;
 
@@ -124,7 +115,7 @@ namespace JuanApp.Formularios.Entrada
                     //Actualizar
                     int EntradaId = Convert.ToInt32(DataGridViewEntrada.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    FormularioEntrada FormularioEntrada = new(_serviceProvider,
+                    FormularioCaja FormularioEntrada = new(_serviceProvider,
                     EntradaId);
 
                     FormularioEntrada.ShowDialog();
@@ -143,7 +134,7 @@ namespace JuanApp.Formularios.Entrada
                     {
                         int EntradaId = Convert.ToInt32(DataGridViewEntrada.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                        _entradaRepository.DeleteByEntradaId(EntradaId);
+                        _cajaRepository.DeleteByCajaId(EntradaId);
 
                         GetTabla();
                     }
@@ -166,15 +157,15 @@ namespace JuanApp.Formularios.Entrada
                     return;
                 }
 
-                List<Areas.JuanApp.Entities.Entrada> lstEntrada = [];
+                List<JuanApp2.Areas.JuanApp2.Entities.Caja> lstCaja = [];
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
-                    lstEntrada = _entradaRepository
+                    lstCaja = _cajaRepository
                     .AsQueryable()
                     .Where(x => x.DateTimeLastModification >= dateTimePickerFechaInicio.Value &&
                     x.DateTimeLastModification <= dateTimePickerFechaFin.Value)
-                    .OrderBy(x => x.NombreDeProducto)
+                    .OrderBy(x => x.DateTimeTransaccion)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
@@ -185,28 +176,26 @@ namespace JuanApp.Formularios.Entrada
                         .Trim(), @"\s+", " ")
                         .Split(" ");
 
-                    lstEntrada = _entradaRepository
+                    lstCaja = _cajaRepository
                     .AsQueryable()
-                    .Where(x => words.All(word => x.NombreDeProducto.Contains(word)) ||
-                    words.All(word => x.NroDePesaje.ToString().Contains(word)) ||
-                    words.All(word => x.CodigoDeProducto.ToString().Contains(word)))
+                    .Where(x => words.All(word => x.IngresoOEgresoDeDinero.ToString().Contains(word)))
                     .Where(x => x.DateTimeLastModification >= dateTimePickerFechaInicio.Value &&
                     x.DateTimeLastModification <= dateTimePickerFechaFin.Value)
-                    .OrderBy(x => x.NombreDeProducto)
+                    .OrderBy(x => x.DateTimeTransaccion)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
 
-                decimal NetoTotal = 0;
-                foreach (Areas.JuanApp.Entities.Entrada entrada in lstEntrada)
+                decimal Caja = 0;
+                foreach (JuanApp2.Areas.JuanApp2.Entities.Caja caja in lstCaja)
                 {
-                    NetoTotal += entrada.Neto;
+                    Caja += caja.IngresoOEgresoDeDinero;
                 }
-                txtNetoTotal.Text = NetoTotal.ToString();
+                txtCaja.Text = Caja.ToString();
 
-                DataGridViewEntrada.DataSource = lstEntrada;
+                DataGridViewEntrada.DataSource = lstCaja;
 
-                statusLabel.Text = $@"Información: Cantidad de entradas listadas: {lstEntrada.Count}";
+                statusLabel.Text = $@"Información: Cantidad de transacciones listadas: {lstCaja.Count}";
             }
             catch (Exception)
             {
@@ -219,10 +208,10 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                FormularioEntrada FormularioEntrada = new(_serviceProvider,
+                FormularioCaja FormularioCaja = new(_serviceProvider,
                         0);
 
-                FormularioEntrada.ShowDialog();
+                FormularioCaja.ShowDialog();
             }
             catch (Exception)
             {
