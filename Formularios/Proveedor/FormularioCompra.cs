@@ -1,33 +1,54 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.Entrada
 {
     public partial class FormularioCompra : Form
     {
-        private readonly ICobradorRepository _cobradorRepository;
-        private readonly int _cobradorId;
+        private readonly ICompraRepository _compraRepository;
+        private readonly int _compraId;
 
         public FormularioCompra(IServiceProvider serviceProvider,
-            int cobradorId)
+            int compraId)
         {
             try
             {
-                _cobradorRepository = serviceProvider.GetRequiredService<ICobradorRepository>();
+                _compraRepository = serviceProvider.GetRequiredService<ICompraRepository>();
 
-                _cobradorId = cobradorId;
+                _compraId = compraId;
 
                 InitializeComponent();
 
-                if (_cobradorId > 0)
-                {
-                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository
-                                                                        .GetByCobradorId(_cobradorId);
+                optHaber.Checked = true;
+                optDebe.Checked = false;
 
-                    //txtNombreCompleto.Text = Cobrador.NombreCompleto;
-                    //txtCelular.Text = Cobrador.Celular;
-                    //txtEmail.Text = Cobrador.Email;
-                    //txtDireccion.Text = Cobrador.Direccion;
+                DateTimePickerFecha.Value = DateTime.Now;
+
+                if (_compraId > 0)
+                {
+                    JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
+                                                                        .GetByCompraId(_compraId);
+
+                    DateTimePickerFecha.Value = Compra.Fecha;
+                    txtDiaDePago.Value = Compra.DiaDePago;
+                    txtDiaDePago.Value = Compra.DiaDePago;
+                    txtReferencia.Text = Compra.Referencia;
+                    txtDescripcion.Text = Compra.Descripcion;
+                    txtUnidad.Value = Compra.Unidad;
+                    txtKilogramo.Value = Compra.Kilogramo;
+                    txtPrecio.Value = Compra.Precio;
+                    txtSubtotal.Value = Compra.Subtotal;
+                    if (Compra.DebeOHaber == true)
+                    {
+                        optDebe.Checked = true;
+                        optHaber.Checked = false;
+                    }
+                    else
+                    {
+                        optDebe.Checked = false;
+                        optHaber.Checked = true;
+                    }
                 }
 
                 statusLabel.Text = "";
@@ -48,64 +69,57 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                //if (string.IsNullOrEmpty(txtNombreCompleto.Text))
-                //{
-                //    statusLabel.Text = "Faltan datos a completar";
-                //}
-                //else
-                //{
-                //    if (_cobradorId == 0)
-                //    {
-                //        //Agregar
-                //        JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorTest = _cobradorRepository
-                //            .AsQueryable()
-                //            .Where(x => x.NombreCompleto == txtNombreCompleto.Text)
-                //            .FirstOrDefault();
+                if (txtReferencia.Text == "" ||
+                    txtDescripcion.Text == "")
+                {
+                    statusLabel.Text = "Faltan datos a completar";
+                }
 
-                //        if (CobradorTest == null)
-                //        {
-                //            JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = new()
-                //            {
-                //                CobradorId = 0,
-                //                Active = true,
-                //                UserCreationId = 1,
-                //                UserLastModificationId = 1,
-                //                DateTimeCreation = DateTime.Now,
-                //                DateTimeLastModification = DateTime.Now,
-                //                NombreCompleto = txtNombreCompleto.Text,
-                //                Celular = txtCelular.Text,
-                //                Direccion = txtDireccion.Text,
-                //                Email = txtEmail.Text
-                //            };
-                //            _cobradorRepository.Add(Cobrador);
-                //        }
-                //        else
-                //        {
-                //            MessageBox.Show("Este cobrador ya existe. No se guardará como nuevo",
-                //                "Atención",
-                //                MessageBoxButtons.OK,
-                //                MessageBoxIcon.Warning);
-                //        }
+                if (_compraId == 0)
+                {
+                    //Agregar
+                    JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = new()
+                    {
+                        CompraId = 0,
+                        Active = true,
+                        UserCreationId = 1,
+                        UserLastModificationId = 1,
+                        DateTimeCreation = DateTime.Now,
+                        DateTimeLastModification = DateTime.Now,
+                        Fecha = DateTimePickerFecha.Value,
+                        DebeOHaber = optDebe.Checked == true ? true : false,
+                        Referencia = txtReferencia.Text,
+                        Descripcion = txtDescripcion.Text,
+                        DiaDePago = Convert.ToInt32(txtDiaDePago.Value),
+                        Unidad = Convert.ToInt32(txtUnidad.Value),
+                        Kilogramo = txtKilogramo.Value,
+                        Precio = txtPrecio.Value,
+                        Subtotal = txtSubtotal.Value
+                    };
+                    _compraRepository.Add(Compra);
+                }
+                else
+                {
+                    //Actualizar
+                    JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
+                        .GetByCompraId(_compraId);
 
-                //    }
-                //    else
-                //    {
-                //        //Actualizar
-                //        JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository
-                //            .GetByCobradorId(_cobradorId);
+                    Compra.Fecha = DateTimePickerFecha.Value;
+                    Compra.DebeOHaber = optDebe.Checked == true ? true : false;
+                    Compra.Referencia = txtReferencia.Text;
+                    Compra.Descripcion = txtDescripcion.Text;
+                    Compra.DiaDePago = Convert.ToInt32(txtDiaDePago.Value);
+                    Compra.Unidad = Convert.ToInt32(txtUnidad.Value);
+                    Compra.Kilogramo = txtKilogramo.Value;
+                    Compra.Precio = txtPrecio.Value;
+                    Compra.Subtotal = txtSubtotal.Value;
+                    Compra.UserLastModificationId = 1;
+                    Compra.DateTimeLastModification = DateTime.Now;
 
-                //        Cobrador.NombreCompleto = txtNombreCompleto.Text;
-                //        Cobrador.Celular = txtCelular.Text;
-                //        Cobrador.Email = txtEmail.Text;
-                //        Cobrador.Direccion = txtDireccion.Text;
-                //        Cobrador.UserLastModificationId = 1;
-                //        Cobrador.DateTimeLastModification = DateTime.Now;
+                    _compraRepository.Update(Compra);
+                }
 
-                //        _cobradorRepository.Update(Cobrador);
-                //    }
-
-                //    Hide();
-                //}
+                Hide();
             }
             catch (Exception)
             {

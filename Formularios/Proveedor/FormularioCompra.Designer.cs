@@ -44,7 +44,7 @@
             txtReferencia = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
+            txtDescripcion = new TextBox();
             txtUnidad = new NumericUpDown();
             label6 = new Label();
             txtKilogramo = new NumericUpDown();
@@ -53,6 +53,8 @@
             label8 = new Label();
             txtSubtotal = new NumericUpDown();
             label9 = new Label();
+            optHaber = new RadioButton();
+            optDebe = new RadioButton();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDiaDePago).BeginInit();
@@ -147,7 +149,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 157);
+            label2.Location = new Point(41, 253);
             label2.Name = "label2";
             label2.Size = new Size(75, 28);
             label2.TabIndex = 25;
@@ -156,7 +158,7 @@
             // DateTimePickerFecha
             // 
             DateTimePickerFecha.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DateTimePickerFecha.Location = new Point(29, 188);
+            DateTimePickerFecha.Location = new Point(41, 284);
             DateTimePickerFecha.Name = "DateTimePickerFecha";
             DateTimePickerFecha.Size = new Size(311, 31);
             DateTimePickerFecha.TabIndex = 26;
@@ -166,7 +168,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(29, 253);
+            label3.Location = new Point(41, 349);
             label3.Name = "label3";
             label3.Size = new Size(140, 28);
             label3.TabIndex = 27;
@@ -175,7 +177,7 @@
             // txtDiaDePago
             // 
             txtDiaDePago.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDiaDePago.Location = new Point(29, 284);
+            txtDiaDePago.Location = new Point(41, 380);
             txtDiaDePago.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             txtDiaDePago.Name = "txtDiaDePago";
             txtDiaDePago.Size = new Size(180, 31);
@@ -184,7 +186,7 @@
             // txtReferencia
             // 
             txtReferencia.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtReferencia.Location = new Point(29, 384);
+            txtReferencia.Location = new Point(41, 480);
             txtReferencia.Name = "txtReferencia";
             txtReferencia.Size = new Size(311, 31);
             txtReferencia.TabIndex = 29;
@@ -194,7 +196,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(29, 353);
+            label4.Location = new Point(41, 449);
             label4.Name = "label4";
             label4.Size = new Size(114, 28);
             label4.TabIndex = 30;
@@ -211,13 +213,13 @@
             label5.TabIndex = 32;
             label5.Text = "Descripción *";
             // 
-            // textBox1
+            // txtDescripcion
             // 
-            textBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(406, 188);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(311, 31);
-            textBox1.TabIndex = 31;
+            txtDescripcion.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcion.Location = new Point(406, 188);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(311, 31);
+            txtDescripcion.TabIndex = 31;
             // 
             // txtUnidad
             // 
@@ -299,12 +301,40 @@
             label9.TabIndex = 39;
             label9.Text = "Subtotal *";
             // 
+            // optHaber
+            // 
+            optHaber.AutoSize = true;
+            optHaber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            optHaber.ForeColor = Color.White;
+            optHaber.Location = new Point(41, 179);
+            optHaber.Name = "optHaber";
+            optHaber.Size = new Size(86, 32);
+            optHaber.TabIndex = 41;
+            optHaber.TabStop = true;
+            optHaber.Text = "Haber";
+            optHaber.UseVisualStyleBackColor = true;
+            // 
+            // optDebe
+            // 
+            optDebe.AutoSize = true;
+            optDebe.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            optDebe.ForeColor = Color.White;
+            optDebe.Location = new Point(158, 179);
+            optDebe.Name = "optDebe";
+            optDebe.Size = new Size(79, 32);
+            optDebe.TabIndex = 42;
+            optDebe.TabStop = true;
+            optDebe.Text = "Debe";
+            optDebe.UseVisualStyleBackColor = true;
+            // 
             // FormularioCompra
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(821, 743);
+            Controls.Add(optDebe);
+            Controls.Add(optHaber);
             Controls.Add(txtSubtotal);
             Controls.Add(label9);
             Controls.Add(txtPrecio);
@@ -314,7 +344,7 @@
             Controls.Add(txtUnidad);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(textBox1);
+            Controls.Add(txtDescripcion);
             Controls.Add(label4);
             Controls.Add(txtReferencia);
             Controls.Add(txtDiaDePago);
@@ -361,7 +391,7 @@
         private TextBox txtReferencia;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox txtDescripcion;
         private NumericUpDown txtUnidad;
         private Label label6;
         private NumericUpDown txtKilogramo;
@@ -370,5 +400,7 @@
         private Label label8;
         private NumericUpDown txtSubtotal;
         private Label label9;
+        private RadioButton optHaber;
+        private RadioButton optDebe;
     }
 }
