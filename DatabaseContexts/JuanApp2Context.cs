@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using JuanApp2.Areas.JuanApp2.Entities;
-using JuanApp2.Areas.JuanApp2.Entities.EntitiesConfiguration;
 using JuanApp2.Areas.System.FailureBack.Entities;
 using JuanApp2.Areas.System.FailureBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
@@ -17,7 +15,6 @@ namespace JuanApp2.DatabaseContexts
 
         //DbSet de JuanApp2
         public DbSet<Cobrador> Cobrador { get; set; }
-        public DbSet<Caja> Caja{ get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {

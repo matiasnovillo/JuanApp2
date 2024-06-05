@@ -1,7 +1,5 @@
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Repositories;
-using JuanApp2.Areas.JuanApp2.Interfaces;
-using JuanApp2.Areas.JuanApp2.Repositories;
 using JuanApp2.Areas.System.FailureBack.Interfaces;
 using JuanApp2.Areas.System.FailureBack.Repositories;
 using JuanApp2.DatabaseContexts;
@@ -29,7 +27,6 @@ namespace JuanApp
             services.AddScoped<IFailureRepository, FailureRepository>();
 
             //Servicios de JuanApp2
-            services.AddScoped<ICajaRepository, CajaRepository>();
             services.AddScoped<ICobradorRepository, CobradorRepository>();
 
             var serviceProvider = services.BuildServiceProvider();

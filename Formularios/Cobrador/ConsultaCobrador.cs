@@ -1,5 +1,4 @@
 ﻿using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
-using JuanApp2.Areas.JuanApp2.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 
