@@ -164,22 +164,6 @@ namespace JuanApp.Formularios.Entrada
             }
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormularioProveedor FormularioCaja = new(_serviceProvider,
-                        0);
-
-                FormularioCaja.ShowDialog();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
@@ -191,6 +175,22 @@ namespace JuanApp.Formularios.Entrada
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        private void btnAgregarCompra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormularioCompra FormularioCompra = new(_serviceProvider,
+                        0);
+
+                FormularioCompra.ShowDialog();
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

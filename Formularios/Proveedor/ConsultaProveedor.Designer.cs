@@ -39,10 +39,10 @@
             btnBuscar = new Button();
             lblBarraDeBusqueda = new Label();
             txtBuscar = new TextBox();
-            btnAgregar = new Button();
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            btnAgregarCompra = new Button();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewCobrador).BeginInit();
@@ -56,7 +56,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1257, 27);
+            toolStrip1.Size = new Size(1483, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -83,7 +83,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 1029);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1257, 26);
+            statusStrip1.Size = new Size(1483, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -105,7 +105,7 @@
             DataGridViewCobrador.Name = "DataGridViewCobrador";
             DataGridViewCobrador.ReadOnly = true;
             DataGridViewCobrador.RowHeadersWidth = 51;
-            DataGridViewCobrador.Size = new Size(1257, 570);
+            DataGridViewCobrador.Size = new Size(1483, 570);
             DataGridViewCobrador.TabIndex = 2;
             DataGridViewCobrador.CellContentClick += DataGridViewEntrada_CellContentClick;
             // 
@@ -125,7 +125,7 @@
             btnBuscar.BackColor = Color.Black;
             btnBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnBuscar.ForeColor = SystemColors.Window;
-            btnBuscar.Location = new Point(1043, 228);
+            btnBuscar.Location = new Point(1260, 228);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(189, 84);
             btnBuscar.TabIndex = 4;
@@ -152,19 +152,6 @@
             txtBuscar.TabIndex = 10;
             txtBuscar.KeyPress += txtBuscar_KeyPress;
             // 
-            // btnAgregar
-            // 
-            btnAgregar.BackColor = Color.Black;
-            btnAgregar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnAgregar.ForeColor = SystemColors.Window;
-            btnAgregar.Location = new Point(829, 228);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(189, 84);
-            btnAgregar.TabIndex = 11;
-            btnAgregar.Text = "AGREGAR";
-            btnAgregar.UseVisualStyleBackColor = false;
-            btnAgregar.Click += btnAgregar_Click;
-            // 
             // numericUpDownRegistrosPorPagina
             // 
             numericUpDownRegistrosPorPagina.Location = new Point(12, 184);
@@ -188,11 +175,11 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(btnAgregarCompra);
             pnlFiltersAndSearchBar.Controls.Add(lblTitulo);
             pnlFiltersAndSearchBar.Controls.Add(label1);
             pnlFiltersAndSearchBar.Controls.Add(btnBuscar);
             pnlFiltersAndSearchBar.Controls.Add(numericUpDownRegistrosPorPagina);
-            pnlFiltersAndSearchBar.Controls.Add(btnAgregar);
             pnlFiltersAndSearchBar.Controls.Add(txtBuscar);
             pnlFiltersAndSearchBar.Controls.Add(lblBarraDeBusqueda);
             pnlFiltersAndSearchBar.Dock = DockStyle.Fill;
@@ -200,14 +187,27 @@
             pnlFiltersAndSearchBar.ForeColor = Color.Goldenrod;
             pnlFiltersAndSearchBar.Location = new Point(0, 27);
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
-            pnlFiltersAndSearchBar.Size = new Size(1257, 432);
+            pnlFiltersAndSearchBar.Size = new Size(1483, 432);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // btnAgregarCompra
+            // 
+            btnAgregarCompra.BackColor = Color.Black;
+            btnAgregarCompra.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnAgregarCompra.ForeColor = SystemColors.Window;
+            btnAgregarCompra.Location = new Point(1035, 228);
+            btnAgregarCompra.Name = "btnAgregarCompra";
+            btnAgregarCompra.Size = new Size(189, 84);
+            btnAgregarCompra.TabIndex = 17;
+            btnAgregarCompra.Text = "COMPRAR";
+            btnAgregarCompra.UseVisualStyleBackColor = false;
+            btnAgregarCompra.Click += btnAgregarCompra_Click;
             // 
             // ConsultaProveedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1257, 1055);
+            ClientSize = new Size(1483, 1055);
             Controls.Add(pnlFiltersAndSearchBar);
             Controls.Add(DataGridViewCobrador);
             Controls.Add(statusStrip1);
@@ -240,9 +240,9 @@
         private Button btnBuscar;
         private Label lblBarraDeBusqueda;
         private TextBox txtBuscar;
-        private Button btnAgregar;
         private NumericUpDown numericUpDownRegistrosPorPagina;
         private Label label1;
         private Panel pnlFiltersAndSearchBar;
+        private Button btnAgregarCompra;
     }
 }
