@@ -68,5 +68,12 @@ namespace JuanApp
 
             ConsultaCobrador.ShowDialog();
         }
+
+        private void btnCobranza_Click(object sender, EventArgs e)
+        {
+            ConsultaCobranza ConsultaCobranza = new(_serviceProvider);
+
+            ConsultaCobranza.ShowDialog();
+        }
     }
 }

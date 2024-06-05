@@ -65,6 +65,24 @@ namespace JuanApp2.Areas.JuanApp2.CobradorBack.Repositories
             catch (Exception) { throw; }
         }
 
+        public Cobrador? GetByNombreCompleto(string txtBuscar)
+        {
+            try
+            {
+                string[] words = Regex
+                       .Replace(txtBuscar
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                Cobrador Cobrador = _context.Cobrador
+                    .Where(x => words.All(word => x.NombreCompleto.Contains(word)))
+                    .FirstOrDefault();
+
+                return Cobrador;
+            }
+            catch (Exception) { throw; }
+        }
+
         public List<Cobrador> GetAllByCobradorIdForModal(string textToSearch)
         {
             try

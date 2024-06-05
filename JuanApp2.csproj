@@ -36,6 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Formularios\Cobranza\ConsultaCobranza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\Cobranza\FormularioCobranza.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\Cobrador\ConsultaCobrador.cs">
       <SubType>Form</SubType>
     </Compile>

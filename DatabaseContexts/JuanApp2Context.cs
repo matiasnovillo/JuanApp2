@@ -4,6 +4,8 @@ using JuanApp2.Areas.System.FailureBack.Entities;
 using JuanApp2.Areas.System.FailureBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobradorBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
+using JuanApp2.Areas.JuanApp2.CobranzaBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -15,6 +17,7 @@ namespace JuanApp2.DatabaseContexts
 
         //DbSet de JuanApp2
         public DbSet<Cobrador> Cobrador { get; set; }
+        public DbSet<Cobranza> Cobranza { get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -62,6 +65,8 @@ namespace JuanApp2.DatabaseContexts
                 //JuanApp2
                 modelBuilder.ApplyConfiguration(new CobradorConfiguration());
                 modelBuilder.Entity<Cobrador>().ToTable("JuanApp2.Cobrador");
+                modelBuilder.ApplyConfiguration(new CobranzaConfiguration());
+                modelBuilder.Entity<Cobranza>().ToTable("JuanApp2.Cobranza");
             }
             catch (Exception) { throw; }
         }

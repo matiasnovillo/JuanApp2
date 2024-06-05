@@ -170,6 +170,7 @@
             btnCobranza.TabIndex = 8;
             btnCobranza.Text = "COBRANZA";
             btnCobranza.UseVisualStyleBackColor = false;
+            btnCobranza.Click += btnCobranza_Click;
             // 
             // btnCaja
             // 
