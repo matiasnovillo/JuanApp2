@@ -1,5 +1,3 @@
-
-
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
  * 
@@ -11,7 +9,7 @@
  * 
  */
 
-namespace JuanApp2.Areas.BasicCore.Entities
+namespace JuanApp2.Areas.System.FailureBack.Entities
 {
     public class Failure
     {

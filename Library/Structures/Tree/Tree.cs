@@ -1,4 +1,6 @@
-﻿using static JuanApp2.Library.Structures.Tree.Utilities;
+﻿using System;
+using System.Collections.Generic;
+using static JuanApp2.Library.Structures.Tree.Utilities;
 
 namespace JuanApp2.Library.Structures.Tree
 {

@@ -35,8 +35,13 @@
             toolStripButton2 = new ToolStripButton();
             ToolStripButtonAcercaDe = new ToolStripButton();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
+            btnCobradores = new Button();
+            btnGastos = new Button();
+            btnProveedores = new Button();
+            btnCompras = new Button();
+            btnCobranza = new Button();
             btnCaja = new Button();
+            pictureBox1 = new PictureBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -92,6 +97,11 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
+            panel1.Controls.Add(btnCobradores);
+            panel1.Controls.Add(btnGastos);
+            panel1.Controls.Add(btnProveedores);
+            panel1.Controls.Add(btnCompras);
+            panel1.Controls.Add(btnCobranza);
             panel1.Controls.Add(btnCaja);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Fill;
@@ -100,30 +110,91 @@
             panel1.Size = new Size(1924, 1002);
             panel1.TabIndex = 7;
             // 
-            // pictureBox1
+            // btnCobradores
             // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = JuanApp2.Properties.Resources.LogoDark;
-            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(84, 42);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(325, 266);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
+            btnCobradores.BackColor = Color.Black;
+            btnCobradores.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnCobradores.ForeColor = SystemColors.Window;
+            btnCobradores.Location = new Point(69, 690);
+            btnCobradores.Name = "btnCobradores";
+            btnCobradores.Size = new Size(203, 148);
+            btnCobradores.TabIndex = 12;
+            btnCobradores.Text = "COBRADORES";
+            btnCobradores.UseVisualStyleBackColor = false;
+            btnCobradores.Click += btnCobradores_Click;
+            // 
+            // btnGastos
+            // 
+            btnGastos.BackColor = Color.Black;
+            btnGastos.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnGastos.ForeColor = SystemColors.Window;
+            btnGastos.Location = new Point(819, 307);
+            btnGastos.Name = "btnGastos";
+            btnGastos.Size = new Size(203, 148);
+            btnGastos.TabIndex = 11;
+            btnGastos.Text = "GASTOS";
+            btnGastos.UseVisualStyleBackColor = false;
+            // 
+            // btnProveedores
+            // 
+            btnProveedores.BackColor = Color.Black;
+            btnProveedores.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnProveedores.ForeColor = SystemColors.Window;
+            btnProveedores.Location = new Point(510, 307);
+            btnProveedores.Name = "btnProveedores";
+            btnProveedores.Size = new Size(203, 148);
+            btnProveedores.TabIndex = 10;
+            btnProveedores.Text = "PROVEEDORES";
+            btnProveedores.UseVisualStyleBackColor = false;
+            // 
+            // btnCompras
+            // 
+            btnCompras.BackColor = Color.Black;
+            btnCompras.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnCompras.ForeColor = SystemColors.Window;
+            btnCompras.Location = new Point(1128, 54);
+            btnCompras.Name = "btnCompras";
+            btnCompras.Size = new Size(203, 148);
+            btnCompras.TabIndex = 9;
+            btnCompras.Text = "COMPRAS";
+            btnCompras.UseVisualStyleBackColor = false;
+            // 
+            // btnCobranza
+            // 
+            btnCobranza.BackColor = Color.Black;
+            btnCobranza.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnCobranza.ForeColor = SystemColors.Window;
+            btnCobranza.Location = new Point(819, 54);
+            btnCobranza.Name = "btnCobranza";
+            btnCobranza.Size = new Size(203, 148);
+            btnCobranza.TabIndex = 8;
+            btnCobranza.Text = "COBRANZA";
+            btnCobranza.UseVisualStyleBackColor = false;
             // 
             // btnCaja
             // 
             btnCaja.BackColor = Color.Black;
             btnCaja.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             btnCaja.ForeColor = SystemColors.Window;
-            btnCaja.Location = new Point(603, 42);
+            btnCaja.Location = new Point(510, 54);
             btnCaja.Name = "btnCaja";
-            btnCaja.Size = new Size(167, 148);
+            btnCaja.Size = new Size(203, 148);
             btnCaja.TabIndex = 7;
             btnCaja.Text = "CAJA";
             btnCaja.UseVisualStyleBackColor = false;
             btnCaja.Click += btnCaja_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Image = JuanApp2.Properties.Resources.LogoDark;
+            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
+            pictureBox1.Location = new Point(69, 54);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(325, 266);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // Main
             // 
@@ -156,5 +227,10 @@
         private ToolStripButton toolStripButton2;
         private ToolStripButton ToolStripButtonAcercaDe;
         private Button btnCaja;
+        private Button btnGastos;
+        private Button btnProveedores;
+        private Button btnCompras;
+        private Button btnCobranza;
+        private Button btnCobradores;
     }
 }

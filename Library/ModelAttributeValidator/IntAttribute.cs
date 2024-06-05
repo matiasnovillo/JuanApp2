@@ -5,51 +5,47 @@ namespace JuanApp2.Library.ModelAttributeValidator
 {
     public class IntAttribute : ValidationAttribute
     {
-        private string _PropertyName;
+        private string _NameToShow;
+        private string _Name;
         private int _MinimumInt;
         private int _MaximumInt;
         private bool _Required;
-        public IntAttribute(string PropertyName, bool Required, int IntMin = int.MinValue, int IntMax = int.MaxValue)
+
+        public IntAttribute(string NameToShow, string Name, bool Required, int IntMin, int IntMax)
         {
-            if (PropertyName == null) { throw new Exception("The property name is empty"); }
-            if (PropertyName.Length < 0) { throw new Exception($"The length of property name must be equal or greater than 0"); }
-            if (PropertyName.Length > int.MaxValue) { throw new Exception($"The length of property name must be equal or less than int.MaxValue"); }
-
-            _PropertyName = PropertyName;
-
-            if (IntMin < int.MinValue || IntMin > int.MaxValue)
-            {
-                throw new Exception("The validator MinimumInt must be inside int.MinValue and int.MaxValue");
-            }
-            if (IntMax < int.MinValue || IntMax > int.MaxValue)
-            {
-                throw new Exception("The validator MaximumInt must be inside int.MinValue and int.MaxValue");
-            }
-
+            _NameToShow = NameToShow;
+            _Name = Name;
             _MinimumInt = IntMin;
             _MaximumInt = IntMax;
             _Required = Required;
         }
 
-        public override bool IsValid(object? objInt)
+        protected override ValidationResult IsValid(object objInt, ValidationContext validationContext)
         {
             try
             {
                 if (_Required)
                 {
                     if (objInt == null)
-                    { throw new Exception($"{_PropertyName} is empty"); }
+                    {
+                        return new ValidationResult($"[{_Name}] La variable {_NameToShow} es requerida");
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(objInt) <= _MinimumInt || Convert.ToInt32(objInt) >= _MaximumInt)
+                        {
+                            return new ValidationResult($"[{_Name}] La variable {_NameToShow} debe ser mayor que {_MinimumInt} y menor que {_MaximumInt}");
+                        }
+                        else
+                        {
+                            return ValidationResult.Success;
+                        }
+                    }
                 }
-                if (Convert.ToInt32(objInt) < int.MinValue || Convert.ToInt32(objInt) > int.MaxValue)
+                else
                 {
-                    throw new Exception($"{_PropertyName} must be inside int.MinValue and int.MaxValue");
+                    return ValidationResult.Success;
                 }
-                if (Convert.ToInt32(objInt) < _MinimumInt || Convert.ToInt32(objInt) > _MaximumInt)
-                {
-                    throw new Exception($"{_PropertyName} must be inside {_MinimumInt} and {_MaximumInt}");
-                }
-
-                return true;
             }
             catch (Exception) { throw; }
         }

@@ -5,28 +5,18 @@ namespace JuanApp2.Library.ModelAttributeValidator
 {
     public class TimeSpanAttribute : ValidationAttribute
     {
-        private string _PropertyName;
+        private string _NameToShow;
+        private string _Name;
         private TimeSpan _MinimumTimeSpan;
         private TimeSpan _MaximumTimeSpan;
         private bool _Required;
-        public TimeSpanAttribute(string PropertyName, bool Required, string TimeSpanMin = "0:00:00.000", string TimeSpanMax = "23:59:59.999")
+
+        public TimeSpanAttribute(string NameToShow, string Name, bool Required, string TimeSpanMin, string TimeSpanMax)
         {
             try
             {
-                if (PropertyName == null)
-                { throw new Exception("The property name is empty"); }
-                if (PropertyName.Length < 0)
-                { throw new Exception($"The length of property name must be equal or greater than 0"); }
-                if (PropertyName.Length > int.MaxValue)
-                { throw new Exception($"The length of property name must be equal or less than int.MaxValue"); }
-
-                _PropertyName = PropertyName;
-
-                if (TimeSpanMin == null)
-                { throw new Exception("The minimum TimeSpan validator is empty"); }
-                if (TimeSpanMax == null)
-                { throw new Exception("The maximum TimeSpan validator is empty"); }
-
+                _NameToShow = NameToShow;
+                _Name = Name;
                 _MinimumTimeSpan = TimeSpan.Parse(TimeSpanMin);
                 _MaximumTimeSpan = TimeSpan.Parse(TimeSpanMax);
 
@@ -35,20 +25,32 @@ namespace JuanApp2.Library.ModelAttributeValidator
             catch (Exception) { throw; }
         }
 
-        public override bool IsValid(object? objTimeSpan)
+        protected override ValidationResult IsValid(object objTimeSpan, ValidationContext validationContext)
         {
             try
             {
                 if (_Required)
                 {
-                    if (objTimeSpan == null) { throw new Exception($"{_PropertyName} is empty"); }
+                    if (objTimeSpan == null) 
+                    {
+                        return new ValidationResult($"[{_Name}] La variable {_NameToShow} es requerida");
+                    }
+                    else
+                    {
+                        if ((TimeSpan)objTimeSpan < _MinimumTimeSpan || (TimeSpan)objTimeSpan > _MaximumTimeSpan)
+                        {
+                            return new ValidationResult($"[{_Name}] La variable {_NameToShow} debe estar entre {_MinimumTimeSpan} y {_MaximumTimeSpan}");
+                        }
+                        else
+                        {
+                            return ValidationResult.Success;
+                        }
+                    }
                 }
-
-                if ((TimeSpan)objTimeSpan < _MinimumTimeSpan || (TimeSpan)objTimeSpan > _MaximumTimeSpan)
+                else
                 {
-                    throw new Exception($"{_PropertyName} must be inside {_MinimumTimeSpan} and {_MaximumTimeSpan}");
+                    return ValidationResult.Success;
                 }
-                return true;
             }
             catch (Exception) { throw; }
         }

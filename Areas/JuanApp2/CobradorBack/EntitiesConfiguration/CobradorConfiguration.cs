@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -12,22 +13,32 @@ using Microsoft.EntityFrameworkCore;
  * 
  */
 
-namespace JuanApp2.Areas.BasicCore.Entities.EntitiesConfiguration
+namespace JuanApp2.Areas.JuanApp2.CobradorBack.EntitiesConfiguration
 {
-    public class FailureConfiguration : IEntityTypeConfiguration<Failure>
+    public class CobradorConfiguration : IEntityTypeConfiguration<Cobrador>
     {
-        public void Configure(EntityTypeBuilder<Failure> entity)
+        public void Configure(EntityTypeBuilder<Cobrador> entity)
         {
             try
             {
-                //FailureId
-                entity.HasKey(e => e.FailureId);
-                entity.Property(e => e.FailureId)
+                //CobradorId
+                entity.HasKey(e => e.CobradorId);
+                entity.Property(e => e.CobradorId)
                     .ValueGeneratedOnAdd();
 
                 //Active
                 entity.Property(e => e.Active)
                     .HasColumnType("tinyint")
+                    .IsRequired(true);
+
+                //DateTimeCreation
+                entity.Property(e => e.DateTimeCreation)
+                    .HasColumnType("datetime")
+                    .IsRequired(true);
+
+                //DateTimeLastModification
+                entity.Property(e => e.DateTimeLastModification)
+                    .HasColumnType("datetime")
                     .IsRequired(true);
 
                 //UserCreationId
@@ -40,29 +51,24 @@ namespace JuanApp2.Areas.BasicCore.Entities.EntitiesConfiguration
                     .HasColumnType("int")
                     .IsRequired(true);
 
-                //Message
-                entity.Property(e => e.Message)
-                    .HasColumnType("text")
-                    .IsRequired(false);
-
-                //EmergencyLevel
-                entity.Property(e => e.EmergencyLevel)
-                    .HasColumnType("int")
+                //NombreCompleto
+                entity.Property(e => e.NombreCompleto)
+                    .HasColumnType("varchar(200)")
                     .IsRequired(true);
 
-                //StackTrace
-                entity.Property(e => e.StackTrace)
+                //Celular
+                entity.Property(e => e.Celular)
+                    .HasColumnType("varchar(100)")
+                    .IsRequired(false);
+
+                //Direccion
+                entity.Property(e => e.Direccion)
                     .HasColumnType("text")
                     .IsRequired(false);
 
-                //Source
-                entity.Property(e => e.Source)
-                    .HasColumnType("text")
-                    .IsRequired(false);
-
-                //Comment
-                entity.Property(e => e.Comment)
-                    .HasColumnType("text")
+                //Email
+                entity.Property(e => e.Email)
+                    .HasColumnType("varchar(400)")
                     .IsRequired(false);
 
                 

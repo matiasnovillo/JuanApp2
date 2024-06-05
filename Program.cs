@@ -1,8 +1,10 @@
-using JuanApp2.Areas.BasicCore;
-using JuanApp2.Areas.BasicCore.Interfaces;
-using JuanApp2.Areas.BasicCore.Repositories;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Repositories;
 using JuanApp2.Areas.JuanApp2.Interfaces;
 using JuanApp2.Areas.JuanApp2.Repositories;
+using JuanApp2.Areas.System.FailureBack.Interfaces;
+using JuanApp2.Areas.System.FailureBack.Repositories;
+using JuanApp2.DatabaseContexts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +30,7 @@ namespace JuanApp
 
             //Servicios de JuanApp2
             services.AddScoped<ICajaRepository, CajaRepository>();
+            services.AddScoped<ICobradorRepository, CobradorRepository>();
 
             var serviceProvider = services.BuildServiceProvider();
 

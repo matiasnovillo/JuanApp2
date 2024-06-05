@@ -1,8 +1,7 @@
-﻿using ClosedXML.Excel;
-using JuanApp2.Areas.BasicCore.Entities;
-using JuanApp2.Areas.BasicCore.Interfaces;
-using JuanApp.Formularios;
+﻿using JuanApp.Formularios;
 using Microsoft.Extensions.DependencyInjection;
+using JuanApp2.Areas.System.FailureBack.Entities;
+using JuanApp2.Areas.System.FailureBack.Interfaces;
 using JuanApp.Formularios.Entrada;
 
 namespace JuanApp
@@ -61,9 +60,13 @@ namespace JuanApp
 
         private void btnCaja_Click(object sender, EventArgs e)
         {
-            ConsultaCaja ConsultaCaja = new(_serviceProvider);
+        }
 
-            ConsultaCaja.ShowDialog();
+        private void btnCobradores_Click(object sender, EventArgs e)
+        {
+            ConsultaCobrador ConsultaCobrador = new(_serviceProvider);
+
+            ConsultaCobrador.ShowDialog();
         }
     }
 }

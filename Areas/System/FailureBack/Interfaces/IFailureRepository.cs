@@ -1,4 +1,4 @@
-using JuanApp2.Areas.BasicCore.Entities;
+using JuanApp2.Areas.System.FailureBack.Entities;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -11,7 +11,7 @@ using JuanApp2.Areas.BasicCore.Entities;
  * 
  */
 
-namespace JuanApp2.Areas.BasicCore.Interfaces
+namespace JuanApp2.Areas.System.FailureBack.Interfaces
 {
     public interface IFailureRepository
     {

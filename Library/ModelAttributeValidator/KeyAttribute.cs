@@ -5,28 +5,37 @@ namespace JuanApp2.Library.ModelAttributeValidator
 {
     public class KeyAttribute : ValidationAttribute
     {
-        private string _PropertyName;
-        public KeyAttribute(string PropertyName)
+        private string _NameToShow;
+        private string _Name;
+        public KeyAttribute(string NameToShow, string Name)
         {
             try
             {
-                if (PropertyName == null) { throw new Exception("The property name is empty"); }
-                if (PropertyName.Length < 0) { throw new Exception($"The length of property name must be equal or greater than 0"); }
-                if (PropertyName.Length > int.MaxValue) { throw new Exception($"The length of property name must be equal or less than int.MaxValue"); }
-
-                _PropertyName = PropertyName;
+                _NameToShow = NameToShow;
+                _Name = Name;
             }
             catch (Exception) { throw; }
         }
 
-        public override bool IsValid(object? objPrimaryKey)
+        protected override ValidationResult IsValid(object objPrimaryKey, ValidationContext validationContext)
         {
             try
             {
-                if (objPrimaryKey == null) { throw new Exception($"{_PropertyName} not found"); }
-                if (Convert.ToInt32(objPrimaryKey) < 0) { throw new Exception($"{_PropertyName} must be equal or better than 0"); }
-                if (Convert.ToInt32(objPrimaryKey) > int.MaxValue) { throw new Exception($"{_PropertyName} must be equal or less than int.MaxValue"); }
-                return true;
+                if (objPrimaryKey == null) 
+                {
+                    return new ValidationResult($"[{_Name}] La variable {_NameToShow} es requerida");
+                }
+                else
+                {
+                    if (Convert.ToInt32(objPrimaryKey) <= 0)
+                    {
+                        return new ValidationResult($"[{_Name}] La variable {_NameToShow} debe ser mayor a 0");
+                    }
+                    else
+                    {
+                        return ValidationResult.Success;
+                    }
+                }
             }
             catch (Exception) { throw; }
         }

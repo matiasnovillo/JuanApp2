@@ -1,3 +1,5 @@
+
+
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
  * 
@@ -9,12 +11,12 @@
  * 
  */
 
-namespace JuanApp2.Areas.JuanApp2.Entities
+namespace JuanApp2.Areas.JuanApp2.CobradorBack.Entities
 {
-    public class Caja
+    public class Cobrador
     {
-        [Library.ModelAttributeValidator.Key("CajaId")]
-        public int CajaId { get; set; }
+        
+        public int CobradorId { get; set; }
 
         ///<summary>
         /// For auditing purposes
@@ -24,44 +26,34 @@ namespace JuanApp2.Areas.JuanApp2.Entities
         ///<summary>
         /// For auditing purposes
         ///</summary>
-[Library.ModelAttributeValidator.DateTime("DateTimeCreation", false, "1753-01-01T00:00", "9998-12-30T23:59")]
         public DateTime DateTimeCreation { get; set; }
 
         ///<summary>
         /// For auditing purposes
         ///</summary>
-[Library.ModelAttributeValidator.DateTime("DateTimeLastModification", false, "1753-01-01T00:00", "9998-12-30T23:59")]
         public DateTime DateTimeLastModification { get; set; }
 
         ///<summary>
         /// For auditing purposes
         ///</summary>
-        [Library.ModelAttributeValidator.Key("UserCreationId")]
         public int UserCreationId { get; set; }
 
         ///<summary>
         /// For auditing purposes
         ///</summary>
-        [Library.ModelAttributeValidator.Key("UserLastModificationId")]
         public int UserLastModificationId { get; set; }
 
-[Library.ModelAttributeValidator.DateTime("DateTimeTransaccion", true, "1753-01-01T00:00", "9998-12-30T23:59")]
-        public DateTime DateTimeTransaccion { get; set; }
+        [Library.ModelAttributeValidator.String("NombreCompleto", "NombreCompleto", true, 1, 200, "")]
+        public string? NombreCompleto { get; set; }
 
-        [Library.ModelAttributeValidator.Key("CajaTipoDeTransaccionId")]
-        public int CajaTipoDeTransaccionId { get; set; }
+        [Library.ModelAttributeValidator.String("Celular", "Celular", false, 1, 100, "")]
+        public string? Celular { get; set; }
 
-        [Library.ModelAttributeValidator.Key("EntradaId")]
-        public int EntradaId { get; set; }
+        
+        public string? Direccion { get; set; }
 
-        [Library.ModelAttributeValidator.Key("SalidaId")]
-        public int SalidaId { get; set; }
-
-        [Library.ModelAttributeValidator.Decimal("IngresoOEgresoDeDinero", true, 0D, 999999999D)]
-        public decimal IngresoOEgresoDeDinero { get; set; }
-
-        [Library.ModelAttributeValidator.Key("FormaDePagoId")]
-        public int FormaDePagoId { get; set; }
+        [Library.ModelAttributeValidator.String("Email", "Email", false, 1, 400, "")]
+        public string? Email { get; set; }
     
         public string ToStringOnlyValuesForHTML()
         {
@@ -69,7 +61,7 @@ namespace JuanApp2.Areas.JuanApp2.Entities
                     <td align=""left"" valign=""top"">
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{CajaId}</span>
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{CobradorId}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td><td align=""left"" valign=""top"">
@@ -105,37 +97,25 @@ namespace JuanApp2.Areas.JuanApp2.Entities
     </td><td align=""left"" valign=""top"">
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{DateTimeTransaccion}</span>
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{NombreCompleto}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td><td align=""left"" valign=""top"">
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{CajaTipoDeTransaccionId}</span>
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{Celular}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td><td align=""left"" valign=""top"">
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{EntradaId}</span>
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{Direccion}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td><td align=""left"" valign=""top"">
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{SalidaId}</span>
-        </font>
-        <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
-    </td><td align=""left"" valign=""top"">
-        <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
-        <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{IngresoOEgresoDeDinero}</span>
-        </font>
-        <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
-    </td><td align=""left"" valign=""top"">
-        <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
-        <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
-            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{FormaDePagoId}</span>
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{Email}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td>

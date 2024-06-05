@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using JuanApp2.Areas.BasicCore.Entities;
-using JuanApp2.Areas.BasicCore.Entities.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.Entities;
 using JuanApp2.Areas.JuanApp2.Entities.EntitiesConfiguration;
+using JuanApp2.Areas.System.FailureBack.Entities;
+using JuanApp2.Areas.System.FailureBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
+using JuanApp2.Areas.JuanApp2.CobradorBack.EntitiesConfiguration;
 
-namespace JuanApp2.Areas.BasicCore
+namespace JuanApp2.DatabaseContexts
 {
     public class JuanApp2Context : DbContext
     {
@@ -14,7 +16,8 @@ namespace JuanApp2.Areas.BasicCore
         public DbSet<Failure> Failure { get; set; }
 
         //DbSet de JuanApp2
-        public DbSet<Caja> Caja { get; set; }
+        public DbSet<Cobrador> Cobrador { get; set; }
+        public DbSet<Caja> Caja{ get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -57,7 +60,11 @@ namespace JuanApp2.Areas.BasicCore
             try
             {
                 modelBuilder.ApplyConfiguration(new FailureConfiguration());
-                modelBuilder.ApplyConfiguration(new CajaConfiguration());
+                modelBuilder.Entity<Failure>().ToTable("System.Failure");
+
+                //JuanApp2
+                modelBuilder.ApplyConfiguration(new CobradorConfiguration());
+                modelBuilder.Entity<Cobrador>().ToTable("JuanApp2.Cobrador");
             }
             catch (Exception) { throw; }
         }

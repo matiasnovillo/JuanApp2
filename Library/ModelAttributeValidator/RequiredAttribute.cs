@@ -5,24 +5,27 @@ namespace JuanApp2.Library.ModelAttributeValidator
 {
     public class RequiredAttribute : ValidationAttribute
     {
-        private string _PropertyName;
-        public RequiredAttribute(string PropertyName)
+        private string _NameToShow;
+        private string _Name;
+        
+        public RequiredAttribute(string NameToShow, string Name)
         {
-            if (PropertyName == null) { throw new Exception("The property name is empty"); }
-            if (PropertyName.Length < 0) { throw new Exception($"The length of property name must be equal or greater than 0"); }
-            if (PropertyName.Length > int.MaxValue) { throw new Exception($"The length of property name must be equal or less than int.MaxValue"); }
-
-            _PropertyName = PropertyName;
+            _NameToShow = NameToShow;
+            _Name = Name;
         }
 
-        public override bool IsValid(object? obj)
+        protected override ValidationResult IsValid(object obj, ValidationContext validationContext)
         {
             try
             {
                 if (obj == null)
-                { throw new Exception($"{_PropertyName} is empty"); }
-
-                return true;
+                {
+                    return new ValidationResult($"[{_Name}] La variable {_NameToShow} es requerida");
+                }
+                else
+                {
+                    return ValidationResult.Success;
+                }
             }
             catch (Exception) { throw; }
         }
