@@ -8,6 +8,8 @@ using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
+using JuanApp2.Areas.JuanApp2.CompraBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -21,6 +23,7 @@ namespace JuanApp2.DatabaseContexts
         public DbSet<Cobrador> Cobrador { get; set; }
         public DbSet<Cobranza> Cobranza { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
+        public DbSet<Compra> Compra { get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -72,6 +75,8 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.Entity<Cobranza>().ToTable("JuanApp2.Cobranza");
                 modelBuilder.ApplyConfiguration(new ProveedorConfiguration());
                 modelBuilder.Entity<Proveedor>().ToTable("JuanApp2.Proveedor");
+                modelBuilder.ApplyConfiguration(new CompraConfiguration());
+                modelBuilder.Entity<Compra>().ToTable("JuanApp2.Compra");
             }
             catch (Exception) { throw; }
         }
