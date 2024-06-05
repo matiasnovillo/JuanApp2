@@ -35,6 +35,7 @@
             toolStripButton2 = new ToolStripButton();
             ToolStripButtonAcercaDe = new ToolStripButton();
             panel1 = new Panel();
+            btnProveedorMain = new Button();
             btnCobradores = new Button();
             btnGastos = new Button();
             btnProveedores = new Button();
@@ -42,6 +43,7 @@
             btnCobranza = new Button();
             btnCaja = new Button();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -97,6 +99,8 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnProveedorMain);
             panel1.Controls.Add(btnCobradores);
             panel1.Controls.Add(btnGastos);
             panel1.Controls.Add(btnProveedores);
@@ -110,12 +114,25 @@
             panel1.Size = new Size(1924, 1002);
             panel1.TabIndex = 7;
             // 
+            // btnProveedorMain
+            // 
+            btnProveedorMain.BackColor = Color.Black;
+            btnProveedorMain.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnProveedorMain.ForeColor = SystemColors.Window;
+            btnProveedorMain.Location = new Point(353, 711);
+            btnProveedorMain.Name = "btnProveedorMain";
+            btnProveedorMain.Size = new Size(203, 148);
+            btnProveedorMain.TabIndex = 13;
+            btnProveedorMain.Text = "PROVEEDORES";
+            btnProveedorMain.UseVisualStyleBackColor = false;
+            btnProveedorMain.Click += btnProveedorMain_Click;
+            // 
             // btnCobradores
             // 
             btnCobradores.BackColor = Color.Black;
             btnCobradores.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
             btnCobradores.ForeColor = SystemColors.Window;
-            btnCobradores.Location = new Point(69, 690);
+            btnCobradores.Location = new Point(69, 711);
             btnCobradores.Name = "btnCobradores";
             btnCobradores.Size = new Size(203, 148);
             btnCobradores.TabIndex = 12;
@@ -198,6 +215,17 @@
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.Window;
+            label1.Location = new Point(69, 630);
+            label1.Name = "label1";
+            label1.Size = new Size(190, 38);
+            label1.TabIndex = 14;
+            label1.Text = "Configuración";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -214,6 +242,7 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -234,5 +263,7 @@
         private Button btnCompras;
         private Button btnCobranza;
         private Button btnCobradores;
+        private Button btnProveedorMain;
+        private Label label1;
     }
 }

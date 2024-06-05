@@ -64,7 +64,7 @@ namespace JuanApp
 
         private void btnCobradores_Click(object sender, EventArgs e)
         {
-            ConsultaCobrador ConsultaCobrador = new(_serviceProvider);
+            ConsultaProveedorMain ConsultaCobrador = new(_serviceProvider);
 
             ConsultaCobrador.ShowDialog();
         }
@@ -81,6 +81,13 @@ namespace JuanApp
             ConsultaProveedor ConsultaProveedor = new(_serviceProvider);
 
             ConsultaProveedor.ShowDialog();
+        }
+
+        private void btnProveedorMain_Click(object sender, EventArgs e)
+        {
+            ConsultaProveedorMain ConsultaProveedorMain = new(_serviceProvider);
+
+            ConsultaProveedorMain.ShowDialog();
         }
     }
 }
