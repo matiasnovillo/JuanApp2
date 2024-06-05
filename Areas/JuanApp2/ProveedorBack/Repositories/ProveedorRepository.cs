@@ -4,6 +4,7 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using JuanApp2.DatabaseContexts;
 using System.Text.RegularExpressions;
 using System.Data;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -52,6 +53,24 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Repositories
             {
                 return _context.Proveedor
                             .FirstOrDefault(x => x.ProveedorId == proveedorId);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Proveedor? GetByNombreCompleto(string txtBuscar)
+        {
+            try
+            {
+                string[] words = Regex
+                       .Replace(txtBuscar
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                Proveedor Proveedor = _context.Proveedor
+                    .Where(x => words.Any(word => x.NombreCompleto.Contains(word)))
+                    .FirstOrDefault();
+
+                return Proveedor;
             }
             catch (Exception) { throw; }
         }

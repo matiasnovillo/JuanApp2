@@ -1,4 +1,5 @@
-﻿using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
+﻿using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 
@@ -6,7 +7,8 @@ namespace JuanApp.Formularios.Entrada
 {
     public partial class ConsultaProveedor : Form
     {
-        private readonly ICobradorRepository _cobradorRepository;
+        private readonly ICompraRepository _compraRepository;
+        private readonly IProveedorRepository _proveedorRepository;
         private readonly ServiceProvider _serviceProvider;
 
         public ConsultaProveedor(ServiceProvider serviceProvider)
@@ -15,47 +17,90 @@ namespace JuanApp.Formularios.Entrada
             {
                 _serviceProvider = serviceProvider;
 
-                _cobradorRepository = serviceProvider.GetRequiredService<ICobradorRepository>();
+                _compraRepository = serviceProvider.GetRequiredService<ICompraRepository>();
+                _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
 
                 InitializeComponent();
 
                 DataGridViewTextBoxColumn col0 = new();
-                col0.DataPropertyName = "CobradorId";
+                col0.DataPropertyName = "CompraId";
                 col0.HeaderText = "ID del sistema";
-                DataGridViewCobrador.Columns.Add(col0);
+                DataGridViewCompra.Columns.Add(col0);
 
                 DataGridViewTextBoxColumn col1 = new();
-                col1.DataPropertyName = "NombreCompleto";
-                col1.HeaderText = "Nombre completo";
-                DataGridViewCobrador.Columns.Add(col1);
+                col1.DataPropertyName = "Fecha";
+                col1.HeaderText = "Fecha";
+                DataGridViewCompra.Columns.Add(col1);
 
                 DataGridViewTextBoxColumn col2 = new();
-                col2.DataPropertyName = "Celular";
-                col2.HeaderText = "Celular";
-                DataGridViewCobrador.Columns.Add(col2);
+                col2.DataPropertyName = "Proveedor";
+                col2.HeaderText = "Proveedor";
+                DataGridViewCompra.Columns.Add(col2);
 
                 DataGridViewTextBoxColumn col3 = new();
-                col3.DataPropertyName = "Email";
-                col3.HeaderText = "Email";
-                DataGridViewCobrador.Columns.Add(col3);
+                col3.DataPropertyName = "Referencia";
+                col3.HeaderText = "Referencia";
+                DataGridViewCompra.Columns.Add(col3);
+
+                DataGridViewTextBoxColumn col4 = new();
+                col4.DataPropertyName = "Descripcion";
+                col4.HeaderText = "Descripcion";
+                DataGridViewCompra.Columns.Add(col4);
+
+                DataGridViewTextBoxColumn col5 = new();
+                col5.DataPropertyName = "Kilogramo";
+                col5.HeaderText = "Kilogramo";
+                DataGridViewCompra.Columns.Add(col5);
+
+                DataGridViewTextBoxColumn col6 = new();
+                col6.DataPropertyName = "Precio";
+                col6.HeaderText = "Precio";
+                DataGridViewCompra.Columns.Add(col6);
+
+                DataGridViewTextBoxColumn col7 = new();
+                col7.DataPropertyName = "Debe";
+                col7.HeaderText = "Debe";
+                DataGridViewCompra.Columns.Add(col7);
+
+                DataGridViewTextBoxColumn col8 = new();
+                col8.DataPropertyName = "Haber";
+                col8.HeaderText = "Haber";
+                DataGridViewCompra.Columns.Add(col8);
+
+                DataGridViewTextBoxColumn col9 = new();
+                col9.DataPropertyName = "Saldo";
+                col9.HeaderText = "Saldo";
+                DataGridViewCompra.Columns.Add(col9);
+
+                DataGridViewTextBoxColumn col10 = new();
+                col10.DataPropertyName = "Vencimiento";
+                col10.HeaderText = "Vencimiento";
+                DataGridViewCompra.Columns.Add(col10);
 
                 DataGridViewButtonColumn colActualizar = new();
                 colActualizar.HeaderText = "Actualizar";
                 colActualizar.Text = "Actualizar";
                 colActualizar.UseColumnTextForButtonValue = true;
-                DataGridViewCobrador.Columns.Add(colActualizar);
+                DataGridViewCompra.Columns.Add(colActualizar);
 
                 DataGridViewButtonColumn colBorrar = new();
                 colBorrar.HeaderText = "Borrar";
                 colBorrar.Text = "Borrar";
                 colBorrar.UseColumnTextForButtonValue = true;
-                DataGridViewCobrador.Columns.Add(colBorrar);
+                DataGridViewCompra.Columns.Add(colBorrar);
 
                 WindowState = FormWindowState.Maximized;
 
-                DataGridViewCobrador.AutoGenerateColumns = false;
+                DataGridViewCompra.AutoGenerateColumns = false;
 
                 numericUpDownRegistrosPorPagina.Value = 500;
+
+                DateTime now = DateTime.Now;
+                DateTime NowIn030DaysBefore = new(now.Year, now.Month, now.Day, 0, 0, 0);
+                DateTime NowIn2359 = new(now.Year, now.Month, now.Day, 23, 59, 59);
+
+                DateTimePickerFechaInicio.Value = NowIn030DaysBefore.AddDays(-30);
+                DateTimePickerFechaFin.Value = NowIn2359;
 
                 GetTabla();
             }
@@ -87,19 +132,19 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                if (e.ColumnIndex == 4)
+                if (e.ColumnIndex == 11)
                 {
                     //Actualizar
-                    int CobradorId = Convert.ToInt32(DataGridViewCobrador.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    int CompraId = Convert.ToInt32(DataGridViewCompra.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    FormularioProveedor FormularioCobrador = new(_serviceProvider,
-                    CobradorId);
+                    FormularioProveedor FormularioCompra = new(_serviceProvider,
+                    CompraId);
 
-                    FormularioCobrador.ShowDialog();
+                    FormularioCompra.ShowDialog();
 
                     GetTabla();
                 }
-                else if (e.ColumnIndex == 5)
+                else if (e.ColumnIndex == 12)
                 {
                     //Borrar
                     DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar este registro?",
@@ -109,9 +154,9 @@ namespace JuanApp.Formularios.Entrada
 
                     if (result == DialogResult.Yes)
                     {
-                        int CobradorId = Convert.ToInt32(DataGridViewCobrador.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        int CompraId = Convert.ToInt32(DataGridViewCompra.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                        _cobradorRepository.DeleteByCobradorId(CobradorId);
+                        _compraRepository.DeleteByCompraId(CompraId);
 
                         GetTabla();
                     }
@@ -128,34 +173,32 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                List<JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador> lstCobrador = [];
+                List<JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra> lstCompra = [];
+
+                JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
-                    lstCobrador = _cobradorRepository
+                    lstCompra = _compraRepository
                     .AsQueryable()
-                    .OrderBy(x => x.NombreCompleto)
+                    .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                    x.Fecha >= DateTimePickerFechaInicio.Value)
+                    .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
                 else
                 {
-                    string[] words = Regex
-                        .Replace(txtBuscar.Text
-                        .Trim(), @"\s+", " ")
-                        .Split(" ");
-
-                    lstCobrador = _cobradorRepository
+                    lstCompra = _compraRepository
                     .AsQueryable()
-                    .Where(x => words.All(word => x.NombreCompleto.Contains(word)))
-                    .OrderBy(x => x.NombreCompleto)
+                    .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
 
-                DataGridViewCobrador.DataSource = lstCobrador;
+                DataGridViewCompra.DataSource = lstCompra;
 
-                statusLabel.Text = $@"Información: Cantidad de cobradores listados: {lstCobrador.Count}";
+                statusLabel.Text = $@"Información: Cantidad de compras listadas: {lstCompra.Count}";
             }
             catch (Exception)
             {

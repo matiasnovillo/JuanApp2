@@ -1,5 +1,8 @@
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.Entrada
@@ -7,6 +10,8 @@ namespace JuanApp.Formularios.Entrada
     public partial class FormularioCompra : Form
     {
         private readonly ICompraRepository _compraRepository;
+        private readonly IProveedorRepository _proveedorRepository;
+        private readonly List<Proveedor> _lstProveedor;
         private readonly int _compraId;
 
         public FormularioCompra(IServiceProvider serviceProvider,
@@ -15,6 +20,7 @@ namespace JuanApp.Formularios.Entrada
             try
             {
                 _compraRepository = serviceProvider.GetRequiredService<ICompraRepository>();
+                _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
 
                 _compraId = compraId;
 
@@ -24,6 +30,15 @@ namespace JuanApp.Formularios.Entrada
                 optDebe.Checked = false;
 
                 DateTimePickerFecha.Value = DateTime.Now;
+
+                _lstProveedor = _proveedorRepository.GetAll();
+
+                cmbProveedor.Items.Clear();
+                foreach (Proveedor proveedor in _lstProveedor)
+                {
+                    cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
+                }
+                cmbProveedor.SelectedIndex = 0;
 
                 if (_compraId > 0)
                 {

@@ -28,6 +28,8 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces
         List<Proveedor?> GetAllByProveedorId(List<int> lstProveedorChecked);
 
         List<Proveedor> GetAllByProveedorIdForModal(string textToSearch);
+
+        Proveedor? GetByNombreCompleto(string txtBuscar);
         #endregion
 
         #region Non-Queries

@@ -75,7 +75,7 @@ namespace JuanApp2.Areas.JuanApp2.CobradorBack.Repositories
                        .Split(" ");
 
                 Cobrador Cobrador = _context.Cobrador
-                    .Where(x => words.All(word => x.NombreCompleto.Contains(word)))
+                    .Where(x => words.Any(word => x.NombreCompleto.Contains(word)))
                     .FirstOrDefault();
 
                 return Cobrador;
