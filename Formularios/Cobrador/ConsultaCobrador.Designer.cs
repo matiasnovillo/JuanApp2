@@ -215,7 +215,7 @@
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "ConsultaCobrador";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Consulta de entradas - Pesajes";
+            Text = "Consulta de cobradores";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);

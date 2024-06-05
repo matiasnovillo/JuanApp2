@@ -1,33 +1,33 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.Entrada
 {
     public partial class FormularioProveedor : Form
     {
-        private readonly ICobradorRepository _cobradorRepository;
-        private readonly int _cobradorId;
+        private readonly IProveedorRepository _proveedorRepository;
+        private readonly int _proveedorId;
 
         public FormularioProveedor(IServiceProvider serviceProvider,
-            int cobradorId)
+            int proveedorId)
         {
             try
             {
-                _cobradorRepository = serviceProvider.GetRequiredService<ICobradorRepository>();
+                _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
 
-                _cobradorId = cobradorId;
+                _proveedorId = proveedorId;
 
                 InitializeComponent();
 
-                if (_cobradorId > 0)
+                if (_proveedorId > 0)
                 {
-                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository
-                                                                        .GetByCobradorId(_cobradorId);
+                    JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository
+                                                                        .GetByProveedorId(_proveedorId);
 
-                    txtNombreCompleto.Text = Cobrador.NombreCompleto;
-                    txtCelular.Text = Cobrador.Celular;
-                    txtEmail.Text = Cobrador.Email;
-                    txtDireccion.Text = Cobrador.Direccion;
+                    txtNombreCompleto.Text = Proveedor.NombreCompleto;
+                    txtCelular.Text = Proveedor.Celular;
+                    txtPaginaWeb.Text = Proveedor.PaginaWeb;
+                    txtDireccion.Text = Proveedor.Direccion;
                 }
 
                 statusLabel.Text = "";
@@ -54,19 +54,19 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
-                    if (_cobradorId == 0)
+                    if (_proveedorId == 0)
                     {
                         //Agregar
-                        JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorTest = _cobradorRepository
+                        JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorTest = _proveedorRepository
                             .AsQueryable()
                             .Where(x => x.NombreCompleto == txtNombreCompleto.Text)
                             .FirstOrDefault();
 
-                        if (CobradorTest == null)
+                        if (ProveedorTest == null)
                         {
-                            JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = new()
+                            JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = new()
                             {
-                                CobradorId = 0,
+                                ProveedorId = 0,
                                 Active = true,
                                 UserCreationId = 1,
                                 UserLastModificationId = 1,
@@ -75,13 +75,13 @@ namespace JuanApp.Formularios.Entrada
                                 NombreCompleto = txtNombreCompleto.Text,
                                 Celular = txtCelular.Text,
                                 Direccion = txtDireccion.Text,
-                                Email = txtEmail.Text
+                                PaginaWeb = txtPaginaWeb.Text
                             };
-                            _cobradorRepository.Add(Cobrador);
+                            _proveedorRepository.Add(Proveedor);
                         }
                         else
                         {
-                            MessageBox.Show("Este cobrador ya existe. No se guardará como nuevo",
+                            MessageBox.Show("Este proveedor ya existe. No se guardará como nuevo",
                                 "Atención",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
@@ -91,17 +91,17 @@ namespace JuanApp.Formularios.Entrada
                     else
                     {
                         //Actualizar
-                        JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository
-                            .GetByCobradorId(_cobradorId);
+                        JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository
+                            .GetByProveedorId(_proveedorId);
 
-                        Cobrador.NombreCompleto = txtNombreCompleto.Text;
-                        Cobrador.Celular = txtCelular.Text;
-                        Cobrador.Email = txtEmail.Text;
-                        Cobrador.Direccion = txtDireccion.Text;
-                        Cobrador.UserLastModificationId = 1;
-                        Cobrador.DateTimeLastModification = DateTime.Now;
+                        Proveedor.NombreCompleto = txtNombreCompleto.Text;
+                        Proveedor.Celular = txtCelular.Text;
+                        Proveedor.PaginaWeb = txtPaginaWeb.Text;
+                        Proveedor.Direccion = txtDireccion.Text;
+                        Proveedor.UserLastModificationId = 1;
+                        Proveedor.DateTimeLastModification = DateTime.Now;
 
-                        _cobradorRepository.Update(Cobrador);
+                        _proveedorRepository.Update(Proveedor);
                     }
 
                     Hide();

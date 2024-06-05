@@ -39,6 +39,9 @@
     <Compile Update="Formularios\Proveedor\ConsultaProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\Proveedor\FormularioCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\Proveedor\FormularioProveedor.cs">
       <SubType>Form</SubType>
     </Compile>

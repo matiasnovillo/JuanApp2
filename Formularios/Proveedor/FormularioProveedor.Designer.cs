@@ -41,7 +41,7 @@
             txtNombreCompleto = new TextBox();
             txtCelular = new TextBox();
             label3 = new Label();
-            txtEmail = new TextBox();
+            txtPaginaWeb = new TextBox();
             label4 = new Label();
             txtDireccion = new TextBox();
             label5 = new Label();
@@ -56,9 +56,9 @@
             lblTitulo.ForeColor = SystemColors.Window;
             lblTitulo.Location = new Point(12, 45);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(718, 81);
+            lblTitulo.Size = new Size(750, 81);
             lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "Formulario de cobradores";
+            lblTitulo.Text = "Formulario de proveedores";
             // 
             // statusStrip1
             // 
@@ -167,13 +167,13 @@
             label3.TabIndex = 27;
             label3.Text = "Celular";
             // 
-            // txtEmail
+            // txtPaginaWeb
             // 
-            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(29, 374);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(295, 34);
-            txtEmail.TabIndex = 30;
+            txtPaginaWeb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPaginaWeb.Location = new Point(29, 374);
+            txtPaginaWeb.Name = "txtPaginaWeb";
+            txtPaginaWeb.Size = new Size(295, 34);
+            txtPaginaWeb.TabIndex = 30;
             // 
             // label4
             // 
@@ -182,9 +182,9 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(29, 343);
             label4.Name = "label4";
-            label4.Size = new Size(59, 28);
+            label4.Size = new Size(111, 28);
             label4.TabIndex = 29;
-            label4.Text = "Email";
+            label4.Text = "Pagina web";
             // 
             // txtDireccion
             // 
@@ -207,7 +207,7 @@
             label5.TabIndex = 31;
             label5.Text = "Direccion";
             // 
-            // FormularioCobrador
+            // FormularioProveedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -215,7 +215,7 @@
             ClientSize = new Size(821, 568);
             Controls.Add(txtDireccion);
             Controls.Add(label5);
-            Controls.Add(txtEmail);
+            Controls.Add(txtPaginaWeb);
             Controls.Add(label4);
             Controls.Add(txtCelular);
             Controls.Add(label3);
@@ -228,9 +228,9 @@
             Controls.Add(lblTitulo);
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
-            Name = "FormularioCobrador";
+            Name = "FormularioProveedor";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Formulario de entradas";
+            Text = "Formulario de proveedores";
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -253,7 +253,7 @@
         private TextBox txtNombreCompleto;
         private TextBox txtCelular;
         private Label label3;
-        private TextBox txtEmail;
+        private TextBox txtPaginaWeb;
         private Label label4;
         private TextBox txtDireccion;
         private Label label5;

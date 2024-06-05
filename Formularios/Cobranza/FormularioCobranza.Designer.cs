@@ -264,7 +264,7 @@
             MaximizeBox = false;
             Name = "FormularioCobranza";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Formulario de entradas";
+            Text = "Formulario de cobranza";
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);

@@ -116,9 +116,9 @@
             lblTitulo.ForeColor = SystemColors.Window;
             lblTitulo.Location = new Point(12, 19);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(661, 81);
+            lblTitulo.Size = new Size(693, 81);
             lblTitulo.TabIndex = 3;
-            lblTitulo.Text = "Consulta de cobradores";
+            lblTitulo.Text = "Consulta de proveedores";
             // 
             // btnBuscar
             // 
@@ -203,7 +203,7 @@
             pnlFiltersAndSearchBar.Size = new Size(1257, 432);
             pnlFiltersAndSearchBar.TabIndex = 17;
             // 
-            // ConsultaCobrador
+            // ConsultaProveedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -213,9 +213,9 @@
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Name = "ConsultaCobrador";
+            Name = "ConsultaProveedor";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Consulta de entradas - Pesajes";
+            Text = "Consulta de proveedores";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
