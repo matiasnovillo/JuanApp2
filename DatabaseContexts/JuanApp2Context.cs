@@ -48,10 +48,10 @@ namespace JuanApp2.DatabaseContexts
                 string IP = "192.168.28.14";
                 string Server = "sql4.baehost.com";
 
-                ConnectionString = "Password=Zc2s4~7n0;" +
+                ConnectionString = "Password=1vb&10tD5;" +
                     "Persist Security Info=True;" +
-                    "User ID=fiyista1_JuanAppAdmin;" +
-                    "Initial Catalog=fiyista1_JuanApp;" +
+                    "User ID=fiyista1_JuanApp2Admin;" +
+                    "Initial Catalog=fiyista1_JuanApp2;" +
                     "Data Source=sql4.baehost.com;" +
                     "TrustServerCertificate=True";
 #endif
