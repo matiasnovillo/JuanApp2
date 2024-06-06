@@ -132,6 +132,13 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Services
             };
             dtCompraCopy.Columns.Add(dtColumnDebeOHaberFordtCompraCopy);
 
+            DataColumn dtColumnProveedorIdFordtCompraCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "ProveedorId"
+            };
+            dtCompraCopy.Columns.Add(dtColumnProveedorIdFordtCompraCopy);
+
             
             #endregion
 
@@ -328,6 +335,7 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Services
                     decimal Precio = Convert.ToDecimal(row.Cell(13).GetString());
                     decimal Subtotal = Convert.ToDecimal(row.Cell(14).GetString());
                     bool DebeOHaber = Convert.ToBoolean(row.Cell(15).GetString());
+                    int ProveedorId = Convert.ToInt32(row.Cell(16).GetString());
                     
 
                     Compra Compra = new()
@@ -347,6 +355,7 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Services
                         Precio = Precio,
                         Subtotal = Subtotal,
                         DebeOHaber = DebeOHaber,
+                        ProveedorId = ProveedorId,
                         
                     };
 

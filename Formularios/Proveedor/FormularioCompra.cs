@@ -1,5 +1,6 @@
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
+using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
@@ -45,6 +46,10 @@ namespace JuanApp.Formularios.Entrada
                     JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
                                                                         .GetByCompraId(_compraId);
 
+                    Proveedor Proveedor = _proveedorRepository.GetByProveedorId(Compra.ProveedorId);
+
+                    
+
                     DateTimePickerFecha.Value = Compra.Fecha;
                     txtDiaDePago.Value = Compra.DiaDePago;
                     txtDiaDePago.Value = Compra.DiaDePago;
@@ -64,6 +69,7 @@ namespace JuanApp.Formularios.Entrada
                         optDebe.Checked = false;
                         optHaber.Checked = true;
                     }
+                    cmbProveedor.SelectedItem = $@"{Proveedor.NombreCompleto}";
                 }
 
                 statusLabel.Text = "";
@@ -90,6 +96,8 @@ namespace JuanApp.Formularios.Entrada
                     statusLabel.Text = "Faltan datos a completar";
                 }
 
+                Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+
                 if (_compraId == 0)
                 {
                     //Agregar
@@ -109,7 +117,8 @@ namespace JuanApp.Formularios.Entrada
                         Unidad = Convert.ToInt32(txtUnidad.Value),
                         Kilogramo = txtKilogramo.Value,
                         Precio = txtPrecio.Value,
-                        Subtotal = txtSubtotal.Value
+                        Subtotal = txtSubtotal.Value,
+                        ProveedorId = Proveedor.ProveedorId
                     };
                     _compraRepository.Add(Compra);
                 }
@@ -119,6 +128,7 @@ namespace JuanApp.Formularios.Entrada
                     JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
                         .GetByCompraId(_compraId);
 
+                    Compra.ProveedorId = Proveedor.ProveedorId;
                     Compra.Fecha = DateTimePickerFecha.Value;
                     Compra.DebeOHaber = optDebe.Checked == true ? true : false;
                     Compra.Referencia = txtReferencia.Text;

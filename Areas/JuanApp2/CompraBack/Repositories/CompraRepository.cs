@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.DatabaseContexts;
-using System.Text.RegularExpressions;
 using System.Data;
 
 /*
@@ -161,6 +160,7 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Repositories
                 DataTable.Columns.Add("Precio", typeof(string));
                 DataTable.Columns.Add("Subtotal", typeof(string));
                 DataTable.Columns.Add("DebeOHaber", typeof(string));
+                DataTable.Columns.Add("ProveedorId", typeof(string));
                 
 
                 foreach (int CompraId in lstCompraChecked)
@@ -184,7 +184,8 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Repositories
                         compra.Kilogramo,
                         compra.Precio,
                         compra.Subtotal,
-                        compra.DebeOHaber
+                        compra.DebeOHaber,
+                        compra.ProveedorId
                         
                         );
                     }
@@ -217,6 +218,7 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Repositories
                 DataTable.Columns.Add("Precio", typeof(string));
                 DataTable.Columns.Add("Subtotal", typeof(string));
                 DataTable.Columns.Add("DebeOHaber", typeof(string));
+                DataTable.Columns.Add("ProveedorId", typeof(string));
                 
 
                 foreach (Compra compra in lstCompra)
@@ -236,7 +238,8 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.Repositories
                         compra.Kilogramo,
                         compra.Precio,
                         compra.Subtotal,
-                        compra.DebeOHaber
+                        compra.DebeOHaber,
+                        compra.ProveedorId
                         
                         );
                 }

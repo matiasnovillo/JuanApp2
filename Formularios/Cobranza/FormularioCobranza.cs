@@ -40,7 +40,7 @@ namespace JuanApp.Formularios.Entrada
 
                     Cobrador Cobrador = _cobradorRepository.GetByCobradorId(Cobranza.CobradorId);
 
-                    cmbCobrador.SelectedItem = $@"{Cobrador.NombreCompleto} - {Cobrador.CobradorId}";
+                    cmbCobrador.SelectedItem = $@"{Cobrador.NombreCompleto}";
                     txtDineroBanco.Value = Cobranza.DineroBanco;
                     txtDineroCheque.Value = Cobranza.DineroCheque;
                     txtDineroEfectivo.Value = Cobranza.DineroEfectivo;

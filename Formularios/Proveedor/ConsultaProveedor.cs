@@ -1,4 +1,7 @@
-﻿using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
+﻿using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
+using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
+using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
+using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
@@ -137,7 +140,7 @@ namespace JuanApp.Formularios.Entrada
                     //Actualizar
                     int CompraId = Convert.ToInt32(DataGridViewCompra.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    FormularioProveedor FormularioCompra = new(_serviceProvider,
+                    FormularioCompra FormularioCompra = new(_serviceProvider,
                     CompraId);
 
                     FormularioCompra.ShowDialog();
@@ -173,7 +176,7 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                List<JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra> lstCompra = [];
+                List<Compra> lstCompra = [];
 
                 JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
 
@@ -191,12 +194,76 @@ namespace JuanApp.Formularios.Entrada
                 {
                     lstCompra = _compraRepository
                     .AsQueryable()
+                    .Where(x => x.ProveedorId == Proveedor.ProveedorId)
                     .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
 
-                DataGridViewCompra.DataSource = lstCompra;
+                DataGridViewCompra.Rows.Clear();
+
+                decimal SaldoTotal = 0;
+
+                DateTime FechaMinima = DateTime.MaxValue;
+
+                decimal TotalAVencer = 0;
+
+                foreach (Compra compra in lstCompra)
+                {
+                    JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(compra.ProveedorId);
+
+                    if (compra.Fecha.AddDays(compra.DiaDePago) < FechaMinima)
+                    {
+                        FechaMinima = compra.Fecha.AddDays(compra.DiaDePago);
+                        TotalAVencer = compra.Subtotal;
+                    }
+
+                    if (compra.DebeOHaber == true)
+                    {
+                        SaldoTotal += compra.Subtotal;
+                    }
+                    else
+                    {
+                        SaldoTotal -= compra.Subtotal;
+                    }
+                    
+
+                    DataGridViewCompra.Rows.Add(compra.CompraId.ToString(),
+                        compra.Fecha.ToString("dd/MM/yyyy"),
+                        ProveedorDataGridView.NombreCompleto,
+                        compra.Referencia,
+                        compra.Descripcion,
+                        compra.Kilogramo,
+                        compra.Precio,
+                        compra.DebeOHaber == true ? compra.Subtotal : "",
+                        compra.DebeOHaber == true ? "" : compra.Subtotal,
+                        SaldoTotal,
+                        compra.Fecha.AddDays(compra.DiaDePago).ToString("dd/MM/yyyy"),
+                        "",
+                        "");
+                }
+
+                txtSaldoTotal.Text = SaldoTotal.ToString();
+                txtProximoVencimiento.Text = FechaMinima.ToString("dd/MM/yyyy");
+                txtTotalAVencer.Text = TotalAVencer.ToString();
+
+                //Diseño
+                if (SaldoTotal < 0)
+                {
+                    txtSaldoTotal.BackColor = Color.Red;
+                }
+                else
+                {
+                    txtSaldoTotal.BackColor = Color.Green;
+                }
+
+                if (FechaMinima.Year == DateTime.Now.Year && 
+                    FechaMinima.Month == DateTime.Now.Month &&
+                    FechaMinima.Day == DateTime.Now.Day)
+                {
+                    txtProximoVencimiento.BackColor = Color.Aquamarine;
+                    txtTotalAVencer.BackColor = Color.Aquamarine;
+                }
 
                 statusLabel.Text = $@"Información: Cantidad de compras listadas: {lstCompra.Count}";
             }

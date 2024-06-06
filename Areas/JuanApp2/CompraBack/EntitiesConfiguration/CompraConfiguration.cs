@@ -96,6 +96,11 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.EntitiesConfiguration
                     .HasColumnType("tinyint")
                     .IsRequired(true);
 
+                //ProveedorId
+                entity.Property(e => e.ProveedorId)
+                    .HasColumnType("int")
+                    .IsRequired(true);
+
                 
             }
             catch (Exception) { throw; }
