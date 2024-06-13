@@ -23,13 +23,13 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces
 
         Proveedor? GetByProveedorId(int proveedorId);
 
+        Proveedor? GetByNombreCompleto(string nombreCompleto);
+
         List<Proveedor?> GetAll();
 
         List<Proveedor?> GetAllByProveedorId(List<int> lstProveedorChecked);
 
         List<Proveedor> GetAllByProveedorIdForModal(string textToSearch);
-
-        Proveedor? GetByNombreCompleto(string txtBuscar);
         #endregion
 
         #region Non-Queries

@@ -39,6 +39,9 @@
     <Compile Update="Formularios\FichaDeMovimientoDeCaja\ConsultaFichaDeMovimientoDeCaja.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\FichaDeMovimientoDeCaja\FormularioProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\FichaDeMovimientoDeCaja\FormularioGasto.cs">
       <SubType>Form</SubType>
     </Compile>
