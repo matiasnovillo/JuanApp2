@@ -4,6 +4,12 @@ using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Repositories;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CompraBack.Repositories;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Repositories;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Repositories;
+using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Repositories;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Repositories;
 using JuanApp2.Areas.System.FailureBack.Interfaces;
@@ -37,6 +43,9 @@ namespace JuanApp
             services.AddScoped<ICobranzaRepository, CobranzaRepository>();
             services.AddScoped<IProveedorRepository, ProveedorRepository>();
             services.AddScoped<ICompraRepository, CompraRepository>();
+            services.AddScoped<IModuloVarioRepository, ModuloVarioRepository>();
+            services.AddScoped<IModuloGastoRepository, ModuloGastoRepository>();
+            services.AddScoped<IModuloProveedorRepository, ModuloProveedorRepository>();
 
             var serviceProvider = services.BuildServiceProvider();
 

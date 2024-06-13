@@ -10,6 +10,12 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities;
+using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Entities;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.ModuloVarioBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -24,6 +30,9 @@ namespace JuanApp2.DatabaseContexts
         public DbSet<Cobranza> Cobranza { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Compra> Compra { get; set; }
+        public DbSet<ModuloVario> ModuloVario { get; set; }
+        public DbSet<ModuloGasto> ModuloGasto { get; set; }
+        public DbSet<ModuloProveedor> ModuloProveedor { get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -75,8 +84,12 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.Entity<Cobranza>().ToTable("JuanApp2.Cobranza");
                 modelBuilder.ApplyConfiguration(new ProveedorConfiguration());
                 modelBuilder.Entity<Proveedor>().ToTable("JuanApp2.Proveedor");
-                modelBuilder.ApplyConfiguration(new CompraConfiguration());
-                modelBuilder.Entity<Compra>().ToTable("JuanApp2.Compra");
+                modelBuilder.ApplyConfiguration(new ModuloProveedorConfiguration());
+                modelBuilder.Entity<ModuloProveedor>().ToTable("JuanApp2.ModuloProveedor");
+                modelBuilder.ApplyConfiguration(new ModuloVarioConfiguration());
+                modelBuilder.Entity<ModuloVario>().ToTable("JuanApp2.ModuloVario");
+                modelBuilder.ApplyConfiguration(new ModuloGastoConfiguration());
+                modelBuilder.Entity<Compra>().ToTable("JuanApp2.ModuloGasto");
             }
             catch (Exception) { throw; }
         }

@@ -60,6 +60,9 @@ namespace JuanApp
 
         private void btnCaja_Click(object sender, EventArgs e)
         {
+            ConsultaFichaDeMovimientoDeCaja ConsultaFichaDeMovimientoDeCaja = new(_serviceProvider);
+
+            ConsultaFichaDeMovimientoDeCaja.ShowDialog();
         }
 
         private void btnCobradores_Click(object sender, EventArgs e)
@@ -71,7 +74,7 @@ namespace JuanApp
 
         private void btnCobranza_Click(object sender, EventArgs e)
         {
-            ConsultaCobranza ConsultaCobranza = new(_serviceProvider);
+            ConsultaFichaDeMovimientoDeCaja ConsultaCobranza = new(_serviceProvider);
 
             ConsultaCobranza.ShowDialog();
         }

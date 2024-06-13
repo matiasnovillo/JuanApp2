@@ -1,0 +1,360 @@
+@page "/JuanApp2/LogPage/{LogId:int}"
+
+@using JuanApp2.Areas.JuanApp2.LogBack.Repositories;
+@using JuanApp2.Areas.JuanApp2.LogBack.Entities;
+@using JuanApp2.Areas.JuanApp2.LogBack.DTOs;
+@inject LogRepository logRepository;
+
+<!--FOREIGN CALLS (TABLES)-->
+
+
+@if (LogId == 0)
+{
+    <PageTitle>Agregar log - JuanApp2</PageTitle>
+}
+else
+{
+    <PageTitle>Editar log - JuanApp2</PageTitle>
+}
+
+<JuanApp2.Components.Layout.SideNav lstFoldersAndPages="lstFoldersAndPages"></JuanApp2.Components.Layout.SideNav>
+
+<div class="main-content position-relative max-height-vh-100 h-100">
+    <JuanApp2.Components.Layout.NavBarDashboard Pagina="Log"></JuanApp2.Components.Layout.NavBarDashboard>
+    <div class="container-fluid px-2 px-md-4">
+        <div class="page-header min-height-300 border-radius-xl mt-4"
+             style="background-image: url('assets/img/illustrations/Landscape2.jpg');">
+            <span class="mask bg-gradient-primary opacity-6"></span>
+        </div>
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="card-header mb-0 pb-0">
+                <h3 class="mb-3">
+                    @if (LogId == 0)
+                    {
+                        <span>Agregar log</span>
+                    }
+                    else
+                    {
+                        <span>Editar log</span>
+                    }
+                </h3>
+                <NavLink class="btn btn-outline-dark" href="JuanApp2/LogPage">
+                    <span class="fas fa-chevron-left"></span>
+                    &nbsp;Volver
+                </NavLink>
+                <hr />
+            </div>
+            <div class="card-body px-0">
+                <form method="post" @onsubmit="Submit"
+                      @formname="log-form" class="mb-4">
+                    <AntiforgeryToken />
+                    
+                    <hr />
+                    @((MarkupString)Message)
+                    <div class="d-flex justify-content-between">
+                        <button id="btn-submit" type="submit"
+                                class="btn btn-success">
+                            <i class="fas fa-pen"></i>
+                            @if (LogId == 0)
+                            {
+                                <span>Agregar</span>
+                            }
+                            else
+                            {
+                                <span>Editar</span>
+                            }
+                        </button>
+                        <NavLink class="btn btn-outline-dark mx-3" href="JuanApp2/LogPage">
+                            <span class="fas fa-chevron-left"></span>
+                            &nbsp;Volver
+                        </NavLink>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <JuanApp2.Components.Layout.FixedPlugin></JuanApp2.Components.Layout.FixedPlugin>
+    <JuanApp2.Components.Layout.FooterDashboard></JuanApp2.Components.Layout.FooterDashboard>
+</div>
+
+@code {
+    #region Properties
+    public List<folderForDashboard> lstFoldersAndPages = [];
+
+    public List<Role> lstRole { get; set; } = [];
+
+    [Parameter]
+    public int LogId { get; set; }
+
+    public string Message { get; set; } = "";
+
+    [SupplyParameterFromForm]
+    public Log Log { get; set; } = new();
+
+    public User User { get; set; } = new();
+
+    //Error messages for inputs
+    public string ErrorMessageLogId { get; set; } = "";
+    public string ErrorMessageActive { get; set; } = "";
+    public string ErrorMessageDateTimeCreation { get; set; } = "";
+    public string ErrorMessageDateTimeLastModification { get; set; } = "";
+    public string ErrorMessageUserCreationId { get; set; } = "";
+    public string ErrorMessageUserLastModificationId { get; set; } = "";
+    
+
+    //Progress bars for uploaders
+    
+    
+    //FOREIGN LISTS (TABLES)
+    
+    #endregion
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            //Look for saved user in shared component, simulates a session
+            User = StateContainer.User == null ? new() : StateContainer.User;
+
+            lstFoldersAndPages = [];
+            Log = new();
+
+            if (User != null)
+            {
+                if (User.UserId != 0)
+                {
+                    //Logged user
+                    List<Menu> lstMenuWithPermission = rolemenuRepository
+                                    .GetAllByRoleIdAndPathForPermission(User.RoleId, "/JuanApp2/LogPage");
+
+                    if (lstMenuWithPermission.Count == 0)
+                    {
+                        //Redirect to...
+                        NavigationManager.NavigateTo("403");
+                    }
+
+                    List<Menu> lstMenu = menuRepository
+                                        .GetAll();
+
+                    lstFoldersAndPages = rolemenuRepository
+                                            .GetAllPagesAndFoldersForDashboardByRoleId(User.RoleId);
+
+                    lstRole = roleRepository.GetAll();
+
+                    //FOREIGN LISTS (TABLES)
+                    
+
+                    if (LogId == 0)
+                    {
+                        //Create new Log
+                        Log = new();
+                    }
+                    else
+                    {
+                        //Edit Log
+
+                        Log = logRepository
+                                    .GetByLogId(LogId);
+
+                        
+                    }                    
+                }
+                else
+                {
+                    //Not logged user
+
+                    //Redirect to...
+                    NavigationManager.NavigateTo("Login");
+                }
+            }
+            else
+            {
+                //Impossible
+            }
+
+            base.OnInitialized();
+        }
+        catch (Exception ex)
+        {
+            Failure failure = new()
+                {
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = User.UserId == 0 ? 1 : User.UserId,
+                    UserLastModificationId = User.UserId == 0 ? 1 : User.UserId,
+                    EmergencyLevel = 1,
+                    Comment = "",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                };
+
+            failureRepository.Add(failure);
+
+            Message = $@"<div class=""alert alert-danger text-white font-weight-bold"" role=""alert"">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {ex.Message}
+                            </div>";
+        }
+    }
+
+    private async Task Submit()
+    {
+        try
+        {
+            if (LogId == 0)
+            {
+                //Create new Log
+                Log.Active = true;
+                Log.UserCreationId = User.UserId;
+                Log.UserLastModificationId = User.UserId;
+                Log.DateTimeCreation = DateTime.Now;
+                Log.DateTimeLastModification = DateTime.Now;
+
+                if(Check("") == null)
+                {
+                    logRepository
+                        .Add(Log);
+
+                    //Redirect to users page
+                    NavigationManager.NavigateTo("JuanApp2/LogPage");
+                }
+
+
+            }
+            else
+            {
+                //Update data
+                Log.DateTimeLastModification = DateTime.Now;
+                Log.UserLastModificationId = User.UserId;
+
+                if(Check("") == null)
+                {
+                    logRepository
+                            .Update(Log);
+
+                    //Redirect to users page
+                    NavigationManager.NavigateTo("JuanApp2/LogPage");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Failure failure = new()
+                {
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = User.UserId == 0 ? 1 : User.UserId,
+                    UserLastModificationId = User.UserId == 0 ? 1 : User.UserId,
+                    EmergencyLevel = 1,
+                    Comment = "",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                };
+
+            failureRepository.Add(failure);
+
+            Message = $@"<div class=""alert alert-danger text-white font-weight-bold"" role=""alert"">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {ex.Message}
+                            </div>";
+        }
+        finally
+        {
+            //Re-render the page to show ScannedText
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+    }
+
+    #region Uploaders
+    
+    #endregion    
+
+    #region SEARCHERS FOR FOREIGN TABLES
+    
+    #endregion
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="attributeToValid">Debe estar encapsulado en []. Ejemplo: [Boolean]</param>
+    /// <returns></returns>
+    private ValidationResult Check(string attributeToValid)
+    {
+        try
+        {
+            List<ValidationResult> lstValidationResult = new List<ValidationResult>();
+            ValidationContext ValidationContext = new ValidationContext(Log);
+
+            bool IsValid = Validator.TryValidateObject(Log, ValidationContext, lstValidationResult, true);
+
+            ValidationResult ValidationResult = lstValidationResult
+            .AsQueryable()
+            .FirstOrDefault(x => x.ErrorMessage.StartsWith(attributeToValid));
+
+            if (!IsValid)
+            {
+                Message = $@"<div class=""alert alert-danger text-white font-weight-bold"" role=""alert"">
+                                Para guardar correctamente debe completar los siguientes puntos: <br/> <ul>";
+
+                foreach (var validationResult in lstValidationResult)
+                {
+                    validationResult.ErrorMessage = validationResult.ErrorMessage.Substring(validationResult.ErrorMessage.IndexOf(']') + 1);
+                    Message += $@"<li>{validationResult}</li>";
+                }
+
+                Message = Message + "</ul></div>";
+            }
+            else
+            {
+                Message = $@"<div class=""alert alert-successs text-white font-weight-bold"" role=""alert"">
+                                Todos los datos ingresados son correctos
+                            </div>";
+            }
+
+
+            if (ValidationResult != null)
+            {
+                ValidationResult.ErrorMessage = ValidationResult.ErrorMessage.Substring(ValidationResult.ErrorMessage.IndexOf(']') + 1);
+            }
+
+            return ValidationResult;
+        }
+        catch (Exception ex)
+        {
+            Failure failure = new()
+                {
+                    Active = true,
+                    DateTimeCreation = DateTime.Now,
+                    DateTimeLastModification = DateTime.Now,
+                    UserCreationId = User.UserId == 0 ? 1 : User.UserId,
+                    UserLastModificationId = User.UserId == 0 ? 1 : User.UserId,
+                    EmergencyLevel = 1,
+                    Comment = "",
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    StackTrace = ex.StackTrace
+                };
+
+            failureRepository.Add(failure);
+
+            Message = $@"<div class=""alert alert-danger text-white font-weight-bold"" role=""alert"">
+                                Hubo un error. Intente nuevamente. Mensaje del error: {ex.Message}
+                            </div>";
+
+            return null;
+        }
+        finally
+        {
+
+        }
+    }
+
+    #region Handlers
+    
+    #endregion
+}
+
