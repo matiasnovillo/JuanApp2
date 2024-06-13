@@ -120,7 +120,7 @@ namespace JuanApp.Formularios.Entrada
                     //Actualizar
                     int CobranzaId = Convert.ToInt32(DataGridViewCobranza.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    FormularioCobranza FormularioCobranza = new(_serviceProvider,
+                    FormularioVario FormularioCobranza = new(_serviceProvider,
                     CobranzaId);
 
                     FormularioCobranza.ShowDialog();
@@ -215,7 +215,7 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                FormularioCobranza FormularioCaja = new(_serviceProvider,
+                FormularioVario FormularioCaja = new(_serviceProvider,
                         0);
 
                 FormularioCaja.ShowDialog();
@@ -254,7 +254,9 @@ namespace JuanApp.Formularios.Entrada
 
         private void btnVario_Click(object sender, EventArgs e)
         {
+            FormularioVario FormularioVario = new(_serviceProvider, 0);
 
+            FormularioVario.ShowDialog();
         }
 
         private void btnGasto_Click(object sender, EventArgs e)
