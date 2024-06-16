@@ -31,7 +31,11 @@ namespace JuanApp.Formularios.Entrada
                 {
                     cmbCobrador.Items.Add($@"{cobrador.NombreCompleto}");
                 }
-                cmbCobrador.SelectedIndex = 0;
+
+                if (_lstCobrador.Count != 0)
+                {
+                    cmbCobrador.SelectedIndex = 0;
+                }
 
                 if (_cobranzaId > 0)
                 {
@@ -63,13 +67,19 @@ namespace JuanApp.Formularios.Entrada
             {
                 decimal DineroTotalDeSuma = txtDineroBanco.Value + txtDineroCheque.Value + txtDineroEfectivo.Value;
 
-                Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(cmbCobrador.SelectedItem.ToString());
-
                 if (DineroTotalDeSuma != txtDineroTotal.Value)
                 {
-                    statusLabel.Text = "la suma de cada dinero no coincide con el total";
+                    statusLabel.Text = "La suma de cada dinero no coincide con el total";
                     return;
                 }
+
+                if (_lstCobrador.Count == 0)
+                {
+                    statusLabel.Text = "Seleccione un cobrador";
+                    return;
+                }
+
+                Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(cmbCobrador.SelectedItem.ToString());
 
                 if (_cobranzaId == 0)
                 {

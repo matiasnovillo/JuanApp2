@@ -34,23 +34,26 @@
             menuItemMain = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
-            DataGridViewCobranza = new DataGridView();
+            DataGridViewFicha = new DataGridView();
             lblTitulo = new Label();
-            btnBuscar = new Button();
             lblBarraDeBusqueda = new Label();
             txtBuscar = new TextBox();
-            btnAgregar = new Button();
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            button1 = new Button();
             btnGasto = new Button();
             btnVario = new Button();
             btnCobranza = new Button();
             btnPagoProveedor = new Button();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            txtSaldoCheque = new TextBox();
+            txtSaldoBanco = new TextBox();
+            txtSaldoEfectivo = new TextBox();
+            txtSaldoTotal = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -58,7 +61,7 @@
             DateTimePickerFechaInicio = new DateTimePicker();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DataGridViewCobranza).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewFicha).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).BeginInit();
             pnlFiltersAndSearchBar.SuspendLayout();
             SuspendLayout();
@@ -106,21 +109,21 @@
             statusLabel.Size = new Size(92, 20);
             statusLabel.Text = "Información:";
             // 
-            // DataGridViewCobranza
+            // DataGridViewFicha
             // 
-            DataGridViewCobranza.AllowUserToAddRows = false;
-            DataGridViewCobranza.AllowUserToDeleteRows = false;
-            DataGridViewCobranza.BackgroundColor = Color.Black;
-            DataGridViewCobranza.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DataGridViewCobranza.Dock = DockStyle.Bottom;
-            DataGridViewCobranza.GridColor = Color.FromArgb(41, 48, 57);
-            DataGridViewCobranza.Location = new Point(0, 557);
-            DataGridViewCobranza.Name = "DataGridViewCobranza";
-            DataGridViewCobranza.ReadOnly = true;
-            DataGridViewCobranza.RowHeadersWidth = 51;
-            DataGridViewCobranza.Size = new Size(1924, 472);
-            DataGridViewCobranza.TabIndex = 2;
-            DataGridViewCobranza.CellContentClick += DataGridViewEntrada_CellContentClick;
+            DataGridViewFicha.AllowUserToAddRows = false;
+            DataGridViewFicha.AllowUserToDeleteRows = false;
+            DataGridViewFicha.BackgroundColor = Color.Black;
+            DataGridViewFicha.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewFicha.Dock = DockStyle.Bottom;
+            DataGridViewFicha.GridColor = Color.FromArgb(41, 48, 57);
+            DataGridViewFicha.Location = new Point(0, 557);
+            DataGridViewFicha.Name = "DataGridViewFicha";
+            DataGridViewFicha.ReadOnly = true;
+            DataGridViewFicha.RowHeadersWidth = 51;
+            DataGridViewFicha.Size = new Size(1924, 472);
+            DataGridViewFicha.TabIndex = 2;
+            DataGridViewFicha.CellContentClick += DataGridViewEntrada_CellContentClick;
             // 
             // lblTitulo
             // 
@@ -132,19 +135,6 @@
             lblTitulo.Size = new Size(1110, 81);
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Consulta de ficha de movimiento de caja";
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.BackColor = Color.Black;
-            btnBuscar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            btnBuscar.ForeColor = SystemColors.Window;
-            btnBuscar.Location = new Point(1723, 379);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(189, 69);
-            btnBuscar.TabIndex = 4;
-            btnBuscar.Text = "BUSCAR";
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
             // 
             // lblBarraDeBusqueda
             // 
@@ -165,19 +155,6 @@
             txtBuscar.Size = new Size(532, 31);
             txtBuscar.TabIndex = 10;
             txtBuscar.KeyPress += txtBuscar_KeyPress;
-            // 
-            // btnAgregar
-            // 
-            btnAgregar.BackColor = Color.Black;
-            btnAgregar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            btnAgregar.ForeColor = SystemColors.Window;
-            btnAgregar.Location = new Point(1509, 379);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(189, 69);
-            btnAgregar.TabIndex = 11;
-            btnAgregar.Text = "AGREGAR";
-            btnAgregar.UseVisualStyleBackColor = false;
-            btnAgregar.Click += btnAgregar_Click;
             // 
             // numericUpDownRegistrosPorPagina
             // 
@@ -204,14 +181,19 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(label8);
+            pnlFiltersAndSearchBar.Controls.Add(label7);
+            pnlFiltersAndSearchBar.Controls.Add(label6);
+            pnlFiltersAndSearchBar.Controls.Add(label5);
+            pnlFiltersAndSearchBar.Controls.Add(button1);
             pnlFiltersAndSearchBar.Controls.Add(btnGasto);
             pnlFiltersAndSearchBar.Controls.Add(btnVario);
             pnlFiltersAndSearchBar.Controls.Add(btnCobranza);
             pnlFiltersAndSearchBar.Controls.Add(btnPagoProveedor);
-            pnlFiltersAndSearchBar.Controls.Add(textBox3);
-            pnlFiltersAndSearchBar.Controls.Add(textBox4);
-            pnlFiltersAndSearchBar.Controls.Add(textBox2);
-            pnlFiltersAndSearchBar.Controls.Add(textBox1);
+            pnlFiltersAndSearchBar.Controls.Add(txtSaldoCheque);
+            pnlFiltersAndSearchBar.Controls.Add(txtSaldoBanco);
+            pnlFiltersAndSearchBar.Controls.Add(txtSaldoEfectivo);
+            pnlFiltersAndSearchBar.Controls.Add(txtSaldoTotal);
             pnlFiltersAndSearchBar.Controls.Add(label4);
             pnlFiltersAndSearchBar.Controls.Add(label3);
             pnlFiltersAndSearchBar.Controls.Add(label2);
@@ -219,9 +201,7 @@
             pnlFiltersAndSearchBar.Controls.Add(DateTimePickerFechaInicio);
             pnlFiltersAndSearchBar.Controls.Add(lblTitulo);
             pnlFiltersAndSearchBar.Controls.Add(label1);
-            pnlFiltersAndSearchBar.Controls.Add(btnBuscar);
             pnlFiltersAndSearchBar.Controls.Add(numericUpDownRegistrosPorPagina);
-            pnlFiltersAndSearchBar.Controls.Add(btnAgregar);
             pnlFiltersAndSearchBar.Controls.Add(txtBuscar);
             pnlFiltersAndSearchBar.Controls.Add(lblBarraDeBusqueda);
             pnlFiltersAndSearchBar.Dock = DockStyle.Fill;
@@ -231,6 +211,63 @@
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
             pnlFiltersAndSearchBar.Size = new Size(1924, 530);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.ForeColor = SystemColors.Window;
+            label8.Location = new Point(658, 298);
+            label8.Name = "label8";
+            label8.Size = new Size(72, 25);
+            label8.TabIndex = 34;
+            label8.Text = "Cheque";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = SystemColors.Window;
+            label7.Location = new Point(444, 298);
+            label7.Name = "label7";
+            label7.Size = new Size(60, 25);
+            label7.TabIndex = 33;
+            label7.Text = "Banco";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.ForeColor = SystemColors.Window;
+            label6.Location = new Point(226, 298);
+            label6.Name = "label6";
+            label6.Size = new Size(74, 25);
+            label6.TabIndex = 32;
+            label6.Text = "Efectivo";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = SystemColors.Window;
+            label5.Location = new Point(12, 298);
+            label5.Name = "label5";
+            label5.Size = new Size(98, 25);
+            label5.TabIndex = 31;
+            label5.Text = "Saldo total";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button1.ForeColor = SystemColors.Window;
+            button1.Location = new Point(1647, 379);
+            button1.Name = "button1";
+            button1.Size = new Size(189, 69);
+            button1.TabIndex = 30;
+            button1.Text = "BUSCAR";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // btnGasto
             // 
@@ -284,37 +321,41 @@
             btnPagoProveedor.UseVisualStyleBackColor = false;
             btnPagoProveedor.Click += btnPagoProveedor_Click;
             // 
-            // textBox3
+            // txtSaldoCheque
             // 
-            textBox3.Font = new Font("Segoe UI", 10.8F);
-            textBox3.Location = new Point(660, 326);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(210, 31);
-            textBox3.TabIndex = 25;
+            txtSaldoCheque.Font = new Font("Segoe UI", 10.8F);
+            txtSaldoCheque.ForeColor = SystemColors.ControlLightLight;
+            txtSaldoCheque.Location = new Point(660, 326);
+            txtSaldoCheque.Name = "txtSaldoCheque";
+            txtSaldoCheque.Size = new Size(210, 31);
+            txtSaldoCheque.TabIndex = 25;
             // 
-            // textBox4
+            // txtSaldoBanco
             // 
-            textBox4.Font = new Font("Segoe UI", 10.8F);
-            textBox4.Location = new Point(444, 326);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(210, 31);
-            textBox4.TabIndex = 24;
+            txtSaldoBanco.Font = new Font("Segoe UI", 10.8F);
+            txtSaldoBanco.ForeColor = SystemColors.ControlLightLight;
+            txtSaldoBanco.Location = new Point(444, 326);
+            txtSaldoBanco.Name = "txtSaldoBanco";
+            txtSaldoBanco.Size = new Size(210, 31);
+            txtSaldoBanco.TabIndex = 24;
             // 
-            // textBox2
+            // txtSaldoEfectivo
             // 
-            textBox2.Font = new Font("Segoe UI", 10.8F);
-            textBox2.Location = new Point(228, 326);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(210, 31);
-            textBox2.TabIndex = 23;
+            txtSaldoEfectivo.Font = new Font("Segoe UI", 10.8F);
+            txtSaldoEfectivo.ForeColor = SystemColors.ControlLightLight;
+            txtSaldoEfectivo.Location = new Point(228, 326);
+            txtSaldoEfectivo.Name = "txtSaldoEfectivo";
+            txtSaldoEfectivo.Size = new Size(210, 31);
+            txtSaldoEfectivo.TabIndex = 23;
             // 
-            // textBox1
+            // txtSaldoTotal
             // 
-            textBox1.Font = new Font("Segoe UI", 10.8F);
-            textBox1.Location = new Point(12, 326);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(210, 31);
-            textBox1.TabIndex = 22;
+            txtSaldoTotal.Font = new Font("Segoe UI", 10.8F);
+            txtSaldoTotal.ForeColor = SystemColors.ControlLightLight;
+            txtSaldoTotal.Location = new Point(12, 326);
+            txtSaldoTotal.Name = "txtSaldoTotal";
+            txtSaldoTotal.Size = new Size(210, 31);
+            txtSaldoTotal.TabIndex = 22;
             // 
             // label4
             // 
@@ -371,7 +412,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1924, 1055);
             Controls.Add(pnlFiltersAndSearchBar);
-            Controls.Add(DataGridViewCobranza);
+            Controls.Add(DataGridViewFicha);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -382,7 +423,7 @@
             toolStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)DataGridViewCobranza).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewFicha).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).EndInit();
             pnlFiltersAndSearchBar.ResumeLayout(false);
             pnlFiltersAndSearchBar.PerformLayout();
@@ -397,12 +438,10 @@
         private ToolStripMenuItem menuItemMain;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel statusLabel;
-        private DataGridView DataGridViewCobranza;
+        private DataGridView DataGridViewFicha;
         private Label lblTitulo;
-        private Button btnBuscar;
         private Label lblBarraDeBusqueda;
         private TextBox txtBuscar;
-        private Button btnAgregar;
         private NumericUpDown numericUpDownRegistrosPorPagina;
         private Label label1;
         private Panel pnlFiltersAndSearchBar;
@@ -415,9 +454,14 @@
         private Button btnVario;
         private Button btnCobranza;
         private Button btnPagoProveedor;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox txtSaldoCheque;
+        private TextBox txtSaldoBanco;
+        private TextBox txtSaldoEfectivo;
+        private TextBox txtSaldoTotal;
+        private Button button1;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
     }
 }

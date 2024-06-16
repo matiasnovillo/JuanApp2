@@ -49,6 +49,8 @@
             label2 = new Label();
             label7 = new Label();
             txtDescripcion = new TextBox();
+            optHaber = new RadioButton();
+            optDebe = new RadioButton();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDineroBanco).BeginInit();
@@ -223,7 +225,7 @@
             // DateTimePickerFecha
             // 
             DateTimePickerFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DateTimePickerFecha.Location = new Point(29, 177);
+            DateTimePickerFecha.Location = new Point(29, 281);
             DateTimePickerFecha.Name = "DateTimePickerFecha";
             DateTimePickerFecha.Size = new Size(307, 34);
             DateTimePickerFecha.TabIndex = 35;
@@ -233,7 +235,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 146);
+            label2.Location = new Point(29, 250);
             label2.Name = "label2";
             label2.Size = new Size(62, 28);
             label2.TabIndex = 36;
@@ -244,7 +246,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(29, 242);
+            label7.Location = new Point(401, 250);
             label7.Name = "label7";
             label7.Size = new Size(114, 28);
             label7.TabIndex = 37;
@@ -253,11 +255,37 @@
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDescripcion.Location = new Point(29, 273);
+            txtDescripcion.Location = new Point(401, 281);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(307, 34);
             txtDescripcion.TabIndex = 38;
             txtDescripcion.KeyPress += txtDescripcion_KeyPress;
+            // 
+            // optHaber
+            // 
+            optHaber.AutoSize = true;
+            optHaber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            optHaber.ForeColor = Color.White;
+            optHaber.Location = new Point(29, 177);
+            optHaber.Name = "optHaber";
+            optHaber.Size = new Size(86, 32);
+            optHaber.TabIndex = 39;
+            optHaber.TabStop = true;
+            optHaber.Text = "Haber";
+            optHaber.UseVisualStyleBackColor = true;
+            // 
+            // optDebe
+            // 
+            optDebe.AutoSize = true;
+            optDebe.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            optDebe.ForeColor = Color.White;
+            optDebe.Location = new Point(152, 179);
+            optDebe.Name = "optDebe";
+            optDebe.Size = new Size(79, 32);
+            optDebe.TabIndex = 40;
+            optDebe.TabStop = true;
+            optDebe.Text = "Debe";
+            optDebe.UseVisualStyleBackColor = true;
             // 
             // FormularioVario
             // 
@@ -265,6 +293,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(821, 706);
+            Controls.Add(optDebe);
+            Controls.Add(optHaber);
             Controls.Add(txtDescripcion);
             Controls.Add(label7);
             Controls.Add(label2);
@@ -321,5 +351,7 @@
         private Label label2;
         private Label label7;
         private TextBox txtDescripcion;
+        private RadioButton optHaber;
+        private RadioButton optDebe;
     }
 }

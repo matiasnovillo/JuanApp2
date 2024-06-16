@@ -35,7 +35,11 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
                 {
                     cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
                 }
-                cmbProveedor.SelectedIndex = 0;
+
+                if (_lstProveedor.Count != 0)
+                {
+                    cmbProveedor.SelectedIndex = 0;
+                }
 
                 if (_moduloproveedorId > 0)
                 {
@@ -68,14 +72,20 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
             {
                 decimal DineroTotalDeSuma = txtDineroBanco.Value + txtDineroCheque.Value + txtDineroEfectivo.Value;
 
-                Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
-
                 if (DineroTotalDeSuma != txtDineroTotal.Value)
                 {
-                    statusLabel.Text = "la suma de cada dinero no coincide con el total";
+                    statusLabel.Text = "La suma de cada dinero no coincide con el total";
                     return;
                 }
 
+                if (_lstProveedor.Count == 0)
+                {
+                    statusLabel.Text = "Seleccione un proveedor";
+                    return;
+                }
+
+                Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                
                 if (_moduloproveedorId == 0)
                 {
                     //Agregar

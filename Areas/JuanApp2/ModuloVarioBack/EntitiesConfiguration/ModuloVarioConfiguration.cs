@@ -81,6 +81,11 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.EntitiesConfiguration
                     .HasColumnType("numeric(18, 2)")
                     .IsRequired(true);
 
+                //DebeOHaber
+                entity.Property(e => e.DebeOHaber)
+                    .HasColumnType("tinyint")
+                    .IsRequired(true);
+
                 
             }
             catch (Exception) { throw; }

@@ -111,6 +111,13 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Services
             };
             dtModuloVarioCopy.Columns.Add(dtColumnDineroTotalFordtModuloVarioCopy);
 
+            DataColumn dtColumnDebeOHaberFordtModuloVarioCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "DebeOHaber"
+            };
+            dtModuloVarioCopy.Columns.Add(dtColumnDebeOHaberFordtModuloVarioCopy);
+
             
             #endregion
 
@@ -304,6 +311,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Services
                     decimal DineroBanco = Convert.ToDecimal(row.Cell(10).GetString());
                     decimal DineroCheque = Convert.ToDecimal(row.Cell(11).GetString());
                     decimal DineroTotal = Convert.ToDecimal(row.Cell(12).GetString());
+                    bool DebeOHaber = Convert.ToBoolean(row.Cell(13).GetString());
                     
 
                     ModuloVario ModuloVario = new()
@@ -320,6 +328,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Services
                         DineroBanco = DineroBanco,
                         DineroCheque = DineroCheque,
                         DineroTotal = DineroTotal,
+                        DebeOHaber = DebeOHaber,
                         
                     };
 

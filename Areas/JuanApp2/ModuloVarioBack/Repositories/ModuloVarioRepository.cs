@@ -157,6 +157,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Repositories
                 DataTable.Columns.Add("DineroBanco", typeof(string));
                 DataTable.Columns.Add("DineroCheque", typeof(string));
                 DataTable.Columns.Add("DineroTotal", typeof(string));
+                DataTable.Columns.Add("DebeOHaber", typeof(string));
                 
 
                 foreach (int ModuloVarioId in lstModuloVarioChecked)
@@ -177,7 +178,8 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Repositories
                         modulovario.DineroEfectivo,
                         modulovario.DineroBanco,
                         modulovario.DineroCheque,
-                        modulovario.DineroTotal
+                        modulovario.DineroTotal,
+                        modulovario.DebeOHaber
                         
                         );
                     }
@@ -207,6 +209,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Repositories
                 DataTable.Columns.Add("DineroBanco", typeof(string));
                 DataTable.Columns.Add("DineroCheque", typeof(string));
                 DataTable.Columns.Add("DineroTotal", typeof(string));
+                DataTable.Columns.Add("DebeOHaber", typeof(string));
                 
 
                 foreach (ModuloVario modulovario in lstModuloVario)
@@ -223,7 +226,8 @@ namespace JuanApp2.Areas.JuanApp2.ModuloVarioBack.Repositories
                         modulovario.DineroEfectivo,
                         modulovario.DineroBanco,
                         modulovario.DineroCheque,
-                        modulovario.DineroTotal
+                        modulovario.DineroTotal,
+                        modulovario.DebeOHaber
                         
                         );
                 }

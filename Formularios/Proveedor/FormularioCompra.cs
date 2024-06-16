@@ -1,6 +1,3 @@
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
-using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;

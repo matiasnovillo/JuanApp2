@@ -241,6 +241,7 @@
             // 
             // cmbProveedor
             // 
+            cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbProveedor.FormattingEnabled = true;
             cmbProveedor.Location = new Point(29, 267);

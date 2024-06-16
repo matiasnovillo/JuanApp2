@@ -1,5 +1,3 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
-using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +21,9 @@ namespace JuanApp.Formularios.Entrada
 
                 DateTimePickerFecha.Value = DateTime.Now;
 
+                optHaber.Checked = true;
+                optDebe.Checked = false;
+
                 if (_modulovarioId > 0)
                 {
                     JuanApp2.Areas.JuanApp2.ModuloVarioBack.Entities.ModuloVario ModuloVario = _modulovarioRepository
@@ -34,6 +35,16 @@ namespace JuanApp.Formularios.Entrada
                     txtDineroCheque.Value = ModuloVario.DineroCheque;
                     txtDineroEfectivo.Value = ModuloVario.DineroEfectivo;
                     txtDineroTotal.Value = ModuloVario.DineroTotal;
+                    if (ModuloVario.DebeOHaber == true)
+                    {
+                        optDebe.Checked = true;
+                        optHaber.Checked = false;
+                    }
+                    else
+                    {
+                        optDebe.Checked = false;
+                        optHaber.Checked = true;
+                    }
                 }
 
                 statusLabel.Text = "";
@@ -74,7 +85,8 @@ namespace JuanApp.Formularios.Entrada
                         DineroBanco = txtDineroBanco.Value,
                         DineroCheque = txtDineroCheque.Value,
                         DineroEfectivo = txtDineroEfectivo.Value,
-                        DineroTotal = txtDineroTotal.Value
+                        DineroTotal = txtDineroTotal.Value,
+                        DebeOHaber = optDebe.Checked == true ? true : false
                     };
                     _modulovarioRepository.Add(ModuloVario);
                 }
@@ -85,6 +97,7 @@ namespace JuanApp.Formularios.Entrada
                         .GetByModuloVarioId(_modulovarioId);
 
                     ModuloVario.Fecha = DateTimePickerFecha.Value;
+                    ModuloVario.DebeOHaber = optDebe.Checked == true ? true : false;
                     ModuloVario.Descripcion = txtDescripcion.Text;
                     ModuloVario.DineroBanco = txtDineroBanco.Value;
                     ModuloVario.DineroCheque = txtDineroCheque.Value;

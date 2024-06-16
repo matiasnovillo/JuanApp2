@@ -57,16 +57,6 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Repositories
             catch (Exception) { throw; }
         }
 
-        public Proveedor? GetByNombreCompleto(string nombreCompleto)
-        {
-            try
-            {
-                return _context.Proveedor
-                            .FirstOrDefault(x => x.NombreCompleto == nombreCompleto);
-            }
-            catch (Exception) { throw; }
-        }
-
         public Proveedor? GetByNombreCompleto(string txtBuscar)
         {
             try

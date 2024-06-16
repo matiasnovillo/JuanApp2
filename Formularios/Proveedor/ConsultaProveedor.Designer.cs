@@ -258,6 +258,7 @@
             // 
             // txtSaldoTotal
             // 
+            txtSaldoTotal.ForeColor = SystemColors.ControlLightLight;
             txtSaldoTotal.Location = new Point(12, 388);
             txtSaldoTotal.Name = "txtSaldoTotal";
             txtSaldoTotal.ReadOnly = true;
