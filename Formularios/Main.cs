@@ -92,5 +92,12 @@ namespace JuanApp
 
             ConsultaProveedorMain.ShowDialog();
         }
+
+        private void btnCompras_Click(object sender, EventArgs e)
+        {
+            FormularioCompra FormularioCompra = new(_serviceProvider, 0);
+
+            FormularioCompra.ShowDialog();
+        }
     }
 }

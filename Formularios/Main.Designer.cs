@@ -35,6 +35,7 @@
             toolStripButton2 = new ToolStripButton();
             ToolStripButtonAcercaDe = new ToolStripButton();
             panel1 = new Panel();
+            label1 = new Label();
             btnProveedorMain = new Button();
             btnCobradores = new Button();
             btnGastos = new Button();
@@ -43,7 +44,6 @@
             btnCobranza = new Button();
             btnCaja = new Button();
             pictureBox1 = new PictureBox();
-            label1 = new Label();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -114,6 +114,17 @@
             panel1.Size = new Size(1924, 1002);
             panel1.TabIndex = 7;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.Window;
+            label1.Location = new Point(69, 630);
+            label1.Name = "label1";
+            label1.Size = new Size(190, 38);
+            label1.TabIndex = 14;
+            label1.Text = "Configuración";
+            // 
             // btnProveedorMain
             // 
             btnProveedorMain.BackColor = Color.Black;
@@ -176,6 +187,7 @@
             btnCompras.TabIndex = 9;
             btnCompras.Text = "COMPRAS";
             btnCompras.UseVisualStyleBackColor = false;
+            btnCompras.Click += btnCompras_Click;
             // 
             // btnCobranza
             // 
@@ -214,17 +226,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(69, 630);
-            label1.Name = "label1";
-            label1.Size = new Size(190, 38);
-            label1.TabIndex = 14;
-            label1.Text = "Configuración";
             // 
             // Main
             // 
