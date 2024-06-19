@@ -74,7 +74,7 @@ namespace JuanApp
 
         private void btnCobranza_Click(object sender, EventArgs e)
         {
-            ConsultaFichaDeMovimientoDeCaja ConsultaCobranza = new(_serviceProvider);
+            ConsultaCobranza ConsultaCobranza = new(_serviceProvider);
 
             ConsultaCobranza.ShowDialog();
         }

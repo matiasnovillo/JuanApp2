@@ -60,7 +60,7 @@
             textBox1.ScrollBars = ScrollBars.Both;
             textBox1.Size = new Size(1025, 335);
             textBox1.TabIndex = 8;
-            textBox1.Text = "PAMPA Y BRASA\r\n\r\nAPLICACIÓN CREADA PARA ADMINISTRAR ENTRADAS; SALIDAS; Y FLUJOS DE DINERO\r\n.\r\n\r\nAño: 2024\r\nVersión: 1.35\r\n\r\nCreada por Matias Alejandro Novillo\r\nwww.fiyistack.com\r\n\r\n";
+            textBox1.Text = "PAMPA Y BRASA\r\n\r\nAPLICACIÓN CREADA PARA ADMINISTRAR ENTRADAS, SALIDAS, Y FLUJOS DE DINERO.\r\n\r\nAño: 2024\r\nVersión: 1.47\r\n\r\nCreada por Matias Alejandro Novillo\r\nwww.fiyistack.com\r\n\r\n";
             // 
             // pictureBox2
             // 

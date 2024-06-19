@@ -80,6 +80,8 @@ namespace JuanApp2.DatabaseContexts
                 //JuanApp2
                 modelBuilder.ApplyConfiguration(new CobradorConfiguration());
                 modelBuilder.Entity<Cobrador>().ToTable("JuanApp2.Cobrador");
+                modelBuilder.ApplyConfiguration(new CompraConfiguration());
+                modelBuilder.Entity<Compra>().ToTable("JuanApp2.Compra");
                 modelBuilder.ApplyConfiguration(new CobranzaConfiguration());
                 modelBuilder.Entity<Cobranza>().ToTable("JuanApp2.Cobranza");
                 modelBuilder.ApplyConfiguration(new ProveedorConfiguration());
@@ -89,7 +91,7 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.ApplyConfiguration(new ModuloVarioConfiguration());
                 modelBuilder.Entity<ModuloVario>().ToTable("JuanApp2.ModuloVario");
                 modelBuilder.ApplyConfiguration(new ModuloGastoConfiguration());
-                modelBuilder.Entity<Compra>().ToTable("JuanApp2.ModuloGasto");
+                modelBuilder.Entity<ModuloGasto>().ToTable("JuanApp2.ModuloGasto");
             }
             catch (Exception) { throw; }
         }

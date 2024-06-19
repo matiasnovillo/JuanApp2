@@ -45,7 +45,7 @@ namespace JuanApp.Formularios.Entrada
 
                     Proveedor Proveedor = _proveedorRepository.GetByProveedorId(Compra.ProveedorId);
 
-                    
+
 
                     DateTimePickerFecha.Value = Compra.Fecha;
                     txtDiaDePago.Value = Compra.DiaDePago;
@@ -148,6 +148,26 @@ namespace JuanApp.Formularios.Entrada
 
                 throw;
             }
+        }
+
+        private void txtPrecio_ValueChanged(object sender, EventArgs e)
+        {
+            lblPrecio.Text = $@"Precio * = {txtPrecio.Value.ToString("N2")}";
+        }
+
+        private void txtUnidad_ValueChanged(object sender, EventArgs e)
+        {
+            lblUnidades.Text = $@"Unidades * = {txtUnidad.Value.ToString("N2")}";
+        }
+
+        private void txtKilogramo_ValueChanged(object sender, EventArgs e)
+        {
+            lblKilogramos.Text = $@"Kilogramos * = {txtKilogramo.Value.ToString("N2")}";
+        }
+
+        private void txtSubtotal_ValueChanged(object sender, EventArgs e)
+        {
+            lblSubtotal.Text = $@"Subtotal * = {txtSubtotal.Value.ToString("N2")}";
         }
     }
 }

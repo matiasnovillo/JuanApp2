@@ -40,13 +40,14 @@
             cmbCobrador = new ComboBox();
             label2 = new Label();
             txtDineroBanco = new NumericUpDown();
-            label3 = new Label();
-            label4 = new Label();
+            lblDineroBanco = new Label();
+            lblDineroCheque = new Label();
             txtDineroCheque = new NumericUpDown();
-            label5 = new Label();
+            lblDineroEfectivo = new Label();
             txtDineroEfectivo = new NumericUpDown();
-            label6 = new Label();
+            lblDineroTotal = new Label();
             txtDineroTotal = new NumericUpDown();
+            txtAtencion = new TextBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDineroBanco).BeginInit();
@@ -158,86 +159,104 @@
             // 
             // txtDineroBanco
             // 
+            txtDineroBanco.DecimalPlaces = 2;
             txtDineroBanco.Font = new Font("Segoe UI", 12F);
             txtDineroBanco.Location = new Point(29, 271);
-            txtDineroBanco.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroBanco.Maximum = new decimal(new int[] { 1569325055, 23283064, 0, 0 });
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
+            txtDineroBanco.ValueChanged += txtDineroBanco_ValueChanged;
             txtDineroBanco.KeyPress += txtDineroBanco_KeyPress;
             // 
-            // label3
+            // lblDineroBanco
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(29, 240);
-            label3.Name = "label3";
-            label3.Size = new Size(156, 28);
-            label3.TabIndex = 28;
-            label3.Text = "Dinero en banco";
+            lblDineroBanco.AutoSize = true;
+            lblDineroBanco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDineroBanco.ForeColor = Color.White;
+            lblDineroBanco.Location = new Point(29, 240);
+            lblDineroBanco.Name = "lblDineroBanco";
+            lblDineroBanco.Size = new Size(156, 28);
+            lblDineroBanco.TabIndex = 28;
+            lblDineroBanco.Text = "Dinero en banco";
             // 
-            // label4
+            // lblDineroCheque
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(29, 337);
-            label4.Name = "label4";
-            label4.Size = new Size(165, 28);
-            label4.TabIndex = 30;
-            label4.Text = "Dinero en cheque";
+            lblDineroCheque.AutoSize = true;
+            lblDineroCheque.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDineroCheque.ForeColor = Color.White;
+            lblDineroCheque.Location = new Point(29, 337);
+            lblDineroCheque.Name = "lblDineroCheque";
+            lblDineroCheque.Size = new Size(165, 28);
+            lblDineroCheque.TabIndex = 30;
+            lblDineroCheque.Text = "Dinero en cheque";
             // 
             // txtDineroCheque
             // 
+            txtDineroCheque.DecimalPlaces = 2;
             txtDineroCheque.Font = new Font("Segoe UI", 12F);
             txtDineroCheque.Location = new Point(29, 368);
-            txtDineroCheque.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroCheque.Maximum = new decimal(new int[] { 1569325055, 23283064, 0, 0 });
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
             txtDineroCheque.TabIndex = 29;
+            txtDineroCheque.ValueChanged += txtDineroCheque_ValueChanged;
             txtDineroCheque.KeyPress += txtDineroCheque_KeyPress;
             // 
-            // label5
+            // lblDineroEfectivo
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(29, 427);
-            label5.Name = "label5";
-            label5.Size = new Size(171, 28);
-            label5.TabIndex = 32;
-            label5.Text = "Dinero en efectivo";
+            lblDineroEfectivo.AutoSize = true;
+            lblDineroEfectivo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDineroEfectivo.ForeColor = Color.White;
+            lblDineroEfectivo.Location = new Point(29, 427);
+            lblDineroEfectivo.Name = "lblDineroEfectivo";
+            lblDineroEfectivo.Size = new Size(171, 28);
+            lblDineroEfectivo.TabIndex = 32;
+            lblDineroEfectivo.Text = "Dinero en efectivo";
             // 
             // txtDineroEfectivo
             // 
+            txtDineroEfectivo.DecimalPlaces = 2;
             txtDineroEfectivo.Font = new Font("Segoe UI", 12F);
             txtDineroEfectivo.Location = new Point(29, 458);
-            txtDineroEfectivo.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroEfectivo.Maximum = new decimal(new int[] { 1569325055, 23283064, 0, 0 });
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
+            txtDineroEfectivo.ValueChanged += txtDineroEfectivo_ValueChanged;
             txtDineroEfectivo.KeyPress += txtDineroEfectivo_KeyPress;
             // 
-            // label6
+            // lblDineroTotal
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(401, 146);
-            label6.Name = "label6";
-            label6.Size = new Size(117, 28);
-            label6.TabIndex = 34;
-            label6.Text = "Dinero total";
+            lblDineroTotal.AutoSize = true;
+            lblDineroTotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDineroTotal.ForeColor = Color.White;
+            lblDineroTotal.Location = new Point(401, 146);
+            lblDineroTotal.Name = "lblDineroTotal";
+            lblDineroTotal.Size = new Size(117, 28);
+            lblDineroTotal.TabIndex = 34;
+            lblDineroTotal.Text = "Dinero total";
             // 
             // txtDineroTotal
             // 
+            txtDineroTotal.DecimalPlaces = 2;
             txtDineroTotal.Font = new Font("Segoe UI", 12F);
             txtDineroTotal.Location = new Point(401, 177);
-            txtDineroTotal.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroTotal.Maximum = new decimal(new int[] { 1569325055, 23283064, 0, 0 });
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
+            txtDineroTotal.ValueChanged += txtDineroTotal_ValueChanged;
+            // 
+            // txtAtencion
+            // 
+            txtAtencion.Location = new Point(401, 271);
+            txtAtencion.Multiline = true;
+            txtAtencion.Name = "txtAtencion";
+            txtAtencion.ReadOnly = true;
+            txtAtencion.Size = new Size(307, 184);
+            txtAtencion.TabIndex = 35;
+            txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
             // 
             // FormularioCobranza
             // 
@@ -245,13 +264,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(821, 622);
-            Controls.Add(label6);
+            Controls.Add(txtAtencion);
+            Controls.Add(lblDineroTotal);
             Controls.Add(txtDineroTotal);
-            Controls.Add(label5);
+            Controls.Add(lblDineroEfectivo);
             Controls.Add(txtDineroEfectivo);
-            Controls.Add(label4);
+            Controls.Add(lblDineroCheque);
             Controls.Add(txtDineroCheque);
-            Controls.Add(label3);
+            Controls.Add(lblDineroBanco);
             Controls.Add(txtDineroBanco);
             Controls.Add(label2);
             Controls.Add(cmbCobrador);
@@ -290,12 +310,13 @@
         private ComboBox cmbCobrador;
         private Label label2;
         private NumericUpDown txtDineroBanco;
-        private Label label3;
-        private Label label4;
+        private Label lblDineroBanco;
+        private Label lblDineroCheque;
         private NumericUpDown txtDineroCheque;
-        private Label label5;
+        private Label lblDineroEfectivo;
         private NumericUpDown txtDineroEfectivo;
-        private Label label6;
+        private Label lblDineroTotal;
         private NumericUpDown txtDineroTotal;
+        private TextBox txtAtencion;
     }
 }
