@@ -16,6 +16,8 @@ using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Entities;
+using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -33,6 +35,7 @@ namespace JuanApp2.DatabaseContexts
         public DbSet<ModuloVario> ModuloVario { get; set; }
         public DbSet<ModuloGasto> ModuloGasto { get; set; }
         public DbSet<ModuloProveedor> ModuloProveedor { get; set; }
+        public DbSet<TipoDeMovimiento> TipoDeMovimiento { get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -92,6 +95,8 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.Entity<ModuloVario>().ToTable("JuanApp2.ModuloVario");
                 modelBuilder.ApplyConfiguration(new ModuloGastoConfiguration());
                 modelBuilder.Entity<ModuloGasto>().ToTable("JuanApp2.ModuloGasto");
+                modelBuilder.ApplyConfiguration(new TipoDeMovimientoConfiguration());
+                modelBuilder.Entity<TipoDeMovimiento>().ToTable("JuanApp2.TipoDeMovimiento");
             }
             catch (Exception) { throw; }
         }
