@@ -38,7 +38,6 @@
             label1 = new Label();
             btnProveedorMain = new Button();
             btnCobradores = new Button();
-            btnGastos = new Button();
             btnProveedores = new Button();
             btnCompras = new Button();
             btnCobranza = new Button();
@@ -102,7 +101,6 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnProveedorMain);
             panel1.Controls.Add(btnCobradores);
-            panel1.Controls.Add(btnGastos);
             panel1.Controls.Add(btnProveedores);
             panel1.Controls.Add(btnCompras);
             panel1.Controls.Add(btnCobranza);
@@ -150,18 +148,6 @@
             btnCobradores.Text = "COBRADORES";
             btnCobradores.UseVisualStyleBackColor = false;
             btnCobradores.Click += btnCobradores_Click;
-            // 
-            // btnGastos
-            // 
-            btnGastos.BackColor = Color.Black;
-            btnGastos.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
-            btnGastos.ForeColor = SystemColors.Window;
-            btnGastos.Location = new Point(819, 307);
-            btnGastos.Name = "btnGastos";
-            btnGastos.Size = new Size(203, 148);
-            btnGastos.TabIndex = 11;
-            btnGastos.Text = "GASTOS";
-            btnGastos.UseVisualStyleBackColor = false;
             // 
             // btnProveedores
             // 
@@ -259,7 +245,6 @@
         private ToolStripButton toolStripButton2;
         private ToolStripButton ToolStripButtonAcercaDe;
         private Button btnCaja;
-        private Button btnGastos;
         private Button btnProveedores;
         private Button btnCompras;
         private Button btnCobranza;

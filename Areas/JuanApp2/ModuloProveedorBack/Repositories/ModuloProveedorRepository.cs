@@ -158,6 +158,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Repositories
                 DataTable.Columns.Add("DineroTotal", typeof(string));
                 DataTable.Columns.Add("DineroCheque", typeof(string));
                 DataTable.Columns.Add("DineroEfectivo", typeof(string));
+                DataTable.Columns.Add("Descripcion", typeof(string));
                 
 
                 foreach (int ModuloProveedorId in lstModuloProveedorChecked)
@@ -178,7 +179,8 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Repositories
                         moduloproveedor.DineroBanco,
                         moduloproveedor.DineroTotal,
                         moduloproveedor.DineroCheque,
-                        moduloproveedor.DineroEfectivo
+                        moduloproveedor.DineroEfectivo,
+                        moduloproveedor.Descripcion
                         
                         );
                     }
@@ -208,6 +210,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Repositories
                 DataTable.Columns.Add("DineroTotal", typeof(string));
                 DataTable.Columns.Add("DineroCheque", typeof(string));
                 DataTable.Columns.Add("DineroEfectivo", typeof(string));
+                DataTable.Columns.Add("Descripcion", typeof(string));
                 
 
                 foreach (ModuloProveedor moduloproveedor in lstModuloProveedor)
@@ -224,7 +227,8 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Repositories
                         moduloproveedor.DineroBanco,
                         moduloproveedor.DineroTotal,
                         moduloproveedor.DineroCheque,
-                        moduloproveedor.DineroEfectivo
+                        moduloproveedor.DineroEfectivo,
+                        moduloproveedor.Descripcion
                         
                         );
                 }

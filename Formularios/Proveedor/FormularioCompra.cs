@@ -24,9 +24,6 @@ namespace JuanApp.Formularios.Entrada
 
                 InitializeComponent();
 
-                optHaber.Checked = true;
-                optDebe.Checked = false;
-
                 DateTimePickerFecha.Value = DateTime.Now;
 
                 _lstProveedor = _proveedorRepository.GetAll();
@@ -56,16 +53,6 @@ namespace JuanApp.Formularios.Entrada
                     txtKilogramo.Value = Compra.Kilogramo;
                     txtPrecio.Value = Compra.Precio;
                     txtSubtotal.Value = Compra.Subtotal;
-                    if (Compra.DebeOHaber == true)
-                    {
-                        optDebe.Checked = true;
-                        optHaber.Checked = false;
-                    }
-                    else
-                    {
-                        optDebe.Checked = false;
-                        optHaber.Checked = true;
-                    }
                     cmbProveedor.SelectedItem = $@"{Proveedor.NombreCompleto}";
                 }
 
@@ -107,7 +94,7 @@ namespace JuanApp.Formularios.Entrada
                         DateTimeCreation = DateTime.Now,
                         DateTimeLastModification = DateTime.Now,
                         Fecha = DateTimePickerFecha.Value,
-                        DebeOHaber = optDebe.Checked == true ? true : false,
+                        DebeOHaber = false,
                         Referencia = txtReferencia.Text,
                         Descripcion = txtDescripcion.Text,
                         DiaDePago = Convert.ToInt32(txtDiaDePago.Value),
@@ -127,7 +114,7 @@ namespace JuanApp.Formularios.Entrada
 
                     Compra.ProveedorId = Proveedor.ProveedorId;
                     Compra.Fecha = DateTimePickerFecha.Value;
-                    Compra.DebeOHaber = optDebe.Checked == true ? true : false;
+                    Compra.DebeOHaber = false;
                     Compra.Referencia = txtReferencia.Text;
                     Compra.Descripcion = txtDescripcion.Text;
                     Compra.DiaDePago = Convert.ToInt32(txtDiaDePago.Value);

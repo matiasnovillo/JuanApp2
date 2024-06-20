@@ -3,12 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.Entrada
 {
-    public partial class FormularioVario : Form
+    public partial class FormularioModuloVario : Form
     {
         private readonly IModuloVarioRepository _modulovarioRepository;
         private readonly int _modulovarioId;
 
-        public FormularioVario(IServiceProvider serviceProvider,
+        public FormularioModuloVario(IServiceProvider serviceProvider,
             int modulovarioId)
         {
             try

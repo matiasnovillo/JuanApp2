@@ -80,12 +80,6 @@ namespace JuanApp.Formularios.Entrada
                 col5.HeaderText = "Saldo";
                 DataGridViewFicha.Columns.Add(col5);
 
-                DataGridViewButtonColumn colActualizar = new();
-                colActualizar.HeaderText = "Actualizar";
-                colActualizar.Text = "Actualizar";
-                colActualizar.UseColumnTextForButtonValue = true;
-                DataGridViewFicha.Columns.Add(colActualizar);
-
                 DataGridViewButtonColumn colBorrar = new();
                 colBorrar.HeaderText = "Borrar";
                 colBorrar.Text = "Borrar";
@@ -135,19 +129,13 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                if (e.ColumnIndex == 8)
+                if (e.ColumnIndex == 7)
                 {
                     //Actualizar
-                    int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
-
-                    FormularioCobranza FormularioCobranza = new(_serviceProvider,
-                    CobranzaId);
-
-                    FormularioCobranza.ShowDialog();
-
-                    GetTabla();
+                    //No se hace actualizaciones debido a su complejidad en vano, para eso, borrar y
+                    //volver a crear
                 }
-                else if (e.ColumnIndex == 9)
+                else if (e.ColumnIndex == 8)
                 {
                     //Borrar
                     DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar este registro?",
@@ -157,9 +145,32 @@ namespace JuanApp.Formularios.Entrada
 
                     if (result == DialogResult.Yes)
                     {
-                        int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        string Referencia = DataGridViewFicha.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-                        _cobranzaRepository.DeleteByCobranzaId(CobranzaId);
+                        if (Referencia == "COBRANZA")
+                        {
+                            int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            _cobranzaRepository.DeleteByCobranzaId(CobranzaId);
+                        }
+
+                        if (Referencia == "PAGO PROVEEDORES")
+                        {
+                            int ModuloProveedorId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            _moduloproveedorRepository.DeleteByModuloProveedorId(ModuloProveedorId);
+                        }
+
+                        if (Referencia == "VARIOS")
+                        {
+                            int ModuloVarioId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            _modulovarioRepository.DeleteByModuloVarioId(ModuloVarioId);
+                        }
+
+                        if (Referencia == "GASTOS")
+                        {
+                            int ModuloGastoId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                            _modulogastoRepository.DeleteByModuloGastoId(ModuloGastoId);
+                        }
+
 
                         GetTabla();
                     }
@@ -272,11 +283,11 @@ namespace JuanApp.Formularios.Entrada
 
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
-                        ID = moduloproveedor.ProveedorId,
+                        ID = moduloproveedor.ModuloProveedorId,
                         Fecha = moduloproveedor.DateTimeLastModification,
                         Referencia = "PAGO PROVEEDORES",
                         Proveedor = ProveedorCustom.NombreCompleto,
-                        Descripcion = "",
+                        Descripcion = moduloproveedor.Descripcion,
                         Debe = 0,
                         Haber = moduloproveedor.DineroTotal
                     };
@@ -347,7 +358,7 @@ namespace JuanApp.Formularios.Entrada
                 }
                 #endregion
 
-                #region Varios (ModuloVario)
+                #region Gastos (ModuloGasto)
                 List<ModuloGasto> lstModuloGasto = [];
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
@@ -410,7 +421,6 @@ namespace JuanApp.Formularios.Entrada
                         fichaDeMovimientoDeCajaDTO.Debe,                                    //Debe
                         fichaDeMovimientoDeCajaDTO.Haber,                                   //Haber
                         SaldoTotal,                                                         //Saldo
-                        "",
                         "");
                 }
 
@@ -485,7 +495,7 @@ namespace JuanApp.Formularios.Entrada
 
         private void btnPagoProveedor_Click(object sender, EventArgs e)
         {
-            FichaDeMovimientoDeCaja.FormularioProveedor FormularioProveedor = new(_serviceProvider, 0);
+            FichaDeMovimientoDeCaja.FormularioModuloProveedor FormularioProveedor = new(_serviceProvider, 0);
 
             FormularioProveedor.ShowDialog();
         }
@@ -499,14 +509,14 @@ namespace JuanApp.Formularios.Entrada
 
         private void btnVario_Click(object sender, EventArgs e)
         {
-            FormularioVario FormularioVario = new(_serviceProvider, 0);
+            FormularioModuloVario FormularioVario = new(_serviceProvider, 0);
 
             FormularioVario.ShowDialog();
         }
 
         private void btnGasto_Click(object sender, EventArgs e)
         {
-            FormularioGasto FormularioGasto = new(_serviceProvider, 0);
+            FormularioModuloGasto FormularioGasto = new(_serviceProvider, 0);
 
             FormularioGasto.ShowDialog();
         }

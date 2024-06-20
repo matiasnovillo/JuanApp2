@@ -1,5 +1,7 @@
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
+using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
+using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
@@ -7,14 +9,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
 {
-    public partial class FormularioProveedor : Form
+    public partial class FormularioModuloProveedor : Form
     {
         private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly IProveedorRepository _proveedorRepository;
         private readonly List<Proveedor> _lstProveedor;
         private readonly int _moduloproveedorId;
 
-        public FormularioProveedor(IServiceProvider serviceProvider,
+        public FormularioModuloProveedor(IServiceProvider serviceProvider,
             int moduloproveedorId)
         {
             try
@@ -50,6 +52,7 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
 
                     DateTimePickerFecha.Value = ModuloProveedor.Fecha;
                     cmbProveedor.SelectedItem = Proveedor.NombreCompleto;
+                    txtDescripcion.Text = ModuloProveedor.Descripcion;
                     txtDineroBanco.Value = ModuloProveedor.DineroBanco;
                     txtDineroCheque.Value = ModuloProveedor.DineroCheque;
                     txtDineroEfectivo.Value = ModuloProveedor.DineroEfectivo;
@@ -102,26 +105,15 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
                         DineroBanco = txtDineroBanco.Value,
                         DineroCheque = txtDineroCheque.Value,
                         DineroEfectivo = txtDineroEfectivo.Value,
-                        DineroTotal = txtDineroTotal.Value
+                        DineroTotal = txtDineroTotal.Value,
+                        Descripcion = txtDescripcion.Text
                     };
                     _moduloproveedorRepository.Add(ModuloProveedor);
                 }
                 else
                 {
                     //Actualizar
-                    JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
-                        .GetByModuloProveedorId(_moduloproveedorId);
-
-                    ModuloProveedor.Fecha = DateTimePickerFecha.Value;
-                    ModuloProveedor.ProveedorId = Proveedor.ProveedorId;
-                    ModuloProveedor.DineroBanco = txtDineroBanco.Value;
-                    ModuloProveedor.DineroCheque = txtDineroCheque.Value;
-                    ModuloProveedor.DineroEfectivo = txtDineroEfectivo.Value;
-                    ModuloProveedor.DineroTotal = txtDineroTotal.Value;
-                    ModuloProveedor.UserLastModificationId = 1;
-                    ModuloProveedor.DateTimeLastModification = DateTime.Now;
-
-                    _moduloproveedorRepository.Update(ModuloProveedor);
+                    //NO SE HARA MODIFICACION, PARA ESO, BORRAR Y CREAR DE NUEVO
                 }
 
                 Hide();

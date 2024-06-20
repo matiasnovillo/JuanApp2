@@ -5,12 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace JuanApp.Formularios.Entrada
 {
-    public partial class FormularioGasto : Form
+    public partial class FormularioModuloGasto : Form
     {
         private readonly IModuloGastoRepository _modulogastoRepository;
         private readonly int _modulogastoId;
 
-        public FormularioGasto(IServiceProvider serviceProvider,
+        public FormularioModuloGasto(IServiceProvider serviceProvider,
             int modulogastoId)
         {
             try

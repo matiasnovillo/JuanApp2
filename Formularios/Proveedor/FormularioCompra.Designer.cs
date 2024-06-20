@@ -53,8 +53,6 @@
             lblPrecio = new Label();
             txtSubtotal = new NumericUpDown();
             lblSubtotal = new Label();
-            optHaber = new RadioButton();
-            optDebe = new RadioButton();
             cmbProveedor = new ComboBox();
             label10 = new Label();
             statusStrip1.SuspendLayout();
@@ -151,7 +149,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(41, 353);
+            label2.Location = new Point(23, 257);
             label2.Name = "label2";
             label2.Size = new Size(75, 28);
             label2.TabIndex = 25;
@@ -160,7 +158,7 @@
             // DateTimePickerFecha
             // 
             DateTimePickerFecha.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DateTimePickerFecha.Location = new Point(41, 384);
+            DateTimePickerFecha.Location = new Point(23, 288);
             DateTimePickerFecha.Name = "DateTimePickerFecha";
             DateTimePickerFecha.Size = new Size(311, 31);
             DateTimePickerFecha.TabIndex = 26;
@@ -170,7 +168,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(41, 449);
+            label3.Location = new Point(23, 353);
             label3.Name = "label3";
             label3.Size = new Size(140, 28);
             label3.TabIndex = 27;
@@ -179,7 +177,7 @@
             // txtDiaDePago
             // 
             txtDiaDePago.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDiaDePago.Location = new Point(41, 480);
+            txtDiaDePago.Location = new Point(23, 384);
             txtDiaDePago.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             txtDiaDePago.Name = "txtDiaDePago";
             txtDiaDePago.Size = new Size(180, 31);
@@ -188,7 +186,7 @@
             // txtReferencia
             // 
             txtReferencia.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtReferencia.Location = new Point(41, 580);
+            txtReferencia.Location = new Point(23, 484);
             txtReferencia.Name = "txtReferencia";
             txtReferencia.Size = new Size(311, 31);
             txtReferencia.TabIndex = 29;
@@ -198,7 +196,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(41, 549);
+            label4.Location = new Point(23, 453);
             label4.Name = "label4";
             label4.Size = new Size(114, 28);
             label4.TabIndex = 30;
@@ -209,7 +207,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(406, 157);
+            label5.Location = new Point(23, 549);
             label5.Name = "label5";
             label5.Size = new Size(127, 28);
             label5.TabIndex = 32;
@@ -218,7 +216,7 @@
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDescripcion.Location = new Point(406, 188);
+            txtDescripcion.Location = new Point(23, 580);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(311, 31);
             txtDescripcion.TabIndex = 31;
@@ -226,7 +224,7 @@
             // txtUnidad
             // 
             txtUnidad.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUnidad.Location = new Point(406, 284);
+            txtUnidad.Location = new Point(417, 188);
             txtUnidad.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             txtUnidad.Name = "txtUnidad";
             txtUnidad.Size = new Size(180, 31);
@@ -238,7 +236,7 @@
             lblUnidades.AutoSize = true;
             lblUnidades.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblUnidades.ForeColor = Color.White;
-            lblUnidades.Location = new Point(406, 253);
+            lblUnidades.Location = new Point(417, 157);
             lblUnidades.Name = "lblUnidades";
             lblUnidades.Size = new Size(107, 28);
             lblUnidades.TabIndex = 33;
@@ -249,7 +247,7 @@
             txtKilogramo.DecimalPlaces = 2;
             txtKilogramo.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtKilogramo.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtKilogramo.Location = new Point(406, 384);
+            txtKilogramo.Location = new Point(417, 284);
             txtKilogramo.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtKilogramo.Name = "txtKilogramo";
             txtKilogramo.Size = new Size(180, 31);
@@ -261,7 +259,7 @@
             lblKilogramos.AutoSize = true;
             lblKilogramos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblKilogramos.ForeColor = Color.White;
-            lblKilogramos.Location = new Point(406, 353);
+            lblKilogramos.Location = new Point(417, 253);
             lblKilogramos.Name = "lblKilogramos";
             lblKilogramos.Size = new Size(125, 28);
             lblKilogramos.TabIndex = 35;
@@ -272,7 +270,7 @@
             txtPrecio.DecimalPlaces = 2;
             txtPrecio.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPrecio.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtPrecio.Location = new Point(406, 480);
+            txtPrecio.Location = new Point(417, 384);
             txtPrecio.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(180, 31);
@@ -284,7 +282,7 @@
             lblPrecio.AutoSize = true;
             lblPrecio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPrecio.ForeColor = Color.White;
-            lblPrecio.Location = new Point(406, 449);
+            lblPrecio.Location = new Point(417, 353);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(79, 28);
             lblPrecio.TabIndex = 37;
@@ -295,7 +293,7 @@
             txtSubtotal.DecimalPlaces = 2;
             txtSubtotal.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSubtotal.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtSubtotal.Location = new Point(406, 580);
+            txtSubtotal.Location = new Point(417, 480);
             txtSubtotal.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtSubtotal.Name = "txtSubtotal";
             txtSubtotal.Size = new Size(180, 31);
@@ -307,43 +305,17 @@
             lblSubtotal.AutoSize = true;
             lblSubtotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtotal.ForeColor = Color.White;
-            lblSubtotal.Location = new Point(406, 549);
+            lblSubtotal.Location = new Point(417, 449);
             lblSubtotal.Name = "lblSubtotal";
             lblSubtotal.Size = new Size(100, 28);
             lblSubtotal.TabIndex = 39;
             lblSubtotal.Text = "Subtotal *";
             // 
-            // optHaber
-            // 
-            optHaber.AutoSize = true;
-            optHaber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            optHaber.ForeColor = Color.White;
-            optHaber.Location = new Point(41, 179);
-            optHaber.Name = "optHaber";
-            optHaber.Size = new Size(86, 32);
-            optHaber.TabIndex = 41;
-            optHaber.TabStop = true;
-            optHaber.Text = "Haber";
-            optHaber.UseVisualStyleBackColor = true;
-            // 
-            // optDebe
-            // 
-            optDebe.AutoSize = true;
-            optDebe.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            optDebe.ForeColor = Color.White;
-            optDebe.Location = new Point(158, 179);
-            optDebe.Name = "optDebe";
-            optDebe.Size = new Size(79, 32);
-            optDebe.TabIndex = 42;
-            optDebe.TabStop = true;
-            optDebe.Text = "Debe";
-            optDebe.UseVisualStyleBackColor = true;
-            // 
             // cmbProveedor
             // 
             cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.Location = new Point(41, 284);
+            cmbProveedor.Location = new Point(23, 188);
             cmbProveedor.Name = "cmbProveedor";
             cmbProveedor.Size = new Size(311, 28);
             cmbProveedor.TabIndex = 43;
@@ -353,7 +325,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(41, 253);
+            label10.Location = new Point(23, 157);
             label10.Name = "label10";
             label10.Size = new Size(116, 28);
             label10.TabIndex = 44;
@@ -367,8 +339,6 @@
             ClientSize = new Size(821, 743);
             Controls.Add(label10);
             Controls.Add(cmbProveedor);
-            Controls.Add(optDebe);
-            Controls.Add(optHaber);
             Controls.Add(txtSubtotal);
             Controls.Add(lblSubtotal);
             Controls.Add(txtPrecio);
@@ -434,8 +404,6 @@
         private Label lblPrecio;
         private NumericUpDown txtSubtotal;
         private Label lblSubtotal;
-        private RadioButton optHaber;
-        private RadioButton optDebe;
         private ComboBox cmbProveedor;
         private Label label10;
     }

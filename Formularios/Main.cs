@@ -81,14 +81,14 @@ namespace JuanApp
 
         private void btnProveedores_Click(object sender, EventArgs e)
         {
-            ConsultaProveedor ConsultaProveedor = new(_serviceProvider);
+            ConsultaProveedorCustom ConsultaProveedor = new(_serviceProvider);
 
             ConsultaProveedor.ShowDialog();
         }
 
         private void btnProveedorMain_Click(object sender, EventArgs e)
         {
-            ConsultaProveedorMain ConsultaProveedorMain = new(_serviceProvider);
+            ConsultaProveedor ConsultaProveedorMain = new(_serviceProvider);
 
             ConsultaProveedorMain.ShowDialog();
         }

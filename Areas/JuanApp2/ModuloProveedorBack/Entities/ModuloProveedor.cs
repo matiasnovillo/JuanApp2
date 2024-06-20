@@ -60,6 +60,9 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities
 
         [Library.ModelAttributeValidator.Decimal("DineroEfectivo", "DineroEfectivo", true, 0D, 9228162514264337593543950335D)]
         public decimal DineroEfectivo { get; set; }
+
+        [Library.ModelAttributeValidator.String("Descripcion", "Descripcion", false, 1, 500, "")]
+        public string? Descripcion { get; set; }
     
         public string ToStringOnlyValuesForHTML()
         {
@@ -134,6 +137,12 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities
         <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
         <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
             <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{DineroEfectivo}</span>
+        </font>
+        <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
+    </td><td align=""left"" valign=""top"">
+        <div style=""height: 12px; line-height: 12px; font-size: 10px;"">&nbsp;</div>
+        <font face=""'Source Sans Pro', sans-serif"" color=""#000000"" style=""font-size: 20px; line-height: 28px;"">
+            <span style=""font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #000000; font-size: 20px; line-height: 28px;"">{Descripcion}</span>
         </font>
         <div style=""height: 40px; line-height: 40px; font-size: 38px;"">&nbsp;</div>
     </td>

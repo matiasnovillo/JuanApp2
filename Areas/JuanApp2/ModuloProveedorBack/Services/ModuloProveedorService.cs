@@ -111,6 +111,13 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Services
             };
             dtModuloProveedorCopy.Columns.Add(dtColumnDineroEfectivoFordtModuloProveedorCopy);
 
+            DataColumn dtColumnDescripcionFordtModuloProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Descripcion"
+            };
+            dtModuloProveedorCopy.Columns.Add(dtColumnDescripcionFordtModuloProveedorCopy);
+
             
             #endregion
 
@@ -304,6 +311,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Services
                     decimal DineroTotal = Convert.ToDecimal(row.Cell(10).GetString());
                     decimal DineroCheque = Convert.ToDecimal(row.Cell(11).GetString());
                     decimal DineroEfectivo = Convert.ToDecimal(row.Cell(12).GetString());
+                    string Descripcion = row.Cell(13).GetString();
                     
 
                     ModuloProveedor ModuloProveedor = new()
@@ -320,6 +328,7 @@ namespace JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Services
                         DineroTotal = DineroTotal,
                         DineroCheque = DineroCheque,
                         DineroEfectivo = DineroEfectivo,
+                        Descripcion = Descripcion,
                         
                     };
 

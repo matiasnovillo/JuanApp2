@@ -1,6 +1,6 @@
 ﻿namespace JuanApp.Formularios.Entrada
 {
-    partial class FormularioVario
+    partial class FormularioModuloVario
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioVario));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioModuloVario));
             lblTitulo = new Label();
             statusStrip1 = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();

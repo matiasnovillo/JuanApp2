@@ -1,6 +1,6 @@
-﻿namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
+﻿namespace JuanApp.Formularios.Entrada
 {
-    partial class FormularioProveedor
+    partial class FormularioModuloGasto
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioProveedor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioModuloGasto));
             lblTitulo = new Label();
             statusStrip1 = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
@@ -47,8 +47,8 @@
             txtDineroTotal = new NumericUpDown();
             DateTimePickerFecha = new DateTimePicker();
             label2 = new Label();
-            cmbProveedor = new ComboBox();
             label7 = new Label();
+            txtDescripcion = new TextBox();
             txtAtencion = new TextBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -65,9 +65,9 @@
             lblTitulo.ForeColor = SystemColors.Window;
             lblTitulo.Location = new Point(12, 45);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(694, 81);
+            lblTitulo.Size = new Size(592, 81);
             lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "Formulario de proveedor";
+            lblTitulo.Text = "Formulario de gastos";
             // 
             // statusStrip1
             // 
@@ -144,7 +144,7 @@
             txtDineroBanco.Font = new Font("Segoe UI", 12F);
             txtDineroBanco.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             txtDineroBanco.Location = new Point(29, 360);
-            txtDineroBanco.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroBanco.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
@@ -179,7 +179,7 @@
             txtDineroCheque.Font = new Font("Segoe UI", 12F);
             txtDineroCheque.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             txtDineroCheque.Location = new Point(29, 457);
-            txtDineroCheque.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroCheque.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
             txtDineroCheque.TabIndex = 29;
@@ -203,7 +203,7 @@
             txtDineroEfectivo.Font = new Font("Segoe UI", 12F);
             txtDineroEfectivo.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             txtDineroEfectivo.Location = new Point(29, 547);
-            txtDineroEfectivo.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroEfectivo.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
@@ -227,7 +227,7 @@
             txtDineroTotal.Font = new Font("Segoe UI", 12F);
             txtDineroTotal.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
             txtDineroTotal.Location = new Point(401, 177);
-            txtDineroTotal.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
+            txtDineroTotal.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
@@ -252,30 +252,29 @@
             label2.TabIndex = 36;
             label2.Text = "Fecha";
             // 
-            // cmbProveedor
-            // 
-            cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.Location = new Point(29, 267);
-            cmbProveedor.Name = "cmbProveedor";
-            cmbProveedor.Size = new Size(307, 36);
-            cmbProveedor.TabIndex = 37;
-            // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(29, 236);
+            label7.Location = new Point(29, 242);
             label7.Name = "label7";
-            label7.Size = new Size(103, 28);
-            label7.TabIndex = 38;
-            label7.Text = "Proveedor";
+            label7.Size = new Size(114, 28);
+            label7.TabIndex = 37;
+            label7.Text = "Descripción";
+            // 
+            // txtDescripcion
+            // 
+            txtDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcion.Location = new Point(29, 273);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(307, 34);
+            txtDescripcion.TabIndex = 38;
+            txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
             // txtAtencion
             // 
-            txtAtencion.Location = new Point(401, 267);
+            txtAtencion.Location = new Point(401, 270);
             txtAtencion.Multiline = true;
             txtAtencion.Name = "txtAtencion";
             txtAtencion.ReadOnly = true;
@@ -283,15 +282,15 @@
             txtAtencion.TabIndex = 39;
             txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
             // 
-            // FormularioProveedor
+            // FormularioGasto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(821, 706);
             Controls.Add(txtAtencion);
+            Controls.Add(txtDescripcion);
             Controls.Add(label7);
-            Controls.Add(cmbProveedor);
             Controls.Add(label2);
             Controls.Add(DateTimePickerFecha);
             Controls.Add(lblDineroTotal);
@@ -309,9 +308,9 @@
             Controls.Add(lblTitulo);
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
-            Name = "FormularioProveedor";
+            Name = "FormularioGasto";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Formulario de proveedor";
+            Text = "Formulario de gastos";
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -344,8 +343,8 @@
         private NumericUpDown txtDineroTotal;
         private DateTimePicker DateTimePickerFecha;
         private Label label2;
-        private ComboBox cmbProveedor;
         private Label label7;
+        private TextBox txtDescripcion;
         private TextBox txtAtencion;
     }
 }

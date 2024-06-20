@@ -63,12 +63,12 @@ namespace JuanApp2.Areas.JuanApp2.CompraBack.EntitiesConfiguration
 
                 //Referencia
                 entity.Property(e => e.Referencia)
-                    .HasColumnType("varchar(500)")
+                    .HasColumnType("varchar(8000)")
                     .IsRequired(true);
 
                 //Descripcion
                 entity.Property(e => e.Descripcion)
-                    .HasColumnType("text")
+                    .HasColumnType("varchar(8000)")
                     .IsRequired(true);
 
                 //Unidad
