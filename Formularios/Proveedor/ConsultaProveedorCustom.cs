@@ -1,5 +1,8 @@
 ﻿using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities;
+using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.DTOs;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +15,7 @@ namespace JuanApp.Formularios.Entrada
     {
         private readonly ICompraRepository _compraRepository;
         private readonly IProveedorRepository _proveedorRepository;
+        private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly ServiceProvider _serviceProvider;
         private List<Proveedor> _lstProveedor;
 
@@ -23,6 +27,7 @@ namespace JuanApp.Formularios.Entrada
 
                 _compraRepository = serviceProvider.GetRequiredService<ICompraRepository>();
                 _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
+                _moduloproveedorRepository = serviceProvider.GetRequiredService<IModuloProveedorRepository>();
 
                 InitializeComponent();
 
@@ -178,9 +183,10 @@ namespace JuanApp.Formularios.Entrada
             try
             {
                 List<Compra> lstCompra = [];
+                List<ModuloProveedor> lstModuloProveedor = [];
+                List<consultaProveedorDTO> lstconsultaProveedorDTO = [];
 
-
-
+                #region lstCompra
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
                     if (cmbProveedor.SelectedItem.ToString() == "TODOS")
@@ -247,58 +253,181 @@ namespace JuanApp.Formularios.Entrada
                             .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                             .ToList();
                     }
-
                 }
+                #endregion
+
+                #region lstModuloProveedor
+                if (string.IsNullOrEmpty(txtBuscar.Text))
+                {
+                    if (cmbProveedor.SelectedItem.ToString() == "TODOS")
+                    {
+                        lstModuloProveedor = _moduloproveedorRepository
+                            .AsQueryable()
+                            .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                            x.Fecha >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.Fecha)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
+                    }
+                    else
+                    {
+                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+
+                        lstModuloProveedor = _moduloproveedorRepository
+                            .AsQueryable()
+                            .Where(x => x.ProveedorId == Proveedor.ProveedorId)
+                            .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                            x.Fecha >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.Fecha)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
+                    }
+                }
+                else
+                {
+                    if (cmbProveedor.SelectedItem.ToString() == "TODOS")
+                    {
+                        string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                        lstModuloProveedor = _moduloproveedorRepository
+                            .AsQueryable()
+                            .Where(x => words.Any(word => x.Descripcion.Contains(word)))
+                            .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                            x.Fecha >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.Fecha)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
+                    }
+                    else
+                    {
+                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+
+                        string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                        lstModuloProveedor = _moduloproveedorRepository
+                            .AsQueryable()
+                            .Where(x => words.Any(word => x.Descripcion.Contains(word)))
+                            .Where(x => x.ProveedorId == Proveedor.ProveedorId)
+                            .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                            x.Fecha >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.Fecha)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
+                    }
+                }
+                #endregion
 
                 DataGridViewCompra.Rows.Clear();
 
-                decimal SaldoTotal = 0;
+                #region lstCompra
+                decimal SaldoTotalCompra = 0;
 
-                DateTime FechaMinima = DateTime.MaxValue;
+                DateTime FechaMinimaCompra = DateTime.MaxValue;
 
-                decimal TotalAVencer = 0;
+                decimal TotalAVencerCompra = 0;
 
                 foreach (Compra compra in lstCompra)
                 {
-                    Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(compra.ProveedorId);
-
-                    if (compra.Fecha.AddDays(compra.DiaDePago) < FechaMinima)
+                    if (compra.Fecha.AddDays(compra.DiaDePago) < FechaMinimaCompra)
                     {
-                        FechaMinima = compra.Fecha.AddDays(compra.DiaDePago);
-                        TotalAVencer = compra.Subtotal;
+                        FechaMinimaCompra = compra.Fecha.AddDays(compra.DiaDePago);
+                        TotalAVencerCompra = compra.Subtotal;
                     }
 
                     if (compra.DebeOHaber == true)
                     {
-                        SaldoTotal += compra.Subtotal;
+                        SaldoTotalCompra += compra.Subtotal;
                     }
                     else
                     {
-                        SaldoTotal -= compra.Subtotal;
+                        SaldoTotalCompra -= compra.Subtotal;
                     }
 
+                    consultaProveedorDTO consultaProveedorDTO = new()
+                    {
+                        Id = compra.CompraId,
+                        Fecha = compra.Fecha,
+                        ProveedorId = compra.ProveedorId,
+                        Referencia = compra.Referencia,
+                        Descripcion = compra.Descripcion,
+                        Kilogramo = compra.Kilogramo,
+                        Precio = compra.Precio,
+                        Debe = compra.DebeOHaber == true ? compra.Subtotal : 0,
+                        Haber = compra.DebeOHaber == true ? 0 : compra.Subtotal,
+                        Saldo = SaldoTotalCompra,
+                        Vencimiento = compra.Fecha.AddDays(compra.DiaDePago)
+                    };
+                    lstconsultaProveedorDTO.Add(consultaProveedorDTO);
+                }
+                #endregion
 
-                    DataGridViewCompra.Rows.Add(compra.CompraId.ToString(),
-                        compra.Fecha.ToString("dd/MM/yyyy"),
+                #region lstModuloProveedor
+                decimal SaldoTotalModuloProveedor = SaldoTotalCompra;
+
+                DateTime FechaMinimaModuloProveedor = DateTime.MaxValue;
+
+                foreach (ModuloProveedor moduloproveedor in lstModuloProveedor)
+                {
+                    if (moduloproveedor.Fecha.AddDays(0) < FechaMinimaModuloProveedor)
+                    {
+                        FechaMinimaModuloProveedor = moduloproveedor.Fecha.AddDays(0);
+                    }
+
+                    SaldoTotalModuloProveedor -= moduloproveedor.DineroTotal; 
+
+                    consultaProveedorDTO consultaProveedorDTO = new()
+                    {
+                        Id = moduloproveedor.ModuloProveedorId,
+                        Fecha = moduloproveedor.Fecha,
+                        ProveedorId = moduloproveedor.ProveedorId,
+                        Referencia = "PAGO A PROVEEDORES",
+                        Descripcion = moduloproveedor.Descripcion,
+                        Kilogramo = 0,
+                        Precio = 0,
+                        Debe = 0,
+                        Haber = moduloproveedor.DineroTotal,
+                        Saldo = SaldoTotalModuloProveedor,
+                        Vencimiento = moduloproveedor.Fecha.AddDays(0)
+                    };
+                    lstconsultaProveedorDTO.Add(consultaProveedorDTO);
+                }
+                #endregion
+
+                foreach (consultaProveedorDTO consultaProveedorDTO in lstconsultaProveedorDTO)
+                {
+                    Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(consultaProveedorDTO.ProveedorId);
+
+                    DataGridViewCompra.Rows.Add(consultaProveedorDTO.Id.ToString(),
+                        consultaProveedorDTO.Fecha.ToString("dd/MM/yyyy"),
                         ProveedorDataGridView.NombreCompleto,
-                        compra.Referencia,
-                        compra.Descripcion,
-                        compra.Kilogramo,
-                        $@"${compra.Precio.ToString("N2")}",
-                        compra.DebeOHaber == true ? $@"${compra.Subtotal.ToString("N2")}" : "",
-                        compra.DebeOHaber == true ? "" : $@"${compra.Subtotal.ToString("N2")}",
-                        $@"${SaldoTotal.ToString("N2")}",
-                        compra.Fecha.AddDays(compra.DiaDePago).ToString("dd/MM/yyyy"),
+                        consultaProveedorDTO.Referencia,
+                        consultaProveedorDTO.Descripcion,
+                        consultaProveedorDTO.Kilogramo,
+                        $@"${consultaProveedorDTO.Precio.ToString("N2")}",
+                        $@"${consultaProveedorDTO.Debe.ToString("N2")}",
+                        $@"${consultaProveedorDTO.Haber.ToString("N2")}",
+                        $@"${consultaProveedorDTO.Saldo.ToString("N2")}",
+                        consultaProveedorDTO.Vencimiento.ToString("dd/MM/yyyy"),
                         "",
                         "");
                 }
 
-                txtSaldoTotal.Text = SaldoTotal.ToString();
+                decimal SaldoTotal = SaldoTotalModuloProveedor;
+                DateTime FechaMinima = FechaMinimaCompra;
+                decimal TotalAVencer = TotalAVencerCompra;
+
+                txtSaldoTotal.Text = $@"${SaldoTotal.ToString("N2")}";
                 txtProximoVencimiento.Text = FechaMinima.ToString("dd/MM/yyyy");
-                txtTotalAVencer.Text = TotalAVencer.ToString();
+                txtTotalAVencer.Text = $@"${TotalAVencer.ToString("N2")}";
 
                 //Diseño
-                if (SaldoTotal < 0)
+                if (SaldoTotalCompra < 0)
                 {
                     txtSaldoTotal.BackColor = Color.Red;
                 }
@@ -307,9 +436,9 @@ namespace JuanApp.Formularios.Entrada
                     txtSaldoTotal.BackColor = Color.Green;
                 }
 
-                if (FechaMinima.Year == DateTime.Now.Year &&
-                    FechaMinima.Month == DateTime.Now.Month &&
-                    FechaMinima.Day == DateTime.Now.Day)
+                if (FechaMinimaCompra.Year == DateTime.Now.Year &&
+                    FechaMinimaCompra.Month == DateTime.Now.Month &&
+                    FechaMinimaCompra.Day == DateTime.Now.Day)
                 {
                     txtProximoVencimiento.BackColor = Color.Aquamarine;
                     txtTotalAVencer.BackColor = Color.Aquamarine;
