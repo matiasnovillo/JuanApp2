@@ -1,7 +1,7 @@
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
     public partial class FormularioModuloVario : Form
     {

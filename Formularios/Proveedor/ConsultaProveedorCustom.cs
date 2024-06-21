@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Proveedor
 {
     public partial class ConsultaProveedorCustom : Form
     {
@@ -17,7 +17,7 @@ namespace JuanApp.Formularios.Entrada
         private readonly IProveedorRepository _proveedorRepository;
         private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly ServiceProvider _serviceProvider;
-        private List<Proveedor> _lstProveedor;
+        private List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> _lstProveedor;
 
         public ConsultaProveedorCustom(ServiceProvider serviceProvider)
         {
@@ -116,7 +116,7 @@ namespace JuanApp.Formularios.Entrada
 
                 cmbProveedor.Items.Clear();
                 cmbProveedor.Items.Add($@"TODOS");
-                foreach (Proveedor proveedor in _lstProveedor)
+                foreach (Areas.JuanApp2.ProveedorBack.Entities.Proveedor proveedor in _lstProveedor)
                 {
                     cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
                 }
@@ -201,7 +201,7 @@ namespace JuanApp.Formularios.Entrada
                     }
                     else
                     {
-                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                        Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                         lstCompra = _compraRepository
                             .AsQueryable()
@@ -235,7 +235,7 @@ namespace JuanApp.Formularios.Entrada
                     }
                     else
                     {
-                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                        Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                         string[] words = Regex
                        .Replace(txtBuscar.Text
@@ -271,7 +271,7 @@ namespace JuanApp.Formularios.Entrada
                     }
                     else
                     {
-                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                        Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                         lstModuloProveedor = _moduloproveedorRepository
                             .AsQueryable()
@@ -303,7 +303,7 @@ namespace JuanApp.Formularios.Entrada
                     }
                     else
                     {
-                        Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                        Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                         string[] words = Regex
                        .Replace(txtBuscar.Text
@@ -401,7 +401,7 @@ namespace JuanApp.Formularios.Entrada
 
                 foreach (consultaProveedorDTO consultaProveedorDTO in lstconsultaProveedorDTO)
                 {
-                    Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(consultaProveedorDTO.ProveedorId);
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(consultaProveedorDTO.ProveedorId);
 
                     DataGridViewCompra.Rows.Add(consultaProveedorDTO.Id.ToString(),
                         consultaProveedorDTO.Fecha.ToString("dd/MM/yyyy"),

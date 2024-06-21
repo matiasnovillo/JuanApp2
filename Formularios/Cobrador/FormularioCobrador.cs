@@ -1,7 +1,7 @@
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Cobrador
 {
     public partial class FormularioCobrador : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace JuanApp.Formularios.Entrada
+﻿namespace JuanApp2.Formularios.Proveedor
 {
     partial class ConsultaProveedorCustom
     {

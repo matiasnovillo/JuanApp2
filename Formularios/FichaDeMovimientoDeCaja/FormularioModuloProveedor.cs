@@ -7,13 +7,13 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
+namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
     public partial class FormularioModuloProveedor : Form
     {
         private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly IProveedorRepository _proveedorRepository;
-        private readonly List<Proveedor> _lstProveedor;
+        private readonly List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> _lstProveedor;
         private readonly int _moduloproveedorId;
 
         public FormularioModuloProveedor(IServiceProvider serviceProvider,
@@ -33,7 +33,7 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
                 _lstProveedor = _proveedorRepository.GetAll();
 
                 cmbProveedor.Items.Clear();
-                foreach (Proveedor proveedor in _lstProveedor)
+                foreach (Areas.JuanApp2.ProveedorBack.Entities.Proveedor proveedor in _lstProveedor)
                 {
                     cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
                 }
@@ -45,10 +45,10 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
 
                 if (_moduloproveedorId > 0)
                 {
-                    JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
+                    Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
                                                                         .GetByModuloProveedorId(_moduloproveedorId);
 
-                    Proveedor Proveedor = _proveedorRepository.GetByProveedorId(ModuloProveedor.ProveedorId);
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByProveedorId(ModuloProveedor.ProveedorId);
 
                     DateTimePickerFecha.Value = ModuloProveedor.Fecha;
                     cmbProveedor.SelectedItem = Proveedor.NombreCompleto;
@@ -87,7 +87,7 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
                     return;
                 }
 
-                Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                 if (_moduloproveedorId == 0)
                 {

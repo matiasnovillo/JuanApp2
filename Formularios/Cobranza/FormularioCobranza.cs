@@ -1,15 +1,14 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Cobranza
 {
     public partial class FormularioCobranza : Form
     {
         private readonly ICobranzaRepository _cobranzaRepository;
         private readonly ICobradorRepository _cobradorRepository;
-        private readonly List<Cobrador> _lstCobrador;
+        private readonly List<JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador> _lstCobrador;
         private readonly int _cobranzaId;
 
         public FormularioCobranza(IServiceProvider serviceProvider,
@@ -27,7 +26,7 @@ namespace JuanApp.Formularios.Entrada
                 _lstCobrador = _cobradorRepository.GetAll();
 
                 cmbCobrador.Items.Clear();
-                foreach (Cobrador cobrador in _lstCobrador)
+                foreach (JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador cobrador in _lstCobrador)
                 {
                     cmbCobrador.Items.Add($@"{cobrador.NombreCompleto}");
                 }
@@ -42,7 +41,7 @@ namespace JuanApp.Formularios.Entrada
                     JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza Cobranza = _cobranzaRepository
                                                                         .GetByCobranzaId(_cobranzaId);
 
-                    Cobrador Cobrador = _cobradorRepository.GetByCobradorId(Cobranza.CobradorId);
+                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByCobradorId(Cobranza.CobradorId);
 
                     cmbCobrador.SelectedItem = $@"{Cobrador.NombreCompleto}";
                     txtDineroBanco.Value = Cobranza.DineroBanco;
@@ -79,7 +78,7 @@ namespace JuanApp.Formularios.Entrada
                     return;
                 }
 
-                Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(cmbCobrador.SelectedItem.ToString());
+                JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(cmbCobrador.SelectedItem.ToString());
 
                 if (_cobranzaId == 0)
                 {

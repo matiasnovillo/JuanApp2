@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Cobranza
 {
     public partial class ConsultaCobranza : Form
     {
@@ -156,9 +156,9 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                List<Cobranza> lstCobranza = [];
+                List<JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
 
-                Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
+                JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
@@ -187,9 +187,9 @@ namespace JuanApp.Formularios.Entrada
 
                 DataGridViewCobranza.Rows.Clear();
 
-                foreach (Cobranza cobranza in lstCobranza)
+                foreach (JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
                 {
-                    Cobrador CobradorDataGridView = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
+                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorDataGridView = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
 
                     DataGridViewCobranza.Rows.Add(cobranza.CobranzaId.ToString(),
                         cobranza.DateTimeLastModification.ToString("dd/MM/yyyy HH:mm"),

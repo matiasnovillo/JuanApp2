@@ -3,13 +3,13 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Proveedor
 {
     public partial class FormularioCompra : Form
     {
         private readonly ICompraRepository _compraRepository;
         private readonly IProveedorRepository _proveedorRepository;
-        private readonly List<Proveedor> _lstProveedor;
+        private readonly List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> _lstProveedor;
         private readonly int _compraId;
 
         public FormularioCompra(IServiceProvider serviceProvider,
@@ -29,7 +29,7 @@ namespace JuanApp.Formularios.Entrada
                 _lstProveedor = _proveedorRepository.GetAll();
 
                 cmbProveedor.Items.Clear();
-                foreach (Proveedor proveedor in _lstProveedor)
+                foreach (Areas.JuanApp2.ProveedorBack.Entities.Proveedor proveedor in _lstProveedor)
                 {
                     cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
                 }
@@ -37,10 +37,10 @@ namespace JuanApp.Formularios.Entrada
 
                 if (_compraId > 0)
                 {
-                    JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
+                    Areas.JuanApp2.CompraBack.Entities.Compra Compra = _compraRepository
                                                                         .GetByCompraId(_compraId);
 
-                    Proveedor Proveedor = _proveedorRepository.GetByProveedorId(Compra.ProveedorId);
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByProveedorId(Compra.ProveedorId);
 
 
 
@@ -80,7 +80,7 @@ namespace JuanApp.Formularios.Entrada
                     statusLabel.Text = "Faltan datos a completar";
                 }
 
-                Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
+                Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
 
                 if (_compraId == 0)
                 {

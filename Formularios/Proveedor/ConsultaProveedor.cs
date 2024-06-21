@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Proveedor
 {
     public partial class ConsultaProveedor : Form
     {

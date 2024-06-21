@@ -1,4 +1,4 @@
-﻿namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
+﻿namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
     partial class FormularioModuloProveedor
     {

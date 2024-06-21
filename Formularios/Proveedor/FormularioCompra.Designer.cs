@@ -1,4 +1,4 @@
-﻿namespace JuanApp.Formularios.Entrada
+﻿namespace JuanApp2.Formularios.Proveedor
 {
     partial class FormularioCompra
     {
@@ -198,9 +198,9 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(23, 453);
             label4.Name = "label4";
-            label4.Size = new Size(114, 28);
+            label4.Size = new Size(254, 28);
             label4.TabIndex = 30;
-            label4.Text = "Referencia *";
+            label4.Text = "Referencia * (Ingresar tropa)";
             // 
             // label5
             // 
@@ -209,9 +209,9 @@
             label5.ForeColor = Color.White;
             label5.Location = new Point(23, 549);
             label5.Name = "label5";
-            label5.Size = new Size(127, 28);
+            label5.Size = new Size(297, 28);
             label5.TabIndex = 32;
-            label5.Text = "Descripción *";
+            label5.Text = "Descripción * (Tipo de producto)";
             // 
             // txtDescripcion
             // 

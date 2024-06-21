@@ -1,10 +1,8 @@
-﻿using JuanApp.Formularios;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using JuanApp2.Areas.System.FailureBack.Entities;
 using JuanApp2.Areas.System.FailureBack.Interfaces;
-using JuanApp.Formularios.Entrada;
 
-namespace JuanApp
+namespace JuanApp2.Formularios
 {
     public partial class Main : Form
     {
@@ -60,42 +58,42 @@ namespace JuanApp
 
         private void btnCaja_Click(object sender, EventArgs e)
         {
-            ConsultaFichaDeMovimientoDeCaja ConsultaFichaDeMovimientoDeCaja = new(_serviceProvider);
+            FichaDeMovimientoDeCaja.ConsultaFichaDeMovimientoDeCaja ConsultaFichaDeMovimientoDeCaja = new(_serviceProvider);
 
             ConsultaFichaDeMovimientoDeCaja.ShowDialog();
         }
 
         private void btnCobradores_Click(object sender, EventArgs e)
         {
-            ConsultaCobrador ConsultaCobrador = new(_serviceProvider);
+            Cobrador.ConsultaCobrador ConsultaCobrador = new(_serviceProvider);
 
             ConsultaCobrador.ShowDialog();
         }
 
         private void btnCobranza_Click(object sender, EventArgs e)
         {
-            ConsultaCobranza ConsultaCobranza = new(_serviceProvider);
+            Formularios.Cobranza.ConsultaCobranza ConsultaCobranza = new(_serviceProvider);
 
             ConsultaCobranza.ShowDialog();
         }
 
         private void btnProveedores_Click(object sender, EventArgs e)
         {
-            ConsultaProveedorCustom ConsultaProveedor = new(_serviceProvider);
+            Proveedor.ConsultaProveedorCustom ConsultaProveedor = new(_serviceProvider);
 
             ConsultaProveedor.ShowDialog();
         }
 
         private void btnProveedorMain_Click(object sender, EventArgs e)
         {
-            ConsultaProveedor ConsultaProveedorMain = new(_serviceProvider);
+            Proveedor.ConsultaProveedor ConsultaProveedorMain = new(_serviceProvider);
 
             ConsultaProveedorMain.ShowDialog();
         }
 
         private void btnCompras_Click(object sender, EventArgs e)
         {
-            FormularioCompra FormularioCompra = new(_serviceProvider, 0);
+            Proveedor.FormularioCompra FormularioCompra = new(_serviceProvider, 0);
 
             FormularioCompra.ShowDialog();
         }

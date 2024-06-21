@@ -17,6 +17,7 @@ using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Repositories;
 using JuanApp2.Areas.System.FailureBack.Interfaces;
 using JuanApp2.Areas.System.FailureBack.Repositories;
 using JuanApp2.DatabaseContexts;
+using JuanApp2.Formularios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

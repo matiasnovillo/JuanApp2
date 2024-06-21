@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace JuanApp.Formularios
+namespace JuanApp2.Formularios
 {
     public partial class AcercaDe : Form
     {

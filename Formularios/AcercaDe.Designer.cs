@@ -1,4 +1,4 @@
-﻿namespace JuanApp.Formularios
+﻿namespace JuanApp2.Formularios
 {
     partial class AcercaDe
     {

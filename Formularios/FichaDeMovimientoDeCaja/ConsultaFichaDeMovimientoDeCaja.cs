@@ -1,4 +1,4 @@
-﻿using JuanApp.Formularios.FichaDeMovimientoDeCaja;
+﻿using JuanApp2.Formularios.FichaDeMovimientoDeCaja;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
@@ -19,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
     public partial class ConsultaFichaDeMovimientoDeCaja : Form
     {
@@ -164,7 +164,7 @@ namespace JuanApp.Formularios.Entrada
                     {
                         int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
                         
-                        FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
+                        Formularios.Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
                     }
 
                     if (Referencia == "PAGO PROVEEDORES")
@@ -248,7 +248,7 @@ namespace JuanApp.Formularios.Entrada
                 decimal SaldoCheque = 0;
 
                 #region Cobranza
-                List<Cobranza> lstCobranza = [];
+                List<JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
                     lstCobranza = _cobranzaRepository
@@ -261,7 +261,7 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
-                    Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
+                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                     if (Cobrador != null)
                     {
@@ -276,9 +276,9 @@ namespace JuanApp.Formularios.Entrada
                     }
                 }
 
-                foreach (Cobranza cobranza in lstCobranza)
+                foreach (JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
                 {
-                    Cobrador CobradorCustom = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
+                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorCustom = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
 
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
@@ -317,7 +317,7 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
-                    Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                     if (Proveedor != null)
                     {
@@ -356,7 +356,7 @@ namespace JuanApp.Formularios.Entrada
 
                 foreach (ModuloProveedor moduloproveedor in lstModuloProveedor)
                 {
-                    Proveedor ProveedorCustom = _proveedorRepository.GetByProveedorId(moduloproveedor.ProveedorId);
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorCustom = _proveedorRepository.GetByProveedorId(moduloproveedor.ProveedorId);
 
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
@@ -676,7 +676,7 @@ namespace JuanApp.Formularios.Entrada
 
         private void btnCobranza_Click(object sender, EventArgs e)
         {
-            FormularioCobranza FormularioCobranza = new(_serviceProvider, 0);
+            Formularios.Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, 0);
 
             FormularioCobranza.ShowDialog();
         }

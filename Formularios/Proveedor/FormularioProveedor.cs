@@ -1,7 +1,7 @@
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp.Formularios.Entrada
+namespace JuanApp2.Formularios.Proveedor
 {
     public partial class FormularioProveedor : Form
     {
