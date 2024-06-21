@@ -4,6 +4,7 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace JuanApp.Formularios.Entrada
 {
@@ -95,6 +96,7 @@ namespace JuanApp.Formularios.Entrada
                 WindowState = FormWindowState.Maximized;
 
                 DataGridViewCompra.AutoGenerateColumns = false;
+                DataGridViewCompra.DefaultCellStyle.Font = new Font("Arial", 11);
 
                 numericUpDownRegistrosPorPagina.Value = 500;
 
@@ -282,10 +284,10 @@ namespace JuanApp.Formularios.Entrada
                         compra.Referencia,
                         compra.Descripcion,
                         compra.Kilogramo,
-                        compra.Precio,
-                        compra.DebeOHaber == true ? compra.Subtotal : "",
-                        compra.DebeOHaber == true ? "" : compra.Subtotal,
-                        SaldoTotal,
+                        $@"${compra.Precio.ToString("N2")}",
+                        compra.DebeOHaber == true ? $@"${compra.Subtotal.ToString("N2")}" : "",
+                        compra.DebeOHaber == true ? "" : $@"${compra.Subtotal.ToString("N2")}",
+                        $@"${SaldoTotal.ToString("N2")}",
                         compra.Fecha.AddDays(compra.DiaDePago).ToString("dd/MM/yyyy"),
                         "",
                         "");
@@ -313,6 +315,7 @@ namespace JuanApp.Formularios.Entrada
                     txtTotalAVencer.BackColor = Color.Aquamarine;
                 }
 
+                DataGridViewCompra.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"Información: Cantidad de compras listadas: {lstCompra.Count}";
             }
             catch (Exception) { throw; }

@@ -41,6 +41,8 @@
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            label9 = new Label();
+            cmbTipoDeMovimiento = new ComboBox();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -54,7 +56,6 @@
             txtSaldoBanco = new TextBox();
             txtSaldoEfectivo = new TextBox();
             txtSaldoTotal = new TextBox();
-            label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             DateTimePickerFechaFin = new DateTimePicker();
@@ -143,9 +144,9 @@
             lblBarraDeBusqueda.ForeColor = SystemColors.Window;
             lblBarraDeBusqueda.Location = new Point(12, 206);
             lblBarraDeBusqueda.Name = "lblBarraDeBusqueda";
-            lblBarraDeBusqueda.Size = new Size(567, 25);
+            lblBarraDeBusqueda.Size = new Size(482, 25);
             lblBarraDeBusqueda.TabIndex = 9;
-            lblBarraDeBusqueda.Text = "Barra de búsqueda (Busque por referencia, descripción y/o proveedor)";
+            lblBarraDeBusqueda.Text = "Barra de búsqueda (Busque por descripción y/o proveedor)";
             // 
             // txtBuscar
             // 
@@ -181,6 +182,8 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(label9);
+            pnlFiltersAndSearchBar.Controls.Add(cmbTipoDeMovimiento);
             pnlFiltersAndSearchBar.Controls.Add(label8);
             pnlFiltersAndSearchBar.Controls.Add(label7);
             pnlFiltersAndSearchBar.Controls.Add(label6);
@@ -194,7 +197,6 @@
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoBanco);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoEfectivo);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoTotal);
-            pnlFiltersAndSearchBar.Controls.Add(label4);
             pnlFiltersAndSearchBar.Controls.Add(label3);
             pnlFiltersAndSearchBar.Controls.Add(label2);
             pnlFiltersAndSearchBar.Controls.Add(DateTimePickerFechaFin);
@@ -211,6 +213,28 @@
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
             pnlFiltersAndSearchBar.Size = new Size(1924, 530);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.ForeColor = SystemColors.Window;
+            label9.Location = new Point(603, 206);
+            label9.Name = "label9";
+            label9.Size = new Size(173, 25);
+            label9.TabIndex = 36;
+            label9.Text = "Tipo de movimiento";
+            // 
+            // cmbTipoDeMovimiento
+            // 
+            cmbTipoDeMovimiento.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoDeMovimiento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbTipoDeMovimiento.FormattingEnabled = true;
+            cmbTipoDeMovimiento.Location = new Point(603, 234);
+            cmbTipoDeMovimiento.Name = "cmbTipoDeMovimiento";
+            cmbTipoDeMovimiento.Size = new Size(267, 36);
+            cmbTipoDeMovimiento.TabIndex = 35;
+            cmbTipoDeMovimiento.SelectedIndexChanged += cmbTipoDeMovimiento_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -357,17 +381,6 @@
             txtSaldoTotal.Size = new Size(210, 31);
             txtSaldoTotal.TabIndex = 22;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = SystemColors.Window;
-            label4.Location = new Point(12, 268);
-            label4.Name = "label4";
-            label4.Size = new Size(395, 25);
-            label4.TabIndex = 21;
-            label4.Text = "SUPER BUSCADOR, permite fallas en su escritura";
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -449,7 +462,6 @@
         private Label label2;
         private DateTimePicker DateTimePickerFechaFin;
         private DateTimePicker DateTimePickerFechaInicio;
-        private Label label4;
         private Button btnGasto;
         private Button btnVario;
         private Button btnCobranza;
@@ -463,5 +475,7 @@
         private Label label7;
         private Label label6;
         private Label label5;
+        private Label label9;
+        private ComboBox cmbTipoDeMovimiento;
     }
 }

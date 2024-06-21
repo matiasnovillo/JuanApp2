@@ -1,4 +1,5 @@
-﻿using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
+﻿using JuanApp.Formularios.FichaDeMovimientoDeCaja;
+using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
@@ -10,8 +11,13 @@ using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Entities;
+using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace JuanApp.Formularios.Entrada
 {
@@ -23,7 +29,9 @@ namespace JuanApp.Formularios.Entrada
         private readonly IModuloGastoRepository _modulogastoRepository;
         private readonly ICobradorRepository _cobradorRepository;
         private readonly IProveedorRepository _proveedorRepository;
+        private readonly ITipoDeMovimientoRepository _tipodemovimientoRepository;
         private readonly ServiceProvider _serviceProvider;
+        private List<TipoDeMovimiento> _lstTipoDeMovimiento;
 
         public ConsultaFichaDeMovimientoDeCaja(ServiceProvider serviceProvider)
         {
@@ -37,6 +45,7 @@ namespace JuanApp.Formularios.Entrada
                 _modulogastoRepository = serviceProvider.GetRequiredService<IModuloGastoRepository>();
                 _cobradorRepository = serviceProvider.GetRequiredService<ICobradorRepository>();
                 _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
+                _tipodemovimientoRepository = serviceProvider.GetRequiredService<ITipoDeMovimientoRepository>();
 
                 InitializeComponent();
 
@@ -80,6 +89,12 @@ namespace JuanApp.Formularios.Entrada
                 col5.HeaderText = "Saldo";
                 DataGridViewFicha.Columns.Add(col5);
 
+                DataGridViewButtonColumn colActualizar = new();
+                colActualizar.HeaderText = "Actualizar";
+                colActualizar.Text = "Actualizar";
+                colActualizar.UseColumnTextForButtonValue = true;
+                DataGridViewFicha.Columns.Add(colActualizar);
+
                 DataGridViewButtonColumn colBorrar = new();
                 colBorrar.HeaderText = "Borrar";
                 colBorrar.Text = "Borrar";
@@ -89,6 +104,7 @@ namespace JuanApp.Formularios.Entrada
                 WindowState = FormWindowState.Maximized;
 
                 DataGridViewFicha.AutoGenerateColumns = false;
+                DataGridViewFicha.DefaultCellStyle.Font = new Font("Arial", 11);
 
                 DateTime now = DateTime.Now;
                 DateTime NowIn030DaysBefore = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
@@ -98,6 +114,16 @@ namespace JuanApp.Formularios.Entrada
                 DateTimePickerFechaFin.Value = NowIn2359;
 
                 numericUpDownRegistrosPorPagina.Value = 500;
+
+                _lstTipoDeMovimiento = _tipodemovimientoRepository.GetAll();
+
+                cmbTipoDeMovimiento.Items.Clear();
+                cmbTipoDeMovimiento.Items.Add($@"TODOS");
+                foreach (TipoDeMovimiento tipodemovimiento in _lstTipoDeMovimiento)
+                {
+                    cmbTipoDeMovimiento.Items.Add($@"{tipodemovimiento.Nombre}");
+                }
+                cmbTipoDeMovimiento.SelectedIndex = 0;
 
                 GetTabla();
             }
@@ -129,13 +155,40 @@ namespace JuanApp.Formularios.Entrada
         {
             try
             {
-                if (e.ColumnIndex == 7)
+                if (e.ColumnIndex == 8)
                 {
                     //Actualizar
-                    //No se hace actualizaciones debido a su complejidad en vano, para eso, borrar y
-                    //volver a crear
+                    string Referencia = DataGridViewFicha.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+                    if (Referencia == "COBRANZA")
+                    {
+                        int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        
+                        FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
+                    }
+
+                    if (Referencia == "PAGO PROVEEDORES")
+                    {
+                        int ModuloProveedorId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                        FormularioModuloProveedor FormularioModuloProveedor = new(_serviceProvider, ModuloProveedorId);
+                    }
+
+                    if (Referencia == "VARIOS")
+                    {
+                        int ModuloVarioId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                        FormularioModuloVario FormularioModuloVario = new(_serviceProvider, ModuloVarioId);
+                    }
+
+                    if (Referencia == "GASTOS")
+                    {
+                        int ModuloGastoId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                        FormularioModuloGasto FormularioModuloGasto = new(_serviceProvider, ModuloGastoId);
+                    }
                 }
-                else if (e.ColumnIndex == 8)
+                else if (e.ColumnIndex == 9)
                 {
                     //Borrar
                     DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar este registro?",
@@ -190,7 +243,6 @@ namespace JuanApp.Formularios.Entrada
                 //COBRANZA - PROVEEDOR - VARIOS - GASTOS
                 List<fichaDeMovimientoDeCajaDTO> lstFichaDeMovimientoDeCajaDTO = [];
 
-                decimal SaldoTotal = 0;
                 decimal SaldoEfectivo = 0;
                 decimal SaldoBanco = 0;
                 decimal SaldoCheque = 0;
@@ -200,12 +252,12 @@ namespace JuanApp.Formularios.Entrada
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
                     lstCobranza = _cobranzaRepository
-                    .AsQueryable()
-                    .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
-                    x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
-                    .OrderBy(x => x.DateTimeLastModification)
-                    .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
-                    .ToList();
+                        .AsQueryable()
+                        .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
+                        x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
+                        .OrderBy(x => x.DateTimeLastModification)
+                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .ToList();
                 }
                 else
                 {
@@ -214,13 +266,13 @@ namespace JuanApp.Formularios.Entrada
                     if (Cobrador != null)
                     {
                         lstCobranza = _cobranzaRepository
-                    .AsQueryable()
-                    .Where(x => x.CobradorId == Cobrador.CobradorId)
-                    .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
-                    x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
-                    .OrderBy(x => x.DateTimeLastModification)
-                    .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
-                    .ToList();
+                            .AsQueryable()
+                            .Where(x => x.CobradorId == Cobrador.CobradorId )
+                            .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
+                            x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.DateTimeLastModification)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
                     }
                 }
 
@@ -241,10 +293,13 @@ namespace JuanApp.Formularios.Entrada
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
 
-                    SaldoTotal += cobranza.DineroTotal;
-                    SaldoEfectivo += cobranza.DineroEfectivo;
-                    SaldoBanco += cobranza.DineroBanco;
-                    SaldoCheque += cobranza.DineroCheque;
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "COBRANZA" ||
+                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
+                    {
+                        SaldoEfectivo += cobranza.DineroEfectivo;
+                        SaldoBanco += cobranza.DineroBanco;
+                        SaldoCheque += cobranza.DineroCheque;
+                    }
                 }
                 #endregion
 
@@ -262,13 +317,35 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
-                    JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
+                    Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                     if (Proveedor != null)
                     {
-                        lstModuloProveedor = lstModuloProveedor
+                        string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                        lstModuloProveedor = _moduloproveedorRepository
                             .AsQueryable()
-                            .Where(x => x.ProveedorId == Proveedor.ProveedorId)
+                            .Where(x => x.ProveedorId == Proveedor.ProveedorId ||
+                            words.Any(word => x.Descripcion.Contains(word)))
+                            .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
+                            x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
+                            .OrderBy(x => x.DateTimeLastModification)
+                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .ToList();
+                    }
+                    else
+                    {
+                        string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                        lstModuloProveedor = _moduloproveedorRepository
+                            .AsQueryable()
+                            .Where(x => words.Any(word => x.Descripcion.Contains(word)))
                             .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                             x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                             .OrderBy(x => x.DateTimeLastModification)
@@ -279,7 +356,7 @@ namespace JuanApp.Formularios.Entrada
 
                 foreach (ModuloProveedor moduloproveedor in lstModuloProveedor)
                 {
-                    JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorCustom = _proveedorRepository.GetByProveedorId(moduloproveedor.ProveedorId);
+                    Proveedor ProveedorCustom = _proveedorRepository.GetByProveedorId(moduloproveedor.ProveedorId);
 
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
@@ -294,10 +371,13 @@ namespace JuanApp.Formularios.Entrada
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
 
-                    SaldoTotal -= moduloproveedor.DineroTotal;
-                    SaldoEfectivo -= moduloproveedor.DineroEfectivo;
-                    SaldoBanco -= moduloproveedor.DineroBanco;
-                    SaldoCheque -= moduloproveedor.DineroCheque;
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "PAGO PROVEEDORES" ||
+                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
+                    {
+                        SaldoEfectivo -= moduloproveedor.DineroEfectivo;
+                        SaldoBanco -= moduloproveedor.DineroBanco;
+                        SaldoCheque -= moduloproveedor.DineroCheque;
+                    }
                 }
                 #endregion
 
@@ -315,9 +395,14 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
+                    string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
                     lstModuloVario = _modulovarioRepository
                         .AsQueryable()
-                        .Where(x => x.Descripcion.Contains(txtBuscar.Text))
+                        .Where(x => words.Any(word => x.Descripcion.Contains(word)))
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
@@ -340,21 +425,24 @@ namespace JuanApp.Formularios.Entrada
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
 
-                    if (modulovario.DebeOHaber == true)
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "VARIOS" ||
+                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
                     {
-                        SaldoTotal += modulovario.DineroTotal;
-                        SaldoEfectivo += modulovario.DineroEfectivo;
-                        SaldoBanco += modulovario.DineroBanco;
-                        SaldoCheque += modulovario.DineroCheque;
+                        if (modulovario.DebeOHaber == true)
+                        {
+                            SaldoEfectivo += modulovario.DineroEfectivo;
+                            SaldoBanco += modulovario.DineroBanco;
+                            SaldoCheque += modulovario.DineroCheque;
+                        }
+                        else
+                        {
+                            SaldoEfectivo -= modulovario.DineroEfectivo;
+                            SaldoBanco -= modulovario.DineroBanco;
+                            SaldoCheque -= modulovario.DineroCheque;
+                        }
                     }
-                    else
-                    {
-                        SaldoTotal -= modulovario.DineroTotal;
-                        SaldoEfectivo -= modulovario.DineroEfectivo;
-                        SaldoBanco -= modulovario.DineroBanco;
-                        SaldoCheque -= modulovario.DineroCheque;
-                    }
-                    
+                        
+
                 }
                 #endregion
 
@@ -372,9 +460,14 @@ namespace JuanApp.Formularios.Entrada
                 }
                 else
                 {
+                    string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
                     lstModuloGasto = _modulogastoRepository
                         .AsQueryable()
-                        .Where(x => x.Descripcion.Contains(txtBuscar.Text))
+                        .Where(x => words.Any(word => x.Descripcion.Contains(word)))
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
@@ -397,34 +490,114 @@ namespace JuanApp.Formularios.Entrada
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
 
-                    SaldoTotal -= modulogasto.DineroTotal;
-                    SaldoEfectivo -= modulogasto.DineroEfectivo;
-                    SaldoBanco -= modulogasto.DineroBanco;
-                    SaldoCheque -= modulogasto.DineroCheque;
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "GASTOS" ||
+                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
+                    {
+                        SaldoEfectivo -= modulogasto.DineroEfectivo;
+                        SaldoBanco -= modulogasto.DineroBanco;
+                        SaldoCheque -= modulogasto.DineroCheque;
+                    }
                 }
                 #endregion
+
+                decimal SaldoTotal = 0;
 
                 DataGridViewFicha.Rows.Clear();
 
                 foreach (fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO in lstFichaDeMovimientoDeCajaDTO)
                 {
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
+                    {
+                        SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
 
-                    SaldoTotal += - fichaDeMovimientoDeCajaDTO.Haber + fichaDeMovimientoDeCajaDTO.Debe;
-
-
-
-                    DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                        DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
                         fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),      //Fecha
                         fichaDeMovimientoDeCajaDTO.Referencia,                              //Referencia
                         fichaDeMovimientoDeCajaDTO.Proveedor,                               //Proveedor
                         fichaDeMovimientoDeCajaDTO.Descripcion,                             //Descripcion
-                        fichaDeMovimientoDeCajaDTO.Debe,                                    //Debe
-                        fichaDeMovimientoDeCajaDTO.Haber,                                   //Haber
-                        SaldoTotal,                                                         //Saldo
+                        $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                        $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                        $@"${SaldoTotal.ToString("N2")}",                                                         //Saldo
+                        "",
                         "");
-                }
+                    }
 
-                
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "PAGO PROVEEDORES")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "PAGO PROVEEDORES")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),      //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                              //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                               //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                             //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}",                                                         //Saldo
+                            "",
+                            "");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "VARIOS")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "VARIOS")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),      //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                              //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                               //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                             //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}",                                                         //Saldo
+                            "",
+                            "");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "GASTOS")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "GASTOS")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),      //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                              //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                               //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                             //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}",                                                         //Saldo
+                            "",
+                            "");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "COBRANZA")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "COBRANZA")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            DataGridViewFicha.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),      //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                              //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                               //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                             //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}",                                                         //Saldo
+                            "",
+                            "");
+                        }
+                    }
+                }
 
                 //Diseño
                 //SaldoTotal
@@ -469,6 +642,7 @@ namespace JuanApp.Formularios.Entrada
                 txtSaldoBanco.Text = SaldoBanco.ToString("N2");
                 txtSaldoCheque.Text = SaldoCheque.ToString("N2");
 
+                DataGridViewFicha.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"";
             }
             catch (Exception)
@@ -522,6 +696,11 @@ namespace JuanApp.Formularios.Entrada
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            GetTabla();
+        }
+
+        private void cmbTipoDeMovimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetTabla();
         }

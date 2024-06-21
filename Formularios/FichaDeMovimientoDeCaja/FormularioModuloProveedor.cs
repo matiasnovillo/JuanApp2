@@ -113,7 +113,20 @@ namespace JuanApp.Formularios.FichaDeMovimientoDeCaja
                 else
                 {
                     //Actualizar
-                    //NO SE HARA MODIFICACION, PARA ESO, BORRAR Y CREAR DE NUEVO
+                    JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
+                        .GetByModuloProveedorId(_moduloproveedorId);
+
+                    ModuloProveedor.UserLastModificationId = 1;
+                    ModuloProveedor.DateTimeLastModification = DateTime.Now;
+                    ModuloProveedor.ProveedorId = Proveedor.ProveedorId;
+                    ModuloProveedor.Fecha = DateTimePickerFecha.Value;
+                    ModuloProveedor.DineroBanco = txtDineroBanco.Value;
+                    ModuloProveedor.DineroCheque = txtDineroCheque.Value;
+                    ModuloProveedor.DineroEfectivo = txtDineroEfectivo.Value;
+                    ModuloProveedor.DineroTotal = txtDineroTotal.Value;
+                    ModuloProveedor.Descripcion = txtDescripcion.Text;
+
+                    _moduloproveedorRepository.Update(ModuloProveedor);
                 }
 
                 Hide();

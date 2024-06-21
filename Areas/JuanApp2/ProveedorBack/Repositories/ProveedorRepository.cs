@@ -75,24 +75,6 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Repositories
             catch (Exception) { throw; }
         }
 
-        public Proveedor? GetByReferenciaDescripcion(string txtBuscar)
-        {
-            try
-            {
-                string[] words = Regex
-                       .Replace(txtBuscar
-                       .Trim(), @"\s+", " ")
-                       .Split(" ");
-
-                Proveedor Proveedor = _context.Proveedor
-                    .Where(x => words.Any(word => x.NombreCompleto.Contains(word)))
-                    .FirstOrDefault();
-
-                return Proveedor;
-            }
-            catch (Exception) { throw; }
-        }
-
         public List<Proveedor?> GetAll()
         {
             try
