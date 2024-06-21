@@ -46,8 +46,6 @@ namespace JuanApp2.Formularios.Proveedor
 
                     DateTimePickerFecha.Value = Compra.Fecha;
                     txtDiaDePago.Value = Compra.DiaDePago;
-                    txtDiaDePago.Value = Compra.DiaDePago;
-                    txtReferencia.Text = Compra.Referencia;
                     txtDescripcion.Text = Compra.Descripcion;
                     txtUnidad.Value = Compra.Unidad;
                     txtKilogramo.Value = Compra.Kilogramo;
@@ -74,8 +72,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (txtReferencia.Text == "" ||
-                    txtDescripcion.Text == "")
+                if (txtDescripcion.Text == "")
                 {
                     statusLabel.Text = "Faltan datos a completar";
                 }
@@ -85,7 +82,7 @@ namespace JuanApp2.Formularios.Proveedor
                 if (_compraId == 0)
                 {
                     //Agregar
-                    JuanApp2.Areas.JuanApp2.CompraBack.Entities.Compra Compra = new()
+                    Areas.JuanApp2.CompraBack.Entities.Compra Compra = new()
                     {
                         CompraId = 0,
                         Active = true,
@@ -94,8 +91,8 @@ namespace JuanApp2.Formularios.Proveedor
                         DateTimeCreation = DateTime.Now,
                         DateTimeLastModification = DateTime.Now,
                         Fecha = DateTimePickerFecha.Value,
-                        DebeOHaber = false,
-                        Referencia = txtReferencia.Text,
+                        DebeOHaber = true,
+                        Referencia = "COMPRA",
                         Descripcion = txtDescripcion.Text,
                         DiaDePago = Convert.ToInt32(txtDiaDePago.Value),
                         Unidad = Convert.ToInt32(txtUnidad.Value),
@@ -114,8 +111,8 @@ namespace JuanApp2.Formularios.Proveedor
 
                     Compra.ProveedorId = Proveedor.ProveedorId;
                     Compra.Fecha = DateTimePickerFecha.Value;
-                    Compra.DebeOHaber = false;
-                    Compra.Referencia = txtReferencia.Text;
+                    Compra.DebeOHaber = true;
+                    Compra.Referencia = "COMPRA";
                     Compra.Descripcion = txtDescripcion.Text;
                     Compra.DiaDePago = Convert.ToInt32(txtDiaDePago.Value);
                     Compra.Unidad = Convert.ToInt32(txtUnidad.Value);
@@ -139,7 +136,7 @@ namespace JuanApp2.Formularios.Proveedor
 
         private void txtPrecio_ValueChanged(object sender, EventArgs e)
         {
-            lblPrecio.Text = $@"Precio * = {txtPrecio.Value.ToString("N2")}";
+            lblPrecio.Text = $@"Precio * = ${txtPrecio.Value.ToString("N2")}";
         }
 
         private void txtUnidad_ValueChanged(object sender, EventArgs e)
@@ -154,7 +151,79 @@ namespace JuanApp2.Formularios.Proveedor
 
         private void txtSubtotal_ValueChanged(object sender, EventArgs e)
         {
-            lblSubtotal.Text = $@"Subtotal * = {txtSubtotal.Value.ToString("N2")}";
+            lblSubtotal.Text = $@"Subtotal * = ${txtSubtotal.Value.ToString("N2")}";
+        }
+
+        private void txtDiaDePago_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    txtDescripcion.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    txtUnidad.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtUnidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    txtKilogramo.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtKilogramo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    txtPrecio.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    txtSubtotal.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtSubtotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    btnGuardar.Focus();
+                }
+            }
+            catch (Exception) { throw; }
         }
     }
 }

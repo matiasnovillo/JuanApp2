@@ -75,6 +75,7 @@ namespace JuanApp2.Formularios.Cobranza
                 WindowState = FormWindowState.Maximized;
 
                 DataGridViewCobranza.AutoGenerateColumns = false;
+                DataGridViewCobranza.DefaultCellStyle.Font = new Font("Arial", 11);
 
                 DateTime now = DateTime.Now;
                 DateTime NowIn030DaysBefore = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
@@ -156,9 +157,9 @@ namespace JuanApp2.Formularios.Cobranza
         {
             try
             {
-                List<JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
+                List<Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
 
-                JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
+                Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
@@ -187,21 +188,22 @@ namespace JuanApp2.Formularios.Cobranza
 
                 DataGridViewCobranza.Rows.Clear();
 
-                foreach (JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
+                foreach (Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
                 {
-                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorDataGridView = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
+                    Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorDataGridView = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
 
                     DataGridViewCobranza.Rows.Add(cobranza.CobranzaId.ToString(),
                         cobranza.DateTimeLastModification.ToString("dd/MM/yyyy HH:mm"),
                         CobradorDataGridView.NombreCompleto,
-                        cobranza.DineroTotal,
-                        cobranza.DineroEfectivo,
-                        cobranza.DineroBanco,
-                        cobranza.DineroCheque,
+                        $@"${cobranza.DineroTotal.ToString("N2")}",
+                        $@"${cobranza.DineroEfectivo.ToString("N2")}",
+                        $@"${cobranza.DineroBanco.ToString("N2")}",
+                        $@"${cobranza.DineroCheque.ToString("N2")}",
                         "",
                         "");
                 }
 
+                DataGridViewCobranza.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"Información: Cantidad de cobranzas listadas: {lstCobranza.Count}";
             }
             catch (Exception)

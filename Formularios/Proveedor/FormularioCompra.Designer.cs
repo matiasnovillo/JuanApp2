@@ -41,8 +41,6 @@
             DateTimePickerFecha = new DateTimePicker();
             label3 = new Label();
             txtDiaDePago = new NumericUpDown();
-            txtReferencia = new TextBox();
-            label4 = new Label();
             label5 = new Label();
             txtDescripcion = new TextBox();
             txtUnidad = new NumericUpDown();
@@ -182,61 +180,45 @@
             txtDiaDePago.Name = "txtDiaDePago";
             txtDiaDePago.Size = new Size(180, 31);
             txtDiaDePago.TabIndex = 28;
-            // 
-            // txtReferencia
-            // 
-            txtReferencia.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtReferencia.Location = new Point(23, 484);
-            txtReferencia.Name = "txtReferencia";
-            txtReferencia.Size = new Size(311, 31);
-            txtReferencia.TabIndex = 29;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(23, 453);
-            label4.Name = "label4";
-            label4.Size = new Size(254, 28);
-            label4.TabIndex = 30;
-            label4.Text = "Referencia * (Ingresar tropa)";
+            txtDiaDePago.KeyPress += txtDiaDePago_KeyPress;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(23, 549);
+            label5.Location = new Point(23, 458);
             label5.Name = "label5";
-            label5.Size = new Size(297, 28);
+            label5.Size = new Size(432, 28);
             label5.TabIndex = 32;
-            label5.Text = "Descripción * (Tipo de producto)";
+            label5.Text = "Descripción * (Ingrese tropa o tipo de producto)";
             // 
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDescripcion.Location = new Point(23, 580);
+            txtDescripcion.Location = new Point(23, 489);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(311, 31);
             txtDescripcion.TabIndex = 31;
+            txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
             // txtUnidad
             // 
             txtUnidad.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUnidad.Location = new Point(417, 188);
+            txtUnidad.Location = new Point(552, 188);
             txtUnidad.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             txtUnidad.Name = "txtUnidad";
             txtUnidad.Size = new Size(180, 31);
             txtUnidad.TabIndex = 34;
             txtUnidad.ValueChanged += txtUnidad_ValueChanged;
+            txtUnidad.KeyPress += txtUnidad_KeyPress;
             // 
             // lblUnidades
             // 
             lblUnidades.AutoSize = true;
             lblUnidades.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblUnidades.ForeColor = Color.White;
-            lblUnidades.Location = new Point(417, 157);
+            lblUnidades.Location = new Point(552, 157);
             lblUnidades.Name = "lblUnidades";
             lblUnidades.Size = new Size(107, 28);
             lblUnidades.TabIndex = 33;
@@ -247,19 +229,20 @@
             txtKilogramo.DecimalPlaces = 2;
             txtKilogramo.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtKilogramo.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtKilogramo.Location = new Point(417, 284);
+            txtKilogramo.Location = new Point(552, 284);
             txtKilogramo.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtKilogramo.Name = "txtKilogramo";
             txtKilogramo.Size = new Size(180, 31);
             txtKilogramo.TabIndex = 36;
             txtKilogramo.ValueChanged += txtKilogramo_ValueChanged;
+            txtKilogramo.KeyPress += txtKilogramo_KeyPress;
             // 
             // lblKilogramos
             // 
             lblKilogramos.AutoSize = true;
             lblKilogramos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblKilogramos.ForeColor = Color.White;
-            lblKilogramos.Location = new Point(417, 253);
+            lblKilogramos.Location = new Point(552, 253);
             lblKilogramos.Name = "lblKilogramos";
             lblKilogramos.Size = new Size(125, 28);
             lblKilogramos.TabIndex = 35;
@@ -270,19 +253,20 @@
             txtPrecio.DecimalPlaces = 2;
             txtPrecio.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPrecio.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtPrecio.Location = new Point(417, 384);
+            txtPrecio.Location = new Point(552, 384);
             txtPrecio.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(180, 31);
             txtPrecio.TabIndex = 38;
             txtPrecio.ValueChanged += txtPrecio_ValueChanged;
+            txtPrecio.KeyPress += txtPrecio_KeyPress;
             // 
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
             lblPrecio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPrecio.ForeColor = Color.White;
-            lblPrecio.Location = new Point(417, 353);
+            lblPrecio.Location = new Point(552, 353);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(79, 28);
             lblPrecio.TabIndex = 37;
@@ -293,19 +277,20 @@
             txtSubtotal.DecimalPlaces = 2;
             txtSubtotal.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSubtotal.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtSubtotal.Location = new Point(417, 480);
+            txtSubtotal.Location = new Point(552, 480);
             txtSubtotal.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtSubtotal.Name = "txtSubtotal";
             txtSubtotal.Size = new Size(180, 31);
             txtSubtotal.TabIndex = 40;
             txtSubtotal.ValueChanged += txtSubtotal_ValueChanged;
+            txtSubtotal.KeyPress += txtSubtotal_KeyPress;
             // 
             // lblSubtotal
             // 
             lblSubtotal.AutoSize = true;
             lblSubtotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtotal.ForeColor = Color.White;
-            lblSubtotal.Location = new Point(417, 449);
+            lblSubtotal.Location = new Point(552, 449);
             lblSubtotal.Name = "lblSubtotal";
             lblSubtotal.Size = new Size(100, 28);
             lblSubtotal.TabIndex = 39;
@@ -349,8 +334,6 @@
             Controls.Add(lblUnidades);
             Controls.Add(label5);
             Controls.Add(txtDescripcion);
-            Controls.Add(label4);
-            Controls.Add(txtReferencia);
             Controls.Add(txtDiaDePago);
             Controls.Add(label3);
             Controls.Add(DateTimePickerFecha);
@@ -392,8 +375,6 @@
         private DateTimePicker DateTimePickerFecha;
         private Label label3;
         private NumericUpDown txtDiaDePago;
-        private TextBox txtReferencia;
-        private Label label4;
         private Label label5;
         private TextBox txtDescripcion;
         private NumericUpDown txtUnidad;

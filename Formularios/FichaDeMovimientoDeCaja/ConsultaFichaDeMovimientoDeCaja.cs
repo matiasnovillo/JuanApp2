@@ -1,9 +1,7 @@
 ﻿using JuanApp2.Formularios.FichaDeMovimientoDeCaja;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
-using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
-using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
 using JuanApp2.Areas.JuanApp2.DTOs;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
@@ -11,13 +9,11 @@ using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloVarioBack.Interfaces;
-using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Entities;
 using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
@@ -164,7 +160,9 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     {
                         int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
                         
-                        Formularios.Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
+                        Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
+                        
+                        FormularioCobranza.ShowDialog();
                     }
 
                     if (Referencia == "PAGO PROVEEDORES")
@@ -172,6 +170,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         int ModuloProveedorId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                         FormularioModuloProveedor FormularioModuloProveedor = new(_serviceProvider, ModuloProveedorId);
+                        
+                        FormularioModuloProveedor.ShowDialog();
                     }
 
                     if (Referencia == "VARIOS")
@@ -179,6 +179,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         int ModuloVarioId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                         FormularioModuloVario FormularioModuloVario = new(_serviceProvider, ModuloVarioId);
+
+                        FormularioModuloVario.ShowDialog();
                     }
 
                     if (Referencia == "GASTOS")
@@ -186,6 +188,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         int ModuloGastoId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                         FormularioModuloGasto FormularioModuloGasto = new(_serviceProvider, ModuloGastoId);
+
+                        FormularioModuloGasto.ShowDialog();
                     }
                 }
                 else if (e.ColumnIndex == 9)
@@ -267,7 +271,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     {
                         lstCobranza = _cobranzaRepository
                             .AsQueryable()
-                            .Where(x => x.CobradorId == Cobrador.CobradorId )
+                            .Where(x => x.CobradorId == Cobrador.CobradorId)
                             .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                             x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                             .OrderBy(x => x.DateTimeLastModification)
@@ -441,7 +445,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                             SaldoCheque -= modulovario.DineroCheque;
                         }
                     }
-                        
+
 
                 }
                 #endregion
@@ -637,10 +641,10 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     txtSaldoCheque.BackColor = Color.Green;
                 }
 
-                txtSaldoTotal.Text = SaldoTotal.ToString("N2");
-                txtSaldoEfectivo.Text = SaldoEfectivo.ToString("N2");
-                txtSaldoBanco.Text = SaldoBanco.ToString("N2");
-                txtSaldoCheque.Text = SaldoCheque.ToString("N2");
+                txtSaldoTotal.Text = $@"${SaldoTotal.ToString("N2")}";
+                txtSaldoEfectivo.Text = $@"${SaldoEfectivo.ToString("N2")}";
+                txtSaldoBanco.Text = $@"${SaldoBanco.ToString("N2")}";
+                txtSaldoCheque.Text = $@"${SaldoCheque.ToString("N2")}";
 
                 DataGridViewFicha.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"";
