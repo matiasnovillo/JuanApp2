@@ -60,7 +60,7 @@ namespace JuanApp2.Formularios
         {
             FichaDeMovimientoDeCaja.ConsultaFichaDeMovimientoDeCaja ConsultaFichaDeMovimientoDeCaja = new(_serviceProvider);
 
-            ConsultaFichaDeMovimientoDeCaja.ShowDialog();
+            ConsultaFichaDeMovimientoDeCaja.Show();
         }
 
         private void btnCobradores_Click(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace JuanApp2.Formularios
         {
             Proveedor.ConsultaProveedorCustom ConsultaProveedor = new(_serviceProvider);
 
-            ConsultaProveedor.ShowDialog();
+            ConsultaProveedor.Show();
         }
 
         private void btnProveedorMain_Click(object sender, EventArgs e)

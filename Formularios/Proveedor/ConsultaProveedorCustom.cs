@@ -334,10 +334,15 @@ namespace JuanApp2.Formularios.Proveedor
 
                 foreach (Compra compra in lstCompra)
                 {
+                    DateTime FechaMasDiaDepagoDe0 = new(compra.Fecha.Year, compra.Fecha.Month, compra.Fecha.Day + compra.DiaDePago, 0, 0, 0);
+                    DateTime HoyDe0 = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
                     if (compra.Fecha.AddDays(compra.DiaDePago) < FechaMinimaCompra)
                     {
-                        FechaMinimaCompra = compra.Fecha.AddDays(compra.DiaDePago);
-                        TotalAVencerCompra = compra.Subtotal;
+                        if (FechaMasDiaDepagoDe0 > HoyDe0)
+                        {
+                            FechaMinimaCompra = FechaMasDiaDepagoDe0;
+                            TotalAVencerCompra = compra.Subtotal;
+                        }
                     }
 
                     if (compra.DebeOHaber == true)
@@ -361,7 +366,7 @@ namespace JuanApp2.Formularios.Proveedor
                         Debe = compra.DebeOHaber == true ? compra.Subtotal : 0,
                         Haber = compra.DebeOHaber == true ? 0 : compra.Subtotal,
                         Saldo = SaldoTotalCompra,
-                        Vencimiento = compra.Fecha.AddDays(compra.DiaDePago)
+                        Vencimiento = FechaMasDiaDepagoDe0
                     };
                     lstconsultaProveedorDTO.Add(consultaProveedorDTO);
                 }
@@ -408,12 +413,12 @@ namespace JuanApp2.Formularios.Proveedor
                         ProveedorDataGridView.NombreCompleto,
                         consultaProveedorDTO.Referencia,
                         consultaProveedorDTO.Descripcion,
-                        consultaProveedorDTO.Kilogramo,
-                        $@"${consultaProveedorDTO.Precio.ToString("N2")}",
-                        $@"${consultaProveedorDTO.Debe.ToString("N2")}",
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : consultaProveedorDTO.Kilogramo,
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : $@"${consultaProveedorDTO.Precio.ToString("N2")}",
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : $@"${consultaProveedorDTO.Debe.ToString("N2")}",
                         $@"${consultaProveedorDTO.Haber.ToString("N2")}",
                         $@"${consultaProveedorDTO.Saldo.ToString("N2")}",
-                        consultaProveedorDTO.Vencimiento.ToString("dd/MM/yyyy"),
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : consultaProveedorDTO.Vencimiento.ToString("dd/MM/yyyy"),
                         "",
                         "");
                 }
