@@ -1,6 +1,4 @@
-﻿using JuanApp2.Formularios.FichaDeMovimientoDeCaja;
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
-using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
+﻿using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.DTOs;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities;
@@ -14,6 +12,8 @@ using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Entities;
 using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
+using System.Data;
+using JuanApp2.Areas.JuanApp2.Interfaces;
 
 namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 {
@@ -26,6 +26,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         private readonly ICobradorRepository _cobradorRepository;
         private readonly IProveedorRepository _proveedorRepository;
         private readonly ITipoDeMovimientoRepository _tipodemovimientoRepository;
+        private readonly IFichaDeCajaService _fichadecajaService;
         private readonly ServiceProvider _serviceProvider;
         private List<TipoDeMovimiento> _lstTipoDeMovimiento;
 
@@ -42,6 +43,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 _cobradorRepository = serviceProvider.GetRequiredService<ICobradorRepository>();
                 _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
                 _tipodemovimientoRepository = serviceProvider.GetRequiredService<ITipoDeMovimientoRepository>();
+                _fichadecajaService = serviceProvider.GetRequiredService<IFichaDeCajaService>();
 
                 InitializeComponent();
 
@@ -159,9 +161,9 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     if (Referencia == "COBRANZA")
                     {
                         int CobranzaId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
-                        
+
                         Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, CobranzaId);
-                        
+
                         FormularioCobranza.ShowDialog();
                     }
 
@@ -170,7 +172,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         int ModuloProveedorId = Convert.ToInt32(DataGridViewFicha.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                         FormularioModuloProveedor FormularioModuloProveedor = new(_serviceProvider, ModuloProveedorId);
-                        
+
                         FormularioModuloProveedor.ShowDialog();
                     }
 
@@ -240,7 +242,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             }
         }
 
-        private void GetTabla()
+        private List<fichaDeMovimientoDeCajaDTO> GetTabla()
         {
             try
             {
@@ -648,12 +650,10 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
                 DataGridViewFicha.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"";
-            }
-            catch (Exception)
-            {
 
-                throw;
+                return lstFichaDeMovimientoDeCajaDTO;
             }
+            catch (Exception) { throw; }
         }
 
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
@@ -665,22 +665,19 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     GetTabla();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
         private void btnPagoProveedor_Click(object sender, EventArgs e)
         {
-            FichaDeMovimientoDeCaja.FormularioModuloProveedor FormularioProveedor = new(_serviceProvider, 0);
+            FormularioModuloProveedor FormularioProveedor = new(_serviceProvider, 0);
 
             FormularioProveedor.ShowDialog();
         }
 
         private void btnCobranza_Click(object sender, EventArgs e)
         {
-            Formularios.Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, 0);
+            Cobranza.FormularioCobranza FormularioCobranza = new(_serviceProvider, 0);
 
             FormularioCobranza.ShowDialog();
         }
@@ -707,6 +704,119 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         private void cmbTipoDeMovimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetTabla();
+        }
+
+        private void btnExportarAExcel_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
+            if (FolderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string SelectedPath = $@"{FolderBrowserDialog.SelectedPath}\\Ficha_de_caja_{DateTime.Now.ToString("dd_MM_yyyy__HH_mm")}.xlsx";
+
+                List<fichaDeMovimientoDeCajaDTO> lstfichaDeMovimientoDeCajaDTO = GetTabla();
+                DataTable dtfichaDeMovimientoDeCajaDTO = new();
+
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("ID", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Fecha", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Referencia", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Proveedor", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Descripcion", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Debe", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Haber", typeof(string));
+                dtfichaDeMovimientoDeCajaDTO.Columns.Add("Saldo", typeof(string));
+
+                decimal SaldoTotal = 0;
+
+                foreach (fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO in lstfichaDeMovimientoDeCajaDTO)
+                {
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
+                    {
+                        SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                        dtfichaDeMovimientoDeCajaDTO.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                        fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),          //Fecha
+                        fichaDeMovimientoDeCajaDTO.Referencia,                                  //Referencia
+                        fichaDeMovimientoDeCajaDTO.Proveedor,                                   //Proveedor
+                        fichaDeMovimientoDeCajaDTO.Descripcion,                                 //Descripcion
+                        $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                        $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                        $@"${SaldoTotal.ToString("N2")}");
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "PAGO PROVEEDORES")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "PAGO PROVEEDORES")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            dtfichaDeMovimientoDeCajaDTO.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),          //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                                  //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                                   //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                                 //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "VARIOS")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "VARIOS")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            dtfichaDeMovimientoDeCajaDTO.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),          //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                                  //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                                   //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                                 //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "GASTOS")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "GASTOS")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            dtfichaDeMovimientoDeCajaDTO.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),          //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                                  //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                                   //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                                 //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}");
+                        }
+                    }
+
+                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "COBRANZA")
+                    {
+                        if (fichaDeMovimientoDeCajaDTO.Referencia == "COBRANZA")
+                        {
+                            SaldoTotal += fichaDeMovimientoDeCajaDTO.Debe - fichaDeMovimientoDeCajaDTO.Haber;
+
+                            dtfichaDeMovimientoDeCajaDTO.Rows.Add(fichaDeMovimientoDeCajaDTO.ID.ToString(),    //ID
+                            fichaDeMovimientoDeCajaDTO.Fecha.ToString("dd/MM/yyyy HH:mm"),          //Fecha
+                            fichaDeMovimientoDeCajaDTO.Referencia,                                  //Referencia
+                            fichaDeMovimientoDeCajaDTO.Proveedor,                                   //Proveedor
+                            fichaDeMovimientoDeCajaDTO.Descripcion,                                 //Descripcion
+                            $@"${fichaDeMovimientoDeCajaDTO.Debe.ToString("N2")}",                                    //Debe
+                            $@"${fichaDeMovimientoDeCajaDTO.Haber.ToString("N2")}",                                   //Haber
+                            $@"${SaldoTotal.ToString("N2")}");
+                        }
+                    }
+                }
+
+
+                _fichadecajaService.ExportToExcel(SelectedPath, dtfichaDeMovimientoDeCajaDTO);
+
+                MessageBox.Show($@"Generación de Excel realizada correctamente", "Información");
+            }
         }
     }
 }

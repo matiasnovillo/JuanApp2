@@ -6,6 +6,7 @@ using JuanApp2.Areas.JuanApp2.ProveedorBack.DTOs;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace JuanApp2.Formularios.Proveedor
     {
         private readonly ICompraRepository _compraRepository;
         private readonly IProveedorRepository _proveedorRepository;
+        private readonly IProveedorService _proveedorService;
         private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly ServiceProvider _serviceProvider;
         private List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> _lstProveedor;
@@ -27,6 +29,7 @@ namespace JuanApp2.Formularios.Proveedor
 
                 _compraRepository = serviceProvider.GetRequiredService<ICompraRepository>();
                 _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
+                _proveedorService = serviceProvider.GetRequiredService<IProveedorService>();
                 _moduloproveedorRepository = serviceProvider.GetRequiredService<IModuloProveedorRepository>();
 
                 InitializeComponent();
@@ -178,7 +181,7 @@ namespace JuanApp2.Formularios.Proveedor
             catch (Exception) { throw; }
         }
 
-        private void GetTabla()
+        private List<consultaProveedorDTO> GetTabla()
         {
             try
             {
@@ -334,11 +337,12 @@ namespace JuanApp2.Formularios.Proveedor
 
                 foreach (Compra compra in lstCompra)
                 {
-                    DateTime FechaMasDiaDepagoDe0 = new(compra.Fecha.Year, compra.Fecha.Month, compra.Fecha.Day + compra.DiaDePago, 0, 0, 0);
+                    DateTime FechaMasDiaDepagoDe0 = new(compra.Fecha.Year, compra.Fecha.Month, compra.Fecha.Day, 0, 0, 0);
+                    FechaMasDiaDepagoDe0 = FechaMasDiaDepagoDe0.AddDays(compra.DiaDePago);
                     DateTime HoyDe0 = new(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
                     if (compra.Fecha.AddDays(compra.DiaDePago) < FechaMinimaCompra)
                     {
-                        if (FechaMasDiaDepagoDe0 > HoyDe0)
+                        if (FechaMasDiaDepagoDe0 >= HoyDe0)
                         {
                             FechaMinimaCompra = FechaMasDiaDepagoDe0;
                             TotalAVencerCompra = compra.Subtotal;
@@ -384,7 +388,7 @@ namespace JuanApp2.Formularios.Proveedor
                         FechaMinimaModuloProveedor = moduloproveedor.Fecha.AddDays(0);
                     }
 
-                    SaldoTotalModuloProveedor -= moduloproveedor.DineroTotal; 
+                    SaldoTotalModuloProveedor -= moduloproveedor.DineroTotal;
 
                     consultaProveedorDTO consultaProveedorDTO = new()
                     {
@@ -451,6 +455,8 @@ namespace JuanApp2.Formularios.Proveedor
 
                 DataGridViewCompra.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"Información: Cantidad de compras listadas: {lstCompra.Count}";
+
+                return lstconsultaProveedorDTO;
             }
             catch (Exception) { throw; }
         }
@@ -486,6 +492,52 @@ namespace JuanApp2.Formularios.Proveedor
                 GetTabla();
             }
             catch (Exception) { throw; }
+        }
+
+        private void btnExportarAExcel_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
+            if (FolderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string SelectedPath = $@"{FolderBrowserDialog.SelectedPath}\\Proveedores_{DateTime.Now.ToString("dd_MM_yyyy__HH_mm")}.xlsx";
+
+                List<consultaProveedorDTO> lstconsultaProveedorDTO = GetTabla();
+                DataTable dtconsultaProveedorDTO = new();
+
+                dtconsultaProveedorDTO.Columns.Add("ID", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Fecha", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Nombre completo", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Referencia", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Descripcion", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Kilogramo", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Precio", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Debe", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Haber", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Saldo", typeof(string));
+                dtconsultaProveedorDTO.Columns.Add("Vencimiento", typeof(string));
+
+                foreach (consultaProveedorDTO consultaProveedorDTO in lstconsultaProveedorDTO)
+                {
+                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(consultaProveedorDTO.ProveedorId);
+
+                    dtconsultaProveedorDTO.Rows.Add(consultaProveedorDTO.Id.ToString(),
+                        consultaProveedorDTO.Fecha.ToString("dd/MM/yyyy"),
+                        ProveedorDataGridView.NombreCompleto,
+                        consultaProveedorDTO.Referencia,
+                        consultaProveedorDTO.Descripcion,
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : consultaProveedorDTO.Kilogramo.ToString("N2"),
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : $@"${consultaProveedorDTO.Precio.ToString("N2")}",
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : $@"${consultaProveedorDTO.Debe.ToString("N2")}",
+                        $@"${consultaProveedorDTO.Haber.ToString("N2")}",
+                        $@"${consultaProveedorDTO.Saldo.ToString("N2")}",
+                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : consultaProveedorDTO.Vencimiento.ToString("dd/MM/yyyy"));
+                }
+
+
+                _proveedorService.ExportToExcel(SelectedPath, dtconsultaProveedorDTO);
+
+                MessageBox.Show($@"Generación de Excel realizada correctamente", "Información");
+            }
         }
     }
 }

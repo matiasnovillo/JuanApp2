@@ -60,6 +60,7 @@
             label2 = new Label();
             DateTimePickerFechaFin = new DateTimePicker();
             DateTimePickerFechaInicio = new DateTimePicker();
+            btnExportarAExcel = new Button();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewFicha).BeginInit();
@@ -182,6 +183,7 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(btnExportarAExcel);
             pnlFiltersAndSearchBar.Controls.Add(label9);
             pnlFiltersAndSearchBar.Controls.Add(cmbTipoDeMovimiento);
             pnlFiltersAndSearchBar.Controls.Add(label8);
@@ -419,6 +421,19 @@
             DateTimePickerFechaInicio.Size = new Size(319, 31);
             DateTimePickerFechaInicio.TabIndex = 17;
             // 
+            // btnExportarAExcel
+            // 
+            btnExportarAExcel.BackColor = Color.Black;
+            btnExportarAExcel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btnExportarAExcel.ForeColor = SystemColors.Window;
+            btnExportarAExcel.Location = new Point(1408, 379);
+            btnExportarAExcel.Name = "btnExportarAExcel";
+            btnExportarAExcel.Size = new Size(189, 69);
+            btnExportarAExcel.TabIndex = 37;
+            btnExportarAExcel.Text = "EXPORTAR A EXCEL";
+            btnExportarAExcel.UseVisualStyleBackColor = false;
+            btnExportarAExcel.Click += btnExportarAExcel_Click;
+            // 
             // ConsultaFichaDeMovimientoDeCaja
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -477,5 +492,6 @@
         private Label label5;
         private Label label9;
         private ComboBox cmbTipoDeMovimiento;
+        private Button btnExportarAExcel;
     }
 }

@@ -27,47 +27,19 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Services
             };
 
             #region Define columns for dtProveedorCopy
-            DataColumn dtColumnProveedorIdFordtProveedorCopy = new()
+            DataColumn dtColumnIDFordtProveedorCopy = new()
             {
                 DataType = typeof(string),
-                ColumnName = "ProveedorId"
+                ColumnName = "ID"
             };
-            dtProveedorCopy.Columns.Add(dtColumnProveedorIdFordtProveedorCopy);
+            dtProveedorCopy.Columns.Add(dtColumnIDFordtProveedorCopy);
 
-            DataColumn dtColumnActiveFordtProveedorCopy = new()
+            DataColumn dtColumnFechaFordtProveedorCopy = new()
             {
                 DataType = typeof(string),
-                ColumnName = "Active"
+                ColumnName = "Fecha"
             };
-            dtProveedorCopy.Columns.Add(dtColumnActiveFordtProveedorCopy);
-
-            DataColumn dtColumnDateTimeCreationFordtProveedorCopy = new()
-            {
-                DataType = typeof(string),
-                ColumnName = "DateTimeCreation"
-            };
-            dtProveedorCopy.Columns.Add(dtColumnDateTimeCreationFordtProveedorCopy);
-
-            DataColumn dtColumnDateTimeLastModificationFordtProveedorCopy = new()
-            {
-                DataType = typeof(string),
-                ColumnName = "DateTimeLastModification"
-            };
-            dtProveedorCopy.Columns.Add(dtColumnDateTimeLastModificationFordtProveedorCopy);
-
-            DataColumn dtColumnUserCreationIdFordtProveedorCopy = new()
-            {
-                DataType = typeof(string),
-                ColumnName = "UserCreationId"
-            };
-            dtProveedorCopy.Columns.Add(dtColumnUserCreationIdFordtProveedorCopy);
-
-            DataColumn dtColumnUserLastModificationIdFordtProveedorCopy = new()
-            {
-                DataType = typeof(string),
-                ColumnName = "UserLastModificationId"
-            };
-            dtProveedorCopy.Columns.Add(dtColumnUserLastModificationIdFordtProveedorCopy);
+            dtProveedorCopy.Columns.Add(dtColumnFechaFordtProveedorCopy);
 
             DataColumn dtColumnNombreCompletoFordtProveedorCopy = new()
             {
@@ -76,28 +48,61 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Services
             };
             dtProveedorCopy.Columns.Add(dtColumnNombreCompletoFordtProveedorCopy);
 
-            DataColumn dtColumnCelularFordtProveedorCopy = new()
+            DataColumn dtColumnReferenciaFordtProveedorCopy = new()
             {
                 DataType = typeof(string),
-                ColumnName = "Celular"
+                ColumnName = "Referencia"
             };
-            dtProveedorCopy.Columns.Add(dtColumnCelularFordtProveedorCopy);
+            dtProveedorCopy.Columns.Add(dtColumnReferenciaFordtProveedorCopy);
 
-            DataColumn dtColumnDireccionFordtProveedorCopy = new()
+            DataColumn dtColumnDescripcionFordtProveedorCopy = new()
             {
                 DataType = typeof(string),
-                ColumnName = "Direccion"
+                ColumnName = "Descripcion"
             };
-            dtProveedorCopy.Columns.Add(dtColumnDireccionFordtProveedorCopy);
+            dtProveedorCopy.Columns.Add(dtColumnDescripcionFordtProveedorCopy);
 
-            DataColumn dtColumnPaginaWebFordtProveedorCopy = new()
+            DataColumn dtColumnKilogramoFordtProveedorCopy = new()
             {
                 DataType = typeof(string),
-                ColumnName = "PaginaWeb"
+                ColumnName = "Kilogramo"
             };
-            dtProveedorCopy.Columns.Add(dtColumnPaginaWebFordtProveedorCopy);
+            dtProveedorCopy.Columns.Add(dtColumnKilogramoFordtProveedorCopy);
 
-            
+            DataColumn dtColumnPrecioFordtProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Precio"
+            };
+            dtProveedorCopy.Columns.Add(dtColumnPrecioFordtProveedorCopy);
+
+            DataColumn dtColumnDebeFordtProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Debe"
+            };
+            dtProveedorCopy.Columns.Add(dtColumnDebeFordtProveedorCopy);
+
+            DataColumn dtColumnHaberFordtProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Haber"
+            };
+            dtProveedorCopy.Columns.Add(dtColumnHaberFordtProveedorCopy);
+
+            DataColumn dtColumnSaldoFordtProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Saldo"
+            };
+            dtProveedorCopy.Columns.Add(dtColumnSaldoFordtProveedorCopy);
+
+            DataColumn dtColumnVencimientoFordtProveedorCopy = new()
+            {
+                DataType = typeof(string),
+                ColumnName = "Vencimiento"
+            };
+            dtProveedorCopy.Columns.Add(dtColumnVencimientoFordtProveedorCopy);
             #endregion
 
             dtProveedorOriginal = dtProveedor;

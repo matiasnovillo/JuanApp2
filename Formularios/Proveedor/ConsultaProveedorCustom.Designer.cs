@@ -55,6 +55,7 @@
             DateTimePickerFechaFin = new DateTimePicker();
             DateTimePickerFechaInicio = new DateTimePicker();
             btnAgregarCompra = new Button();
+            btnExportarAExcel = new Button();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewCompra).BeginInit();
@@ -68,7 +69,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1483, 27);
+            toolStrip1.Size = new Size(1924, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -95,7 +96,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 1029);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1483, 26);
+            statusStrip1.Size = new Size(1924, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -117,7 +118,7 @@
             DataGridViewCompra.Name = "DataGridViewCompra";
             DataGridViewCompra.ReadOnly = true;
             DataGridViewCompra.RowHeadersWidth = 51;
-            DataGridViewCompra.Size = new Size(1483, 449);
+            DataGridViewCompra.Size = new Size(1924, 449);
             DataGridViewCompra.TabIndex = 2;
             DataGridViewCompra.CellContentClick += DataGridViewEntrada_CellContentClick;
             // 
@@ -137,7 +138,7 @@
             btnBuscar.BackColor = Color.Black;
             btnBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnBuscar.ForeColor = SystemColors.Window;
-            btnBuscar.Location = new Point(1260, 342);
+            btnBuscar.Location = new Point(1723, 342);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(189, 84);
             btnBuscar.TabIndex = 4;
@@ -166,7 +167,7 @@
             // 
             // numericUpDownRegistrosPorPagina
             // 
-            numericUpDownRegistrosPorPagina.Location = new Point(1223, 86);
+            numericUpDownRegistrosPorPagina.Location = new Point(1686, 86);
             numericUpDownRegistrosPorPagina.Maximum = new decimal(new int[] { 1410065407, 2, 0, 0 });
             numericUpDownRegistrosPorPagina.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
             numericUpDownRegistrosPorPagina.Name = "numericUpDownRegistrosPorPagina";
@@ -178,7 +179,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(1223, 42);
+            label1.Location = new Point(1686, 42);
             label1.Name = "label1";
             label1.Size = new Size(226, 31);
             label1.TabIndex = 16;
@@ -187,6 +188,7 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(btnExportarAExcel);
             pnlFiltersAndSearchBar.Controls.Add(label7);
             pnlFiltersAndSearchBar.Controls.Add(cmbProveedor);
             pnlFiltersAndSearchBar.Controls.Add(label6);
@@ -211,7 +213,7 @@
             pnlFiltersAndSearchBar.ForeColor = Color.Goldenrod;
             pnlFiltersAndSearchBar.Location = new Point(0, 27);
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
-            pnlFiltersAndSearchBar.Size = new Size(1483, 553);
+            pnlFiltersAndSearchBar.Size = new Size(1924, 553);
             pnlFiltersAndSearchBar.TabIndex = 17;
             // 
             // label7
@@ -328,7 +330,7 @@
             btnAgregarCompra.BackColor = Color.Black;
             btnAgregarCompra.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnAgregarCompra.ForeColor = SystemColors.Window;
-            btnAgregarCompra.Location = new Point(1035, 342);
+            btnAgregarCompra.Location = new Point(1498, 342);
             btnAgregarCompra.Name = "btnAgregarCompra";
             btnAgregarCompra.Size = new Size(189, 84);
             btnAgregarCompra.TabIndex = 17;
@@ -336,11 +338,24 @@
             btnAgregarCompra.UseVisualStyleBackColor = false;
             btnAgregarCompra.Click += btnAgregarCompra_Click;
             // 
+            // btnExportarAExcel
+            // 
+            btnExportarAExcel.BackColor = Color.Black;
+            btnExportarAExcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnExportarAExcel.ForeColor = SystemColors.Window;
+            btnExportarAExcel.Location = new Point(1268, 342);
+            btnExportarAExcel.Name = "btnExportarAExcel";
+            btnExportarAExcel.Size = new Size(189, 84);
+            btnExportarAExcel.TabIndex = 30;
+            btnExportarAExcel.Text = "EXPORTAR A EXCEL";
+            btnExportarAExcel.UseVisualStyleBackColor = false;
+            btnExportarAExcel.Click += btnExportarAExcel_Click;
+            // 
             // ConsultaProveedorCustom
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1483, 1055);
+            ClientSize = new Size(1924, 1055);
             Controls.Add(pnlFiltersAndSearchBar);
             Controls.Add(DataGridViewCompra);
             Controls.Add(statusStrip1);
@@ -389,5 +404,6 @@
         private TextBox txtSaldoTotal;
         private Label label7;
         private ComboBox cmbProveedor;
+        private Button btnExportarAExcel;
     }
 }
