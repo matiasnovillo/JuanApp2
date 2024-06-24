@@ -28,7 +28,12 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         private readonly ITipoDeMovimientoRepository _tipodemovimientoRepository;
         private readonly IFichaDeCajaService _fichadecajaService;
         private readonly ServiceProvider _serviceProvider;
+
         private List<TipoDeMovimiento> _lstTipoDeMovimiento;
+        private Color ColorForVarios;
+        private Color ColorForGastos;
+        private Color ColorForPagoAProveedores;
+        private Color ColorForCobranza;
 
         public ConsultaFichaDeMovimientoDeCaja(ServiceProvider serviceProvider)
         {
@@ -104,6 +109,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 DataGridViewFicha.AutoGenerateColumns = false;
                 DataGridViewFicha.DefaultCellStyle.Font = new Font("Arial", 11);
 
+                //DateTimePickers
                 DateTime now = DateTime.Now;
                 DateTime NowIn030DaysBefore = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
                 DateTime NowIn2359 = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
@@ -115,6 +121,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
                 _lstTipoDeMovimiento = _tipodemovimientoRepository.GetAll();
 
+                //ComboBox para tipo de movimientos
                 cmbTipoDeMovimiento.Items.Clear();
                 cmbTipoDeMovimiento.Items.Add($@"TODOS");
                 foreach (TipoDeMovimiento tipodemovimiento in _lstTipoDeMovimiento)
@@ -122,6 +129,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     cmbTipoDeMovimiento.Items.Add($@"{tipodemovimiento.Nombre}");
                 }
                 cmbTipoDeMovimiento.SelectedIndex = 0;
+
+                //Color for rows
+                ColorForVarios = Color.White;
+                ColorForGastos = Color.White;
+                ColorForPagoAProveedores = Color.White;
+                ColorForCobranza = Color.White;
+                PanelColourVarios.BackColor = ColorForVarios;
 
                 GetTabla();
             }
@@ -817,6 +831,92 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
                 MessageBox.Show($@"Generación de Excel realizada correctamente", "Información");
             }
+        }
+
+        private void DataGridViewFicha_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            string Referencia = DataGridViewFicha.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            if (Referencia == "COBRANZA")
+            {
+                DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForCobranza;
+            }
+            else if (Referencia == "PAGO PROVEEDORES")
+            {
+                DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForPagoAProveedores;
+            }
+            else if (Referencia == "GASTOS")
+            {
+                DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForGastos;
+            }
+            else
+            {
+                DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForVarios;
+            }
+        }
+
+        private void PanelColourVarios_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForVarios.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForVarios = ColorDialogForVarios.Color;
+
+                    PanelColourVarios.BackColor = ColorForVarios;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void PanelColourPagoAProveedores_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForPagoAProveedores.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForPagoAProveedores = ColorDialogForPagoAProveedores.Color;
+
+                    PanelColourPagoAProveedores.BackColor = ColorForPagoAProveedores;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void PanelColourGastos_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForGastos.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForGastos = ColorDialogForGastos.Color;
+
+                    PanelColourGastos.BackColor = ColorForGastos;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void PanelColourCobranza_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForCobranza.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForCobranza = ColorDialogForCobranza.Color;
+
+                    PanelColourCobranza.BackColor = ColorForCobranza;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
         }
     }
 }

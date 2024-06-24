@@ -41,6 +41,44 @@
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            panel3 = new Panel();
+            PanelColourVarios = new Panel();
+            label24 = new Label();
+            PanelColourCobranza = new Panel();
+            label23 = new Label();
+            PanelColourGastos = new Panel();
+            label11 = new Label();
+            PanelColourPagoAProveedores = new Panel();
+            label12 = new Label();
+            button2 = new Button();
+            label13 = new Label();
+            comboBox1 = new ComboBox();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            label17 = new Label();
+            button3 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            textBox4 = new TextBox();
+            label18 = new Label();
+            label19 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
+            label20 = new Label();
+            label21 = new Label();
+            numericUpDown1 = new NumericUpDown();
+            textBox5 = new TextBox();
+            label22 = new Label();
+            label10 = new Label();
+            panel1 = new Panel();
+            label4 = new Label();
+            btnExportarAExcel = new Button();
             label9 = new Label();
             cmbTipoDeMovimiento = new ComboBox();
             label8 = new Label();
@@ -60,12 +98,17 @@
             label2 = new Label();
             DateTimePickerFechaFin = new DateTimePicker();
             DateTimePickerFechaInicio = new DateTimePicker();
-            btnExportarAExcel = new Button();
+            ColorDialogForVarios = new ColorDialog();
+            ColorDialogForPagoAProveedores = new ColorDialog();
+            ColorDialogForGastos = new ColorDialog();
+            ColorDialogForCobranza = new ColorDialog();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewFicha).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).BeginInit();
             pnlFiltersAndSearchBar.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -126,6 +169,7 @@
             DataGridViewFicha.Size = new Size(1924, 472);
             DataGridViewFicha.TabIndex = 2;
             DataGridViewFicha.CellContentClick += DataGridViewEntrada_CellContentClick;
+            DataGridViewFicha.RowPrePaint += DataGridViewFicha_RowPrePaint;
             // 
             // lblTitulo
             // 
@@ -183,6 +227,10 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(panel3);
+            pnlFiltersAndSearchBar.Controls.Add(label10);
+            pnlFiltersAndSearchBar.Controls.Add(panel1);
+            pnlFiltersAndSearchBar.Controls.Add(label4);
             pnlFiltersAndSearchBar.Controls.Add(btnExportarAExcel);
             pnlFiltersAndSearchBar.Controls.Add(label9);
             pnlFiltersAndSearchBar.Controls.Add(cmbTipoDeMovimiento);
@@ -215,6 +263,436 @@
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
             pnlFiltersAndSearchBar.Size = new Size(1924, 530);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Black;
+            panel3.Controls.Add(PanelColourVarios);
+            panel3.Controls.Add(label24);
+            panel3.Controls.Add(PanelColourCobranza);
+            panel3.Controls.Add(label23);
+            panel3.Controls.Add(PanelColourGastos);
+            panel3.Controls.Add(label11);
+            panel3.Controls.Add(PanelColourPagoAProveedores);
+            panel3.Controls.Add(label12);
+            panel3.Controls.Add(button2);
+            panel3.Controls.Add(label13);
+            panel3.Controls.Add(comboBox1);
+            panel3.Controls.Add(label14);
+            panel3.Controls.Add(label15);
+            panel3.Controls.Add(label16);
+            panel3.Controls.Add(label17);
+            panel3.Controls.Add(button3);
+            panel3.Controls.Add(button4);
+            panel3.Controls.Add(button5);
+            panel3.Controls.Add(button6);
+            panel3.Controls.Add(button7);
+            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(textBox2);
+            panel3.Controls.Add(textBox3);
+            panel3.Controls.Add(textBox4);
+            panel3.Controls.Add(label18);
+            panel3.Controls.Add(label19);
+            panel3.Controls.Add(dateTimePicker1);
+            panel3.Controls.Add(dateTimePicker2);
+            panel3.Controls.Add(label20);
+            panel3.Controls.Add(label21);
+            panel3.Controls.Add(numericUpDown1);
+            panel3.Controls.Add(textBox5);
+            panel3.Controls.Add(label22);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            panel3.ForeColor = Color.Goldenrod;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1924, 530);
+            panel3.TabIndex = 42;
+            // 
+            // PanelColourVarios
+            // 
+            PanelColourVarios.BackColor = Color.White;
+            PanelColourVarios.Location = new Point(751, 151);
+            PanelColourVarios.Name = "PanelColourVarios";
+            PanelColourVarios.Size = new Size(162, 31);
+            PanelColourVarios.TabIndex = 38;
+            PanelColourVarios.MouseClick += PanelColourVarios_MouseClick;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 10.8F);
+            label24.ForeColor = SystemColors.Window;
+            label24.Location = new Point(1387, 123);
+            label24.Name = "label24";
+            label24.Size = new Size(193, 25);
+            label24.TabIndex = 45;
+            label24.Text = "Color para COBRANZA";
+            // 
+            // PanelColourCobranza
+            // 
+            PanelColourCobranza.BackColor = Color.White;
+            PanelColourCobranza.Location = new Point(1387, 151);
+            PanelColourCobranza.Name = "PanelColourCobranza";
+            PanelColourCobranza.Size = new Size(193, 31);
+            PanelColourCobranza.TabIndex = 44;
+            PanelColourCobranza.MouseClick += PanelColourCobranza_MouseClick;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 10.8F);
+            label23.ForeColor = SystemColors.Window;
+            label23.Location = new Point(1215, 123);
+            label23.Name = "label23";
+            label23.Size = new Size(166, 25);
+            label23.TabIndex = 43;
+            label23.Text = "Color para GASTOS";
+            // 
+            // PanelColourGastos
+            // 
+            PanelColourGastos.BackColor = Color.White;
+            PanelColourGastos.Location = new Point(1215, 151);
+            PanelColourGastos.Name = "PanelColourGastos";
+            PanelColourGastos.Size = new Size(166, 31);
+            PanelColourGastos.TabIndex = 42;
+            PanelColourGastos.MouseClick += PanelColourGastos_MouseClick;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 10.8F);
+            label11.ForeColor = SystemColors.Window;
+            label11.Location = new Point(919, 123);
+            label11.Name = "label11";
+            label11.Size = new Size(290, 25);
+            label11.TabIndex = 41;
+            label11.Text = "Color para PAGO A PROVEEDORES";
+            // 
+            // PanelColourPagoAProveedores
+            // 
+            PanelColourPagoAProveedores.BackColor = Color.White;
+            PanelColourPagoAProveedores.Location = new Point(919, 151);
+            PanelColourPagoAProveedores.Name = "PanelColourPagoAProveedores";
+            PanelColourPagoAProveedores.Size = new Size(290, 31);
+            PanelColourPagoAProveedores.TabIndex = 40;
+            PanelColourPagoAProveedores.MouseClick += PanelColourPagoAProveedores_MouseClick;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10.8F);
+            label12.ForeColor = SystemColors.Window;
+            label12.Location = new Point(751, 123);
+            label12.Name = "label12";
+            label12.Size = new Size(162, 25);
+            label12.TabIndex = 39;
+            label12.Text = "Color para VARIOS";
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Black;
+            button2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button2.ForeColor = SystemColors.Window;
+            button2.Location = new Point(1408, 379);
+            button2.Name = "button2";
+            button2.Size = new Size(189, 69);
+            button2.TabIndex = 37;
+            button2.Text = "EXPORTAR A EXCEL";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.ForeColor = SystemColors.Window;
+            label13.Location = new Point(603, 206);
+            label13.Name = "label13";
+            label13.Size = new Size(173, 25);
+            label13.TabIndex = 36;
+            label13.Text = "Tipo de movimiento";
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(603, 234);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(267, 36);
+            comboBox1.TabIndex = 35;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.ForeColor = SystemColors.Window;
+            label14.Location = new Point(658, 298);
+            label14.Name = "label14";
+            label14.Size = new Size(72, 25);
+            label14.TabIndex = 34;
+            label14.Text = "Cheque";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.ForeColor = SystemColors.Window;
+            label15.Location = new Point(444, 298);
+            label15.Name = "label15";
+            label15.Size = new Size(60, 25);
+            label15.TabIndex = 33;
+            label15.Text = "Banco";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.ForeColor = SystemColors.Window;
+            label16.Location = new Point(226, 298);
+            label16.Name = "label16";
+            label16.Size = new Size(74, 25);
+            label16.TabIndex = 32;
+            label16.Text = "Efectivo";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.ForeColor = SystemColors.Window;
+            label17.Location = new Point(12, 298);
+            label17.Name = "label17";
+            label17.Size = new Size(98, 25);
+            label17.TabIndex = 31;
+            label17.Text = "Saldo total";
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.Black;
+            button3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button3.ForeColor = SystemColors.Window;
+            button3.Location = new Point(1647, 379);
+            button3.Name = "button3";
+            button3.Size = new Size(189, 69);
+            button3.TabIndex = 30;
+            button3.Text = "BUSCAR";
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.Black;
+            button4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button4.ForeColor = SystemColors.Window;
+            button4.Location = new Point(658, 379);
+            button4.Name = "button4";
+            button4.Size = new Size(189, 69);
+            button4.TabIndex = 28;
+            button4.Text = "GASTOS";
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.Black;
+            button5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button5.ForeColor = SystemColors.Window;
+            button5.Location = new Point(444, 379);
+            button5.Name = "button5";
+            button5.Size = new Size(189, 69);
+            button5.TabIndex = 29;
+            button5.Text = "VARIOS";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.Black;
+            button6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button6.ForeColor = SystemColors.Window;
+            button6.Location = new Point(226, 379);
+            button6.Name = "button6";
+            button6.Size = new Size(189, 69);
+            button6.TabIndex = 26;
+            button6.Text = "COBRANZA";
+            button6.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            button7.BackColor = Color.Black;
+            button7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            button7.ForeColor = SystemColors.Window;
+            button7.Location = new Point(12, 379);
+            button7.Name = "button7";
+            button7.Size = new Size(189, 69);
+            button7.TabIndex = 27;
+            button7.Text = "PAGO PROVEEDORES";
+            button7.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 10.8F);
+            textBox1.ForeColor = SystemColors.ControlLightLight;
+            textBox1.Location = new Point(660, 326);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(210, 31);
+            textBox1.TabIndex = 25;
+            // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("Segoe UI", 10.8F);
+            textBox2.ForeColor = SystemColors.ControlLightLight;
+            textBox2.Location = new Point(444, 326);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(210, 31);
+            textBox2.TabIndex = 24;
+            // 
+            // textBox3
+            // 
+            textBox3.Font = new Font("Segoe UI", 10.8F);
+            textBox3.ForeColor = SystemColors.ControlLightLight;
+            textBox3.Location = new Point(228, 326);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(210, 31);
+            textBox3.TabIndex = 23;
+            // 
+            // textBox4
+            // 
+            textBox4.Font = new Font("Segoe UI", 10.8F);
+            textBox4.ForeColor = SystemColors.ControlLightLight;
+            textBox4.Location = new Point(12, 326);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(210, 31);
+            textBox4.TabIndex = 22;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 10.8F);
+            label18.ForeColor = SystemColors.Window;
+            label18.Location = new Point(384, 123);
+            label18.Name = "label18";
+            label18.Size = new Size(107, 25);
+            label18.TabIndex = 20;
+            label18.Text = "Fecha de fin";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 10.8F);
+            label19.ForeColor = SystemColors.Window;
+            label19.Location = new Point(12, 123);
+            label19.Name = "label19";
+            label19.Size = new Size(128, 25);
+            label19.TabIndex = 19;
+            label19.Text = "Fecha de inicio";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Font = new Font("Segoe UI", 10.8F);
+            dateTimePicker1.Location = new Point(384, 151);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(319, 31);
+            dateTimePicker1.TabIndex = 18;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Font = new Font("Segoe UI", 10.8F);
+            dateTimePicker2.Location = new Point(12, 151);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(319, 31);
+            dateTimePicker2.TabIndex = 17;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.ForeColor = SystemColors.Window;
+            label20.Location = new Point(12, 19);
+            label20.Name = "label20";
+            label20.Size = new Size(1110, 81);
+            label20.TabIndex = 3;
+            label20.Text = "Consulta de ficha de movimiento de caja";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label21.ForeColor = SystemColors.Window;
+            label21.Location = new Point(1686, 58);
+            label21.Name = "label21";
+            label21.Size = new Size(193, 28);
+            label21.TabIndex = 16;
+            label21.Text = "Registros por página";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            numericUpDown1.Location = new Point(1686, 89);
+            numericUpDown1.Maximum = new decimal(new int[] { 1410065407, 2, 0, 0 });
+            numericUpDown1.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(150, 31);
+            numericUpDown1.TabIndex = 15;
+            numericUpDown1.Value = new decimal(new int[] { 500, 0, 0, 0 });
+            // 
+            // textBox5
+            // 
+            textBox5.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox5.Location = new Point(12, 234);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(532, 31);
+            textBox5.TabIndex = 10;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label22.ForeColor = SystemColors.Window;
+            label22.Location = new Point(12, 206);
+            label22.Name = "label22";
+            label22.Size = new Size(482, 25);
+            label22.TabIndex = 9;
+            label22.Text = "Barra de búsqueda (Busque por descripción y/o proveedor)";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 10.8F);
+            label10.ForeColor = SystemColors.Window;
+            label10.Location = new Point(919, 123);
+            label10.Name = "label10";
+            label10.Size = new Size(290, 25);
+            label10.TabIndex = 41;
+            label10.Text = "Color para PAGO A PROVEEDORES";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Location = new Point(919, 151);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(290, 31);
+            panel1.TabIndex = 40;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.8F);
+            label4.ForeColor = SystemColors.Window;
+            label4.Location = new Point(751, 123);
+            label4.Name = "label4";
+            label4.Size = new Size(162, 25);
+            label4.TabIndex = 39;
+            label4.Text = "Color para VARIOS";
+            // 
+            // btnExportarAExcel
+            // 
+            btnExportarAExcel.BackColor = Color.Black;
+            btnExportarAExcel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btnExportarAExcel.ForeColor = SystemColors.Window;
+            btnExportarAExcel.Location = new Point(1408, 379);
+            btnExportarAExcel.Name = "btnExportarAExcel";
+            btnExportarAExcel.Size = new Size(189, 69);
+            btnExportarAExcel.TabIndex = 37;
+            btnExportarAExcel.Text = "EXPORTAR A EXCEL";
+            btnExportarAExcel.UseVisualStyleBackColor = false;
+            btnExportarAExcel.Click += btnExportarAExcel_Click;
             // 
             // label9
             // 
@@ -421,19 +899,6 @@
             DateTimePickerFechaInicio.Size = new Size(319, 31);
             DateTimePickerFechaInicio.TabIndex = 17;
             // 
-            // btnExportarAExcel
-            // 
-            btnExportarAExcel.BackColor = Color.Black;
-            btnExportarAExcel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            btnExportarAExcel.ForeColor = SystemColors.Window;
-            btnExportarAExcel.Location = new Point(1408, 379);
-            btnExportarAExcel.Name = "btnExportarAExcel";
-            btnExportarAExcel.Size = new Size(189, 69);
-            btnExportarAExcel.TabIndex = 37;
-            btnExportarAExcel.Text = "EXPORTAR A EXCEL";
-            btnExportarAExcel.UseVisualStyleBackColor = false;
-            btnExportarAExcel.Click += btnExportarAExcel_Click;
-            // 
             // ConsultaFichaDeMovimientoDeCaja
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -455,6 +920,9 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).EndInit();
             pnlFiltersAndSearchBar.ResumeLayout(false);
             pnlFiltersAndSearchBar.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -493,5 +961,46 @@
         private Label label9;
         private ComboBox cmbTipoDeMovimiento;
         private Button btnExportarAExcel;
+        private Label label4;
+        private Panel PanelColourVarios;
+        private ColorDialog ColorDialogForVarios;
+        private Panel panel3;
+        private Label label24;
+        private Panel PanelColourCobranza;
+        private Label label23;
+        private Panel PanelColourGastos;
+        private Label label11;
+        private Panel PanelColourPagoAProveedores;
+        private Label label12;
+        private Button button2;
+        private Label label13;
+        private ComboBox comboBox1;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label17;
+        private Button button3;
+        private Button button4;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private TextBox textBox4;
+        private Label label18;
+        private Label label19;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
+        private Label label20;
+        private Label label21;
+        private NumericUpDown numericUpDown1;
+        private TextBox textBox5;
+        private Label label22;
+        private Label label10;
+        private Panel panel1;
+        private ColorDialog ColorDialogForPagoAProveedores;
+        private ColorDialog ColorDialogForGastos;
+        private ColorDialog ColorDialogForCobranza;
     }
 }

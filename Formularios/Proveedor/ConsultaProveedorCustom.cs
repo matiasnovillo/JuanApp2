@@ -19,7 +19,10 @@ namespace JuanApp2.Formularios.Proveedor
         private readonly IProveedorService _proveedorService;
         private readonly IModuloProveedorRepository _moduloproveedorRepository;
         private readonly ServiceProvider _serviceProvider;
+
         private List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> _lstProveedor;
+        private Color ColorForCompra;
+        private Color ColorForPagoAProveedores;
 
         public ConsultaProveedorCustom(ServiceProvider serviceProvider)
         {
@@ -124,6 +127,13 @@ namespace JuanApp2.Formularios.Proveedor
                     cmbProveedor.Items.Add($@"{proveedor.NombreCompleto}");
                 }
                 cmbProveedor.SelectedIndex = 0;
+
+                //Coloring rows of DataGridView
+                ColorForCompra = Color.White;
+                PanelColourCompra.BackColor = ColorForCompra;
+
+                ColorForPagoAProveedores = Color.White;
+                PanelColourPagoAProveedores.BackColor = ColorForPagoAProveedores;
 
                 GetTabla();
             }
@@ -538,6 +548,52 @@ namespace JuanApp2.Formularios.Proveedor
 
                 MessageBox.Show($@"Generación de Excel realizada correctamente", "Información");
             }
+        }
+
+        private void DataGridViewCompra_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            string Referencia = DataGridViewCompra.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+            if (Referencia == "COMPRA")
+            {
+                DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForCompra;
+            }
+            else
+            {
+                DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForPagoAProveedores;
+            }
+        }
+
+        private void PanelColourCobranza_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForCompra.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForCompra = ColorDialogForCompra.Color;
+
+                    PanelColourCompra.BackColor = ColorForCompra;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void PanelColourPagoAProveedores_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (ColorDialogForPagoAProveedores.ShowDialog() == DialogResult.OK)
+                {
+                    ColorForPagoAProveedores = ColorDialogForPagoAProveedores.Color;
+
+                    PanelColourPagoAProveedores.BackColor = ColorForPagoAProveedores;
+
+                    GetTabla();
+                }
+            }
+            catch (Exception) { throw; }
         }
     }
 }
