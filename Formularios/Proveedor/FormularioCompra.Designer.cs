@@ -210,7 +210,6 @@
             txtUnidad.Name = "txtUnidad";
             txtUnidad.Size = new Size(180, 31);
             txtUnidad.TabIndex = 34;
-            txtUnidad.ValueChanged += txtUnidad_ValueChanged;
             txtUnidad.KeyPress += txtUnidad_KeyPress;
             // 
             // lblUnidades
@@ -234,7 +233,6 @@
             txtKilogramo.Name = "txtKilogramo";
             txtKilogramo.Size = new Size(180, 31);
             txtKilogramo.TabIndex = 36;
-            txtKilogramo.ValueChanged += txtKilogramo_ValueChanged;
             txtKilogramo.KeyPress += txtKilogramo_KeyPress;
             // 
             // lblKilogramos
@@ -258,7 +256,6 @@
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(180, 31);
             txtPrecio.TabIndex = 38;
-            txtPrecio.ValueChanged += txtPrecio_ValueChanged;
             txtPrecio.KeyPress += txtPrecio_KeyPress;
             // 
             // lblPrecio
@@ -282,8 +279,6 @@
             txtSubtotal.Name = "txtSubtotal";
             txtSubtotal.Size = new Size(180, 31);
             txtSubtotal.TabIndex = 40;
-            txtSubtotal.ValueChanged += txtSubtotal_ValueChanged;
-            txtSubtotal.KeyPress += txtSubtotal_KeyPress;
             // 
             // lblSubtotal
             // 

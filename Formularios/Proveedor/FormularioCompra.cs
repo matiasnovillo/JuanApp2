@@ -75,6 +75,7 @@ namespace JuanApp2.Formularios.Proveedor
                 if (txtDescripcion.Text == "")
                 {
                     statusLabel.Text = "Faltan datos a completar";
+                    return;
                 }
 
                 Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository.GetByNombreCompleto(cmbProveedor.SelectedItem.ToString());
@@ -134,26 +135,6 @@ namespace JuanApp2.Formularios.Proveedor
             }
         }
 
-        private void txtPrecio_ValueChanged(object sender, EventArgs e)
-        {
-            lblPrecio.Text = $@"Precio * = ${txtPrecio.Value.ToString("N2")}";
-        }
-
-        private void txtUnidad_ValueChanged(object sender, EventArgs e)
-        {
-            lblUnidades.Text = $@"Unidades * = {txtUnidad.Value.ToString("N2")}";
-        }
-
-        private void txtKilogramo_ValueChanged(object sender, EventArgs e)
-        {
-            lblKilogramos.Text = $@"Kilogramos * = {txtKilogramo.Value.ToString("N2")}";
-        }
-
-        private void txtSubtotal_ValueChanged(object sender, EventArgs e)
-        {
-            lblSubtotal.Text = $@"Subtotal * = ${txtSubtotal.Value.ToString("N2")}";
-        }
-
         private void txtDiaDePago_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
@@ -184,6 +165,8 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
+                    lblUnidades.Text = $@"Precio * = ${txtUnidad.Value.ToString("N2")}";
+
                     txtKilogramo.Focus();
                 }
             }
@@ -196,6 +179,8 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
+                    lblKilogramos.Text = $@"Kilogramos * = {txtKilogramo.Value.ToString("N2")}";
+
                     txtPrecio.Focus();
                 }
             }
@@ -208,18 +193,17 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    txtSubtotal.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
+                    lblPrecio.Text = $@"Subtotal * = ${txtPrecio.Value.ToString("N2")}";
 
-        private void txtSubtotal_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
+                    decimal Kilogramo = txtKilogramo.Value;
+                    decimal Precio = txtPrecio.Value;
+
+                    decimal Subtotal = Kilogramo * Precio;
+
+                    txtSubtotal.Value = Subtotal;
+
+                    lblSubtotal.Text = $@"Subtotal * = ${txtSubtotal.Value.ToString("N2")}";
+
                     btnGuardar.Focus();
                 }
             }
