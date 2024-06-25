@@ -30,10 +30,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         private readonly ServiceProvider _serviceProvider;
 
         private List<TipoDeMovimiento> _lstTipoDeMovimiento;
-        private Color ColorForVarios;
-        private Color ColorForGastos;
-        private Color ColorForPagoAProveedores;
-        private Color ColorForCobranza;
+        private Color Color;
 
         public ConsultaFichaDeMovimientoDeCaja(ServiceProvider serviceProvider)
         {
@@ -131,11 +128,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 cmbTipoDeMovimiento.SelectedIndex = 0;
 
                 //Color for rows
-                ColorForVarios = Color.White;
-                ColorForGastos = Color.White;
-                ColorForPagoAProveedores = Color.White;
-                ColorForCobranza = Color.White;
-                PanelColourVarios.BackColor = ColorForVarios;
+                Color = Color.White;
+                PanelColor.BackColor = Color;
 
                 GetTabla();
             }
@@ -759,63 +753,19 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             }
         }
 
-        #region Panel coloring
         private void PanelColourVarios_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
                 if (ColorDialogForVarios.ShowDialog() == DialogResult.OK)
                 {
-                    ColorForVarios = ColorDialogForVarios.Color;
+                    Color = ColorDialogForVarios.Color;
 
-                    PanelColourVarios.BackColor = ColorForVarios;
+                    PanelColor.BackColor = Color;
                 }
             }
             catch (Exception) { throw; }
         }
-
-        private void PanelColourPagoAProveedores_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (ColorDialogForPagoAProveedores.ShowDialog() == DialogResult.OK)
-                {
-                    ColorForPagoAProveedores = ColorDialogForPagoAProveedores.Color;
-
-                    PanelColourPagoAProveedores.BackColor = ColorForPagoAProveedores;
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void PanelColourGastos_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (ColorDialogForGastos.ShowDialog() == DialogResult.OK)
-                {
-                    ColorForGastos = ColorDialogForGastos.Color;
-
-                    PanelColourGastos.BackColor = ColorForGastos;
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void PanelColourCobranza_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (ColorDialogForCobranza.ShowDialog() == DialogResult.OK)
-                {
-                    ColorForCobranza = ColorDialogForCobranza.Color;
-
-                    PanelColourCobranza.BackColor = ColorForCobranza;
-                }
-            }
-            catch (Exception) { throw; }
-        } 
-        #endregion
 
         private void DataGridViewFicha_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -823,49 +773,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             {
                 string Referencia = DataGridViewFicha.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-                if (Referencia == "COBRANZA")
+                if (DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color)
                 {
-                    if (DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForCobranza)
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForCobranza;
-                    }
-                }
-                else if (Referencia == "PAGO PROVEEDORES")
-                {
-                    if (DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForPagoAProveedores)
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForPagoAProveedores;
-                    }
-                }
-                else if (Referencia == "GASTOS")
-                {
-                    if (DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForGastos)
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForGastos;
-                    }
+                    DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
                 }
                 else
                 {
-                    if (DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForVarios)
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForVarios;
-                    }
+                    DataGridViewFicha.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color;
                 }
             }
         }

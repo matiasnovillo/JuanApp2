@@ -41,19 +41,13 @@
             pnlFiltersAndSearchBar = new Panel();
             panel3 = new Panel();
             txtRegistrosPorPagina = new NumericUpDown();
-            label1 = new Label();
             txtSaldoTotal = new TextBox();
             btnPagoProveedor = new Button();
             btnCobranza = new Button();
             btnVario = new Button();
             btnGasto = new Button();
             btnBuscar = new Button();
-            PanelColourVarios = new Panel();
-            lblColorCobranza = new Label();
-            PanelColourCobranza = new Panel();
-            lblColorGastos = new Label();
-            PanelColourGastos = new Panel();
-            PanelColourPagoAProveedores = new Panel();
+            PanelColor = new Panel();
             lblColorVarios = new Label();
             btnPagoAProveedores = new Button();
             lblFechaFin = new Label();
@@ -183,19 +177,13 @@
             // 
             panel3.BackColor = Color.Black;
             panel3.Controls.Add(txtRegistrosPorPagina);
-            panel3.Controls.Add(label1);
             panel3.Controls.Add(txtSaldoTotal);
             panel3.Controls.Add(btnPagoProveedor);
             panel3.Controls.Add(btnCobranza);
             panel3.Controls.Add(btnVario);
             panel3.Controls.Add(btnGasto);
             panel3.Controls.Add(btnBuscar);
-            panel3.Controls.Add(PanelColourVarios);
-            panel3.Controls.Add(lblColorCobranza);
-            panel3.Controls.Add(PanelColourCobranza);
-            panel3.Controls.Add(lblColorGastos);
-            panel3.Controls.Add(PanelColourGastos);
-            panel3.Controls.Add(PanelColourPagoAProveedores);
+            panel3.Controls.Add(PanelColor);
             panel3.Controls.Add(lblColorVarios);
             panel3.Controls.Add(btnPagoAProveedores);
             panel3.Controls.Add(lblFechaFin);
@@ -224,17 +212,6 @@
             txtRegistrosPorPagina.Name = "txtRegistrosPorPagina";
             txtRegistrosPorPagina.Size = new Size(193, 38);
             txtRegistrosPorPagina.TabIndex = 47;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.8F);
-            label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(459, 298);
-            label1.Name = "label1";
-            label1.Size = new Size(290, 25);
-            label1.TabIndex = 46;
-            label1.Text = "Color para PAGO A PROVEEDORES";
             // 
             // txtSaldoTotal
             // 
@@ -310,74 +287,25 @@
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += button1_Click;
             // 
-            // PanelColourVarios
+            // PanelColor
             // 
-            PanelColourVarios.BackColor = Color.White;
-            PanelColourVarios.Location = new Point(291, 326);
-            PanelColourVarios.Name = "PanelColourVarios";
-            PanelColourVarios.Size = new Size(162, 31);
-            PanelColourVarios.TabIndex = 38;
-            PanelColourVarios.MouseClick += PanelColourVarios_MouseClick;
-            // 
-            // lblColorCobranza
-            // 
-            lblColorCobranza.AutoSize = true;
-            lblColorCobranza.Font = new Font("Segoe UI", 10.8F);
-            lblColorCobranza.ForeColor = SystemColors.Window;
-            lblColorCobranza.Location = new Point(927, 298);
-            lblColorCobranza.Name = "lblColorCobranza";
-            lblColorCobranza.Size = new Size(193, 25);
-            lblColorCobranza.TabIndex = 45;
-            lblColorCobranza.Text = "Color para COBRANZA";
-            // 
-            // PanelColourCobranza
-            // 
-            PanelColourCobranza.BackColor = Color.White;
-            PanelColourCobranza.Location = new Point(927, 326);
-            PanelColourCobranza.Name = "PanelColourCobranza";
-            PanelColourCobranza.Size = new Size(193, 31);
-            PanelColourCobranza.TabIndex = 44;
-            PanelColourCobranza.MouseClick += PanelColourCobranza_MouseClick;
-            // 
-            // lblColorGastos
-            // 
-            lblColorGastos.AutoSize = true;
-            lblColorGastos.Font = new Font("Segoe UI", 10.8F);
-            lblColorGastos.ForeColor = SystemColors.Window;
-            lblColorGastos.Location = new Point(755, 298);
-            lblColorGastos.Name = "lblColorGastos";
-            lblColorGastos.Size = new Size(166, 25);
-            lblColorGastos.TabIndex = 43;
-            lblColorGastos.Text = "Color para GASTOS";
-            // 
-            // PanelColourGastos
-            // 
-            PanelColourGastos.BackColor = Color.White;
-            PanelColourGastos.Location = new Point(755, 326);
-            PanelColourGastos.Name = "PanelColourGastos";
-            PanelColourGastos.Size = new Size(166, 31);
-            PanelColourGastos.TabIndex = 42;
-            PanelColourGastos.MouseClick += PanelColourGastos_MouseClick;
-            // 
-            // PanelColourPagoAProveedores
-            // 
-            PanelColourPagoAProveedores.BackColor = Color.White;
-            PanelColourPagoAProveedores.Location = new Point(459, 326);
-            PanelColourPagoAProveedores.Name = "PanelColourPagoAProveedores";
-            PanelColourPagoAProveedores.Size = new Size(290, 31);
-            PanelColourPagoAProveedores.TabIndex = 40;
-            PanelColourPagoAProveedores.MouseClick += PanelColourPagoAProveedores_MouseClick;
+            PanelColor.BackColor = Color.White;
+            PanelColor.Location = new Point(748, 151);
+            PanelColor.Name = "PanelColor";
+            PanelColor.Size = new Size(122, 31);
+            PanelColor.TabIndex = 38;
+            PanelColor.MouseClick += PanelColourVarios_MouseClick;
             // 
             // lblColorVarios
             // 
             lblColorVarios.AutoSize = true;
             lblColorVarios.Font = new Font("Segoe UI", 10.8F);
             lblColorVarios.ForeColor = SystemColors.Window;
-            lblColorVarios.Location = new Point(291, 298);
+            lblColorVarios.Location = new Point(748, 123);
             lblColorVarios.Name = "lblColorVarios";
-            lblColorVarios.Size = new Size(162, 25);
+            lblColorVarios.Size = new Size(55, 25);
             lblColorVarios.TabIndex = 39;
-            lblColorVarios.Text = "Color para VARIOS";
+            lblColorVarios.Text = "Color";
             // 
             // btnPagoAProveedores
             // 
@@ -530,13 +458,10 @@
         private ComboBox cmbTipoDeMovimiento;
         private Button btnExportarAExcel;
         private Label label4;
-        private Panel PanelColourVarios;
+        private Panel PanelColor;
         private ColorDialog ColorDialogForVarios;
         private Panel panel3;
-        private Panel PanelColourCobranza;
-        private Panel PanelColourGastos;
         private Label label11;
-        private Panel PanelColourPagoAProveedores;
         private Label label12;
         private Button button2;
         private Label label13;
@@ -555,10 +480,7 @@
         private ColorDialog ColorDialogForCobranza;
         private Label lblColorVarios;
         private Label lblFechaInicio;
-        private Label lblColorCobranza;
-        private Label lblColorGastos;
         private Label lblBarraBusqueda;
-        private Label label1;
         private NumericUpDown txtRegistrosPorPagina;
     }
 }
