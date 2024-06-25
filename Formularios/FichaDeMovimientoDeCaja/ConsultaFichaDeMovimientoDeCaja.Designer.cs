@@ -62,6 +62,7 @@
             ColorDialogForPagoAProveedores = new ColorDialog();
             ColorDialogForGastos = new ColorDialog();
             ColorDialogForCobranza = new ColorDialog();
+            btnNotas = new Button();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewFicha).BeginInit();
@@ -176,6 +177,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Black;
+            panel3.Controls.Add(btnNotas);
             panel3.Controls.Add(txtRegistrosPorPagina);
             panel3.Controls.Add(txtSaldoTotal);
             panel3.Controls.Add(btnPagoProveedor);
@@ -403,6 +405,19 @@
             DateTimePickerFechaInicio.Size = new Size(319, 31);
             DateTimePickerFechaInicio.TabIndex = 17;
             // 
+            // btnNotas
+            // 
+            btnNotas.BackColor = Color.Black;
+            btnNotas.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btnNotas.ForeColor = SystemColors.Window;
+            btnNotas.Location = new Point(1250, 379);
+            btnNotas.Name = "btnNotas";
+            btnNotas.Size = new Size(189, 69);
+            btnNotas.TabIndex = 48;
+            btnNotas.Text = "NOTAS";
+            btnNotas.UseVisualStyleBackColor = false;
+            btnNotas.Click += btnNotas_Click;
+            // 
             // ConsultaFichaDeMovimientoDeCaja
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -482,5 +497,6 @@
         private Label lblFechaInicio;
         private Label lblBarraBusqueda;
         private NumericUpDown txtRegistrosPorPagina;
+        private Button btnNotas;
     }
 }

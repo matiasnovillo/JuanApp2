@@ -7,6 +7,9 @@
     <Compile Update="Formularios\FichaDeMovimientoDeCaja\ConsultaFichaDeMovimientoDeCaja.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\FichaDeMovimientoDeCaja\FormularioNota.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\Main.cs">
       <SubType>Form</SubType>
     </Compile>

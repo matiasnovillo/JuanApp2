@@ -788,5 +788,12 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 }
             }
         }
+
+        private void btnNotas_Click(object sender, EventArgs e)
+        {
+            FormularioNota FormularioNota = new FormularioNota(_serviceProvider);
+
+            FormularioNota.Show();
+        }
     }
 }
