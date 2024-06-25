@@ -74,7 +74,7 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (txtDescripcion.Text == "")
                 {
-                    statusLabel.Text = "Faltan datos a completar";
+                    statusLabel.Text = "Agregue una descripcion";
                     return;
                 }
 
@@ -165,7 +165,7 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    lblUnidades.Text = $@"Precio * = ${txtUnidad.Value.ToString("N2")}";
+                    lblUnidades.Text = $@"Unidades * {txtUnidad.Value.ToString("N2")}";
 
                     txtKilogramo.Focus();
                 }
@@ -179,7 +179,7 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    lblKilogramos.Text = $@"Kilogramos * = {txtKilogramo.Value.ToString("N2")}";
+                    lblKilogramos.Text = $@"Kilogramos * {txtKilogramo.Value.ToString("N2")}";
 
                     txtPrecio.Focus();
                 }
@@ -193,7 +193,7 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    lblPrecio.Text = $@"Subtotal * = ${txtPrecio.Value.ToString("N2")}";
+                    lblPrecio.Text = $@"Precio * ${txtPrecio.Value.ToString("N2")}";
 
                     decimal Kilogramo = txtKilogramo.Value;
                     decimal Precio = txtPrecio.Value;
@@ -202,7 +202,7 @@ namespace JuanApp2.Formularios.Proveedor
 
                     txtSubtotal.Value = Subtotal;
 
-                    lblSubtotal.Text = $@"Subtotal * = ${txtSubtotal.Value.ToString("N2")}";
+                    lblSubtotal.Text = $@"Subtotal * ${txtSubtotal.Value.ToString("N2")}";
 
                     btnGuardar.Focus();
                 }

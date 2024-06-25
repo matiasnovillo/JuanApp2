@@ -49,11 +49,7 @@
             btnExportarAExcel = new Button();
             label7 = new Label();
             cmbProveedor = new ComboBox();
-            label6 = new Label();
-            label5 = new Label();
             label4 = new Label();
-            txtTotalAVencer = new TextBox();
-            txtProximoVencimiento = new TextBox();
             txtSaldoTotal = new TextBox();
             label3 = new Label();
             label2 = new Label();
@@ -202,11 +198,7 @@
             pnlFiltersAndSearchBar.Controls.Add(btnExportarAExcel);
             pnlFiltersAndSearchBar.Controls.Add(label7);
             pnlFiltersAndSearchBar.Controls.Add(cmbProveedor);
-            pnlFiltersAndSearchBar.Controls.Add(label6);
-            pnlFiltersAndSearchBar.Controls.Add(label5);
             pnlFiltersAndSearchBar.Controls.Add(label4);
-            pnlFiltersAndSearchBar.Controls.Add(txtTotalAVencer);
-            pnlFiltersAndSearchBar.Controls.Add(txtProximoVencimiento);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoTotal);
             pnlFiltersAndSearchBar.Controls.Add(label3);
             pnlFiltersAndSearchBar.Controls.Add(label2);
@@ -229,7 +221,7 @@
             // 
             // PanelColourPagoAProveedores
             // 
-            PanelColourPagoAProveedores.BackColor = Color.White;
+            PanelColourPagoAProveedores.BackColor = Color.IndianRed;
             PanelColourPagoAProveedores.Location = new Point(1070, 160);
             PanelColourPagoAProveedores.Name = "PanelColourPagoAProveedores";
             PanelColourPagoAProveedores.Size = new Size(290, 31);
@@ -249,7 +241,7 @@
             // 
             // PanelColourCompra
             // 
-            PanelColourCompra.BackColor = Color.White;
+            PanelColourCompra.BackColor = Color.FromArgb(128, 255, 128);
             PanelColourCompra.Location = new Point(871, 160);
             PanelColourCompra.Name = "PanelColourCompra";
             PanelColourCompra.Size = new Size(193, 31);
@@ -272,7 +264,7 @@
             btnExportarAExcel.BackColor = Color.Black;
             btnExportarAExcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnExportarAExcel.ForeColor = SystemColors.Window;
-            btnExportarAExcel.Location = new Point(1268, 342);
+            btnExportarAExcel.Location = new Point(1272, 342);
             btnExportarAExcel.Name = "btnExportarAExcel";
             btnExportarAExcel.Size = new Size(189, 84);
             btnExportarAExcel.TabIndex = 30;
@@ -300,26 +292,6 @@
             cmbProveedor.TabIndex = 28;
             cmbProveedor.SelectedIndexChanged += cmbProveedor_SelectedIndexChanged;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.ForeColor = SystemColors.Window;
-            label6.Location = new Point(570, 354);
-            label6.Name = "label6";
-            label6.Size = new Size(154, 31);
-            label6.TabIndex = 27;
-            label6.Text = "Total a vencer";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.ForeColor = SystemColors.Window;
-            label5.Location = new Point(291, 354);
-            label5.Name = "label5";
-            label5.Size = new Size(229, 31);
-            label5.TabIndex = 26;
-            label5.Text = "Próximo vencimiento";
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -330,29 +302,14 @@
             label4.TabIndex = 25;
             label4.Text = "Saldo total";
             // 
-            // txtTotalAVencer
-            // 
-            txtTotalAVencer.Location = new Point(570, 388);
-            txtTotalAVencer.Name = "txtTotalAVencer";
-            txtTotalAVencer.ReadOnly = true;
-            txtTotalAVencer.Size = new Size(253, 38);
-            txtTotalAVencer.TabIndex = 24;
-            // 
-            // txtProximoVencimiento
-            // 
-            txtProximoVencimiento.Location = new Point(291, 388);
-            txtProximoVencimiento.Name = "txtProximoVencimiento";
-            txtProximoVencimiento.ReadOnly = true;
-            txtProximoVencimiento.Size = new Size(253, 38);
-            txtProximoVencimiento.TabIndex = 23;
-            // 
             // txtSaldoTotal
             // 
+            txtSaldoTotal.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtSaldoTotal.ForeColor = SystemColors.ControlLightLight;
             txtSaldoTotal.Location = new Point(12, 388);
             txtSaldoTotal.Name = "txtSaldoTotal";
             txtSaldoTotal.ReadOnly = true;
-            txtSaldoTotal.Size = new Size(253, 38);
+            txtSaldoTotal.Size = new Size(253, 43);
             txtSaldoTotal.TabIndex = 22;
             // 
             // label3
@@ -447,11 +404,7 @@
         private Label label2;
         private DateTimePicker DateTimePickerFechaFin;
         private DateTimePicker DateTimePickerFechaInicio;
-        private Label label6;
-        private Label label5;
         private Label label4;
-        private TextBox txtTotalAVencer;
-        private TextBox txtProximoVencimiento;
         private TextBox txtSaldoTotal;
         private Label label7;
         private ComboBox cmbProveedor;

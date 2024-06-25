@@ -129,10 +129,10 @@ namespace JuanApp2.Formularios.Proveedor
                 cmbProveedor.SelectedIndex = 0;
 
                 //Coloring rows of DataGridView
-                ColorForCompra = Color.White;
+                ColorForCompra = Color.LightGreen;
                 PanelColourCompra.BackColor = ColorForCompra;
 
-                ColorForPagoAProveedores = Color.White;
+                ColorForPagoAProveedores = Color.IndianRed;
                 PanelColourPagoAProveedores.BackColor = ColorForPagoAProveedores;
 
                 GetTabla();
@@ -449,8 +449,6 @@ namespace JuanApp2.Formularios.Proveedor
                 decimal TotalAVencer = TotalAVencerCompra;
 
                 txtSaldoTotal.Text = $@"${SaldoTotal.ToString("N2")}";
-                txtProximoVencimiento.Text = FechaMinima.ToString("dd/MM/yyyy");
-                txtTotalAVencer.Text = $@"${TotalAVencer.ToString("N2")}";
 
                 //Diseño
                 if (SaldoTotalCompra < 0)
@@ -460,14 +458,6 @@ namespace JuanApp2.Formularios.Proveedor
                 else
                 {
                     txtSaldoTotal.BackColor = Color.Green;
-                }
-
-                if (FechaMinimaCompra.Year == DateTime.Now.Year &&
-                    FechaMinimaCompra.Month == DateTime.Now.Month &&
-                    FechaMinimaCompra.Day == DateTime.Now.Day)
-                {
-                    txtProximoVencimiento.BackColor = Color.Aquamarine;
-                    txtTotalAVencer.BackColor = Color.Aquamarine;
                 }
 
                 DataGridViewCompra.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
