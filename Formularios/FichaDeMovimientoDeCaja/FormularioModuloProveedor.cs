@@ -1,9 +1,4 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
-using JuanApp2.Areas.JuanApp2.CobranzaBack.Entities;
-using JuanApp2.Areas.JuanApp2.CompraBack.Entities;
-using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Interfaces;
-using JuanApp2.Areas.JuanApp2.ProveedorBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,9 +48,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     DateTimePickerFecha.Value = ModuloProveedor.Fecha;
                     cmbProveedor.SelectedItem = Proveedor.NombreCompleto;
                     txtDescripcion.Text = ModuloProveedor.Descripcion;
-                    txtDineroBanco.Value = ModuloProveedor.DineroBanco;
-                    txtDineroCheque.Value = ModuloProveedor.DineroCheque;
-                    txtDineroEfectivo.Value = ModuloProveedor.DineroEfectivo;
                     txtDineroTotal.Value = ModuloProveedor.DineroTotal;
                 }
 
@@ -73,17 +65,15 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                decimal DineroTotalDeSuma = txtDineroBanco.Value + txtDineroCheque.Value + txtDineroEfectivo.Value;
-
-                if (DineroTotalDeSuma != txtDineroTotal.Value)
-                {
-                    statusLabel.Text = "La suma de cada dinero no coincide con el total";
-                    return;
-                }
-
                 if (_lstProveedor.Count == 0)
                 {
                     statusLabel.Text = "Seleccione un proveedor";
+                    return;
+                }
+
+                if (txtDescripcion.Text == "")
+                {
+                    statusLabel.Text = "Agregue una descripcion";
                     return;
                 }
 
@@ -92,7 +82,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 if (_moduloproveedorId == 0)
                 {
                     //Agregar
-                    JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = new()
+                    Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = new()
                     {
                         ModuloProveedorId = 0,
                         Active = true,
@@ -102,9 +92,9 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         DateTimeLastModification = DateTime.Now,
                         ProveedorId = Proveedor.ProveedorId,
                         Fecha = DateTimePickerFecha.Value,
-                        DineroBanco = txtDineroBanco.Value,
-                        DineroCheque = txtDineroCheque.Value,
-                        DineroEfectivo = txtDineroEfectivo.Value,
+                        DineroBanco = 0,
+                        DineroCheque = 0,
+                        DineroEfectivo = 0,
                         DineroTotal = txtDineroTotal.Value,
                         Descripcion = txtDescripcion.Text
                     };
@@ -113,16 +103,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 else
                 {
                     //Actualizar
-                    JuanApp2.Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
+                    Areas.JuanApp2.ModuloProveedorBack.Entities.ModuloProveedor ModuloProveedor = _moduloproveedorRepository
                         .GetByModuloProveedorId(_moduloproveedorId);
 
                     ModuloProveedor.UserLastModificationId = 1;
                     ModuloProveedor.DateTimeLastModification = DateTime.Now;
                     ModuloProveedor.ProveedorId = Proveedor.ProveedorId;
                     ModuloProveedor.Fecha = DateTimePickerFecha.Value;
-                    ModuloProveedor.DineroBanco = txtDineroBanco.Value;
-                    ModuloProveedor.DineroCheque = txtDineroCheque.Value;
-                    ModuloProveedor.DineroEfectivo = txtDineroEfectivo.Value;
                     ModuloProveedor.DineroTotal = txtDineroTotal.Value;
                     ModuloProveedor.Descripcion = txtDescripcion.Text;
 
@@ -134,56 +121,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             catch (Exception) { throw; }
         }
 
-        private void txtDineroBanco_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroBanco.Text = $@"Dinero en banco = {txtDineroBanco.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroBanco.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-
-                    txtDineroCheque.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void txtDineroCheque_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroCheque.Text = $@"Dinero en cheque = {txtDineroCheque.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroCheque.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-
-                    txtDineroEfectivo.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void txtDineroEfectivo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroEfectivo.Text = $@"Dinero en efectivo = {txtDineroEfectivo.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroEfectivo.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-
-                    btnGuardar.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
 
         private void txtDescripcion_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -191,7 +128,21 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    txtDineroBanco.Focus();
+                    txtDineroTotal.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        private void txtDineroTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    lblDineroTotal.Text = $@"Dinero total * {txtDineroTotal.Value.ToString("N2")}";
+
+                    btnGuardar.Focus();
                 }
             }
             catch (Exception) { throw; }

@@ -135,9 +135,9 @@
             lblDineroTotal.ForeColor = Color.White;
             lblDineroTotal.Location = new Point(26, 344);
             lblDineroTotal.Name = "lblDineroTotal";
-            lblDineroTotal.Size = new Size(142, 28);
+            lblDineroTotal.Size = new Size(130, 28);
             lblDineroTotal.TabIndex = 34;
-            lblDineroTotal.Text = "Dinero total (*)";
+            lblDineroTotal.Text = "Dinero total *";
             // 
             // txtDineroTotal
             // 
@@ -149,6 +149,7 @@
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
+            txtDineroTotal.KeyPress += txtDineroTotal_KeyPress;
             // 
             // DateTimePickerFecha
             // 
@@ -165,9 +166,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(29, 146);
             label2.Name = "label2";
-            label2.Size = new Size(87, 28);
+            label2.Size = new Size(75, 28);
             label2.TabIndex = 36;
-            label2.Text = "Fecha (*)";
+            label2.Text = "Fecha *";
             // 
             // label7
             // 
@@ -176,9 +177,9 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(29, 242);
             label7.Name = "label7";
-            label7.Size = new Size(139, 28);
+            label7.Size = new Size(127, 28);
             label7.TabIndex = 37;
-            label7.Text = "Descripción (*)";
+            label7.Text = "Descripción *";
             // 
             // txtDescripcion
             // 

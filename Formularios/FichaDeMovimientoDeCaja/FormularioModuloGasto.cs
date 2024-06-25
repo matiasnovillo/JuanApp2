@@ -102,5 +102,19 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             }
             catch (Exception) { throw; }
         }
+
+        private void txtDineroTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    lblDineroTotal.Text = $@"Dinero total * {txtDineroTotal.Value.ToString("N2")}";
+
+                    btnGuardar.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
