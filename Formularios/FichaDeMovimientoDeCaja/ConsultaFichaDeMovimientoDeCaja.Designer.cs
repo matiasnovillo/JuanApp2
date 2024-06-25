@@ -215,11 +215,11 @@
             // 
             // txtSaldoTotal
             // 
-            txtSaldoTotal.Font = new Font("Segoe UI", 10.8F);
+            txtSaldoTotal.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtSaldoTotal.ForeColor = SystemColors.ControlLightLight;
-            txtSaldoTotal.Location = new Point(12, 326);
+            txtSaldoTotal.Location = new Point(12, 313);
             txtSaldoTotal.Name = "txtSaldoTotal";
-            txtSaldoTotal.Size = new Size(210, 31);
+            txtSaldoTotal.Size = new Size(210, 43);
             txtSaldoTotal.TabIndex = 22;
             // 
             // btnPagoProveedor
@@ -381,7 +381,7 @@
             lblSaldoTotal.AutoSize = true;
             lblSaldoTotal.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSaldoTotal.ForeColor = SystemColors.Window;
-            lblSaldoTotal.Location = new Point(12, 298);
+            lblSaldoTotal.Location = new Point(12, 285);
             lblSaldoTotal.Name = "lblSaldoTotal";
             lblSaldoTotal.Size = new Size(98, 25);
             lblSaldoTotal.TabIndex = 31;
