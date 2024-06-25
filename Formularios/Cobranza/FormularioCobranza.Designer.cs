@@ -47,7 +47,6 @@
             txtDineroEfectivo = new NumericUpDown();
             lblDineroTotal = new Label();
             txtDineroTotal = new NumericUpDown();
-            txtAtencion = new TextBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDineroBanco).BeginInit();
@@ -73,7 +72,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 596);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(821, 26);
+            statusStrip1.Size = new Size(736, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -91,7 +90,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { dropDownButton });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(821, 27);
+            toolStrip1.Size = new Size(736, 27);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -117,7 +116,7 @@
             btnGuardar.BackColor = Color.Black;
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = SystemColors.Window;
-            btnGuardar.Location = new Point(629, 500);
+            btnGuardar.Location = new Point(528, 500);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 78);
             btnGuardar.TabIndex = 11;
@@ -166,7 +165,6 @@
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
-            txtDineroBanco.ValueChanged += txtDineroBanco_ValueChanged;
             txtDineroBanco.KeyPress += txtDineroBanco_KeyPress;
             // 
             // lblDineroBanco
@@ -200,7 +198,6 @@
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
             txtDineroCheque.TabIndex = 29;
-            txtDineroCheque.ValueChanged += txtDineroCheque_ValueChanged;
             txtDineroCheque.KeyPress += txtDineroCheque_KeyPress;
             // 
             // lblDineroEfectivo
@@ -223,7 +220,6 @@
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
-            txtDineroEfectivo.ValueChanged += txtDineroEfectivo_ValueChanged;
             txtDineroEfectivo.KeyPress += txtDineroEfectivo_KeyPress;
             // 
             // lblDineroTotal
@@ -246,25 +242,13 @@
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
-            txtDineroTotal.ValueChanged += txtDineroTotal_ValueChanged;
-            // 
-            // txtAtencion
-            // 
-            txtAtencion.Location = new Point(401, 271);
-            txtAtencion.Multiline = true;
-            txtAtencion.Name = "txtAtencion";
-            txtAtencion.ReadOnly = true;
-            txtAtencion.Size = new Size(307, 184);
-            txtAtencion.TabIndex = 35;
-            txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
             // 
             // FormularioCobranza
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(821, 622);
-            Controls.Add(txtAtencion);
+            ClientSize = new Size(736, 622);
             Controls.Add(lblDineroTotal);
             Controls.Add(txtDineroTotal);
             Controls.Add(lblDineroEfectivo);
@@ -317,6 +301,5 @@
         private NumericUpDown txtDineroEfectivo;
         private Label lblDineroTotal;
         private NumericUpDown txtDineroTotal;
-        private TextBox txtAtencion;
     }
 }

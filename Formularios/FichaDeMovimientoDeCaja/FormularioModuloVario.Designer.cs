@@ -51,7 +51,6 @@
             txtDescripcion = new TextBox();
             optHaber = new RadioButton();
             optDebe = new RadioButton();
-            txtAtencion = new TextBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDineroBanco).BeginInit();
@@ -77,7 +76,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 680);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(821, 26);
+            statusStrip1.Size = new Size(731, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -95,7 +94,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { dropDownButton });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(821, 27);
+            toolStrip1.Size = new Size(731, 27);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -121,7 +120,7 @@
             btnGuardar.BackColor = Color.Black;
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = SystemColors.Window;
-            btnGuardar.Location = new Point(629, 590);
+            btnGuardar.Location = new Point(510, 594);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 78);
             btnGuardar.TabIndex = 11;
@@ -145,12 +144,11 @@
             txtDineroBanco.DecimalPlaces = 2;
             txtDineroBanco.Font = new Font("Segoe UI", 12F);
             txtDineroBanco.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtDineroBanco.Location = new Point(29, 360);
+            txtDineroBanco.Location = new Point(383, 214);
             txtDineroBanco.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
-            txtDineroBanco.ValueChanged += txtDineroBanco_ValueChanged;
             txtDineroBanco.KeyPress += txtDineroBanco_KeyPress;
             // 
             // lblDineroBanco
@@ -158,7 +156,7 @@
             lblDineroBanco.AutoSize = true;
             lblDineroBanco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDineroBanco.ForeColor = Color.White;
-            lblDineroBanco.Location = new Point(29, 329);
+            lblDineroBanco.Location = new Point(383, 183);
             lblDineroBanco.Name = "lblDineroBanco";
             lblDineroBanco.Size = new Size(156, 28);
             lblDineroBanco.TabIndex = 28;
@@ -169,7 +167,7 @@
             lblDineroCheque.AutoSize = true;
             lblDineroCheque.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDineroCheque.ForeColor = Color.White;
-            lblDineroCheque.Location = new Point(29, 426);
+            lblDineroCheque.Location = new Point(383, 280);
             lblDineroCheque.Name = "lblDineroCheque";
             lblDineroCheque.Size = new Size(165, 28);
             lblDineroCheque.TabIndex = 30;
@@ -180,7 +178,7 @@
             txtDineroCheque.DecimalPlaces = 2;
             txtDineroCheque.Font = new Font("Segoe UI", 12F);
             txtDineroCheque.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtDineroCheque.Location = new Point(29, 457);
+            txtDineroCheque.Location = new Point(383, 311);
             txtDineroCheque.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
@@ -193,7 +191,7 @@
             lblDineroEfectivo.AutoSize = true;
             lblDineroEfectivo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDineroEfectivo.ForeColor = Color.White;
-            lblDineroEfectivo.Location = new Point(29, 516);
+            lblDineroEfectivo.Location = new Point(383, 370);
             lblDineroEfectivo.Name = "lblDineroEfectivo";
             lblDineroEfectivo.Size = new Size(171, 28);
             lblDineroEfectivo.TabIndex = 32;
@@ -204,12 +202,11 @@
             txtDineroEfectivo.DecimalPlaces = 2;
             txtDineroEfectivo.Font = new Font("Segoe UI", 12F);
             txtDineroEfectivo.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtDineroEfectivo.Location = new Point(29, 547);
+            txtDineroEfectivo.Location = new Point(383, 401);
             txtDineroEfectivo.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
-            txtDineroEfectivo.ValueChanged += txtDineroEfectivo_ValueChanged;
             txtDineroEfectivo.KeyPress += txtDineroEfectivo_KeyPress;
             // 
             // lblDineroTotal
@@ -217,7 +214,7 @@
             lblDineroTotal.AutoSize = true;
             lblDineroTotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDineroTotal.ForeColor = Color.White;
-            lblDineroTotal.Location = new Point(401, 146);
+            lblDineroTotal.Location = new Point(383, 469);
             lblDineroTotal.Name = "lblDineroTotal";
             lblDineroTotal.Size = new Size(117, 28);
             lblDineroTotal.TabIndex = 34;
@@ -228,17 +225,16 @@
             txtDineroTotal.DecimalPlaces = 2;
             txtDineroTotal.Font = new Font("Segoe UI", 12F);
             txtDineroTotal.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
-            txtDineroTotal.Location = new Point(401, 177);
+            txtDineroTotal.Location = new Point(383, 500);
             txtDineroTotal.Maximum = new decimal(new int[] { 276447231, 23283, 0, 0 });
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
-            txtDineroTotal.ValueChanged += txtDineroTotal_ValueChanged;
             // 
             // DateTimePickerFecha
             // 
             DateTimePickerFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DateTimePickerFecha.Location = new Point(29, 281);
+            DateTimePickerFecha.Location = new Point(29, 268);
             DateTimePickerFecha.Name = "DateTimePickerFecha";
             DateTimePickerFecha.Size = new Size(307, 34);
             DateTimePickerFecha.TabIndex = 35;
@@ -248,7 +244,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 250);
+            label2.Location = new Point(29, 237);
             label2.Name = "label2";
             label2.Size = new Size(62, 28);
             label2.TabIndex = 36;
@@ -259,7 +255,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(401, 250);
+            label7.Location = new Point(29, 335);
             label7.Name = "label7";
             label7.Size = new Size(114, 28);
             label7.TabIndex = 37;
@@ -268,7 +264,7 @@
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDescripcion.Location = new Point(401, 281);
+            txtDescripcion.Location = new Point(29, 366);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(307, 34);
             txtDescripcion.TabIndex = 38;
@@ -300,23 +296,12 @@
             optDebe.Text = "Debe";
             optDebe.UseVisualStyleBackColor = true;
             // 
-            // txtAtencion
-            // 
-            txtAtencion.Location = new Point(401, 360);
-            txtAtencion.Multiline = true;
-            txtAtencion.Name = "txtAtencion";
-            txtAtencion.ReadOnly = true;
-            txtAtencion.Size = new Size(307, 184);
-            txtAtencion.TabIndex = 41;
-            txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
-            // 
-            // FormularioVario
+            // FormularioModuloVario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(821, 706);
-            Controls.Add(txtAtencion);
+            ClientSize = new Size(731, 706);
             Controls.Add(optDebe);
             Controls.Add(optHaber);
             Controls.Add(txtDescripcion);
@@ -338,7 +323,7 @@
             Controls.Add(lblTitulo);
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
-            Name = "FormularioVario";
+            Name = "FormularioModuloVario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario de varios";
             statusStrip1.ResumeLayout(false);
@@ -377,6 +362,5 @@
         private TextBox txtDescripcion;
         private RadioButton optHaber;
         private RadioButton optDebe;
-        private TextBox txtAtencion;
     }
 }

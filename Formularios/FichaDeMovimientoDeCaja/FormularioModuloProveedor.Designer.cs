@@ -49,7 +49,6 @@
             label2 = new Label();
             cmbProveedor = new ComboBox();
             label7 = new Label();
-            txtAtencion = new TextBox();
             txtDescripcion = new TextBox();
             label3 = new Label();
             statusStrip1.SuspendLayout();
@@ -150,7 +149,6 @@
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
-            txtDineroBanco.ValueChanged += txtDineroBanco_ValueChanged;
             txtDineroBanco.KeyPress += txtDineroBanco_KeyPress;
             // 
             // lblDineroBanco
@@ -185,7 +183,6 @@
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
             txtDineroCheque.TabIndex = 29;
-            txtDineroCheque.ValueChanged += txtDineroCheque_ValueChanged;
             txtDineroCheque.KeyPress += txtDineroCheque_KeyPress;
             // 
             // lblDineroEfectivo
@@ -209,7 +206,6 @@
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
-            txtDineroEfectivo.ValueChanged += txtDineroEfectivo_ValueChanged;
             txtDineroEfectivo.KeyPress += txtDineroEfectivo_KeyPress;
             // 
             // lblDineroTotal
@@ -233,7 +229,6 @@
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
-            txtDineroTotal.ValueChanged += txtDineroTotal_ValueChanged;
             // 
             // DateTimePickerFecha
             // 
@@ -275,16 +270,6 @@
             label7.TabIndex = 38;
             label7.Text = "Proveedor";
             // 
-            // txtAtencion
-            // 
-            txtAtencion.Location = new Point(401, 267);
-            txtAtencion.Multiline = true;
-            txtAtencion.Name = "txtAtencion";
-            txtAtencion.ReadOnly = true;
-            txtAtencion.Size = new Size(307, 184);
-            txtAtencion.TabIndex = 39;
-            txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
-            // 
             // txtDescripcion
             // 
             txtDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -292,6 +277,7 @@
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(307, 34);
             txtDescripcion.TabIndex = 40;
+            txtDescripcion.KeyPress += txtDescripcion_KeyPress_1;
             // 
             // label3
             // 
@@ -304,7 +290,7 @@
             label3.TabIndex = 41;
             label3.Text = "Descripcion";
             // 
-            // FormularioProveedor
+            // FormularioModuloProveedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -312,7 +298,6 @@
             ClientSize = new Size(821, 795);
             Controls.Add(label3);
             Controls.Add(txtDescripcion);
-            Controls.Add(txtAtencion);
             Controls.Add(label7);
             Controls.Add(cmbProveedor);
             Controls.Add(label2);
@@ -332,7 +317,7 @@
             Controls.Add(lblTitulo);
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
-            Name = "FormularioProveedor";
+            Name = "FormularioModuloProveedor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario de proveedor";
             statusStrip1.ResumeLayout(false);
@@ -369,7 +354,6 @@
         private Label label2;
         private ComboBox cmbProveedor;
         private Label label7;
-        private TextBox txtAtencion;
         private TextBox txtDescripcion;
         private Label label3;
     }

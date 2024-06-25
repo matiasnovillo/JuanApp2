@@ -118,10 +118,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
+                    lblDineroBanco.Text = $@"Dinero en banco = {txtDineroBanco.Value.ToString("N2")}";
+
                     txtDineroTotal.Value += txtDineroBanco.Value;
                     lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
+                    
                     txtDineroCheque.Focus();
                 }
             }
@@ -132,10 +135,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
+                    lblDineroCheque.Text = $@"Dinero en cheque = {txtDineroCheque.Value.ToString("N2")}";
+
                     txtDineroTotal.Value += txtDineroCheque.Value;
                     lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
+                    
                     txtDineroEfectivo.Focus();
                 }
             }
@@ -146,11 +152,14 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
+                    lblDineroEfectivo.Text = $@"Dinero en efectivo = {txtDineroEfectivo.Value.ToString("N2")}";
+
                     txtDineroTotal.Value += txtDineroEfectivo.Value;
                     lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-                    txtDescripcion.Focus();
+
+                    btnGuardar.Focus();
                 }
             }
             catch (Exception) { throw; }
@@ -160,32 +169,17 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
-                    btnGuardar.Focus();
+                    txtDineroBanco.Focus();
                 }
             }
             catch (Exception) { throw; }
         }
 
-        private void txtDineroBanco_ValueChanged(object sender, EventArgs e)
-        {
-            lblDineroBanco.Text = $@"Dinero en banco = {txtDineroBanco.Value.ToString("N2")}";
-        }
-
         private void txtDineroCheque_ValueChanged(object sender, EventArgs e)
         {
-            lblDineroCheque.Text = $@"Dinero en cheque = {txtDineroCheque.Value.ToString("N2")}";
-        }
-
-        private void txtDineroEfectivo_ValueChanged(object sender, EventArgs e)
-        {
-            lblDineroEfectivo.Text = $@"Dinero en efectivo = {txtDineroEfectivo.Value.ToString("N2")}";
-        }
-
-        private void txtDineroTotal_ValueChanged(object sender, EventArgs e)
-        {
-            lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
+            
         }
     }
 }

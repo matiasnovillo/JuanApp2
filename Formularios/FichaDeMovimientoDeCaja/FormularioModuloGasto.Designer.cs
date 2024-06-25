@@ -49,7 +49,6 @@
             label2 = new Label();
             label7 = new Label();
             txtDescripcion = new TextBox();
-            txtAtencion = new TextBox();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDineroBanco).BeginInit();
@@ -148,7 +147,6 @@
             txtDineroBanco.Name = "txtDineroBanco";
             txtDineroBanco.Size = new Size(307, 34);
             txtDineroBanco.TabIndex = 27;
-            txtDineroBanco.ValueChanged += txtDineroBanco_ValueChanged;
             txtDineroBanco.KeyPress += txtDineroBanco_KeyPress;
             // 
             // lblDineroBanco
@@ -183,7 +181,6 @@
             txtDineroCheque.Name = "txtDineroCheque";
             txtDineroCheque.Size = new Size(307, 34);
             txtDineroCheque.TabIndex = 29;
-            txtDineroCheque.ValueChanged += txtDineroCheque_ValueChanged;
             txtDineroCheque.KeyPress += txtDineroCheque_KeyPress;
             // 
             // lblDineroEfectivo
@@ -207,7 +204,6 @@
             txtDineroEfectivo.Name = "txtDineroEfectivo";
             txtDineroEfectivo.Size = new Size(307, 34);
             txtDineroEfectivo.TabIndex = 31;
-            txtDineroEfectivo.ValueChanged += txtDineroEfectivo_ValueChanged;
             txtDineroEfectivo.KeyPress += txtDineroEfectivo_KeyPress;
             // 
             // lblDineroTotal
@@ -231,7 +227,6 @@
             txtDineroTotal.Name = "txtDineroTotal";
             txtDineroTotal.Size = new Size(307, 34);
             txtDineroTotal.TabIndex = 33;
-            txtDineroTotal.ValueChanged += txtDineroTotal_ValueChanged;
             // 
             // DateTimePickerFecha
             // 
@@ -272,23 +267,12 @@
             txtDescripcion.TabIndex = 38;
             txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
-            // txtAtencion
-            // 
-            txtAtencion.Location = new Point(401, 270);
-            txtAtencion.Multiline = true;
-            txtAtencion.Name = "txtAtencion";
-            txtAtencion.ReadOnly = true;
-            txtAtencion.Size = new Size(307, 184);
-            txtAtencion.TabIndex = 39;
-            txtAtencion.Text = "¡ATENCIÓN! \r\n[Enter] para ver el valor con puntos de mil y decimales\r\n[Espacio] para sumar el valor de cada dinero en Dinero total y pasar al proximo valor\r\n\r\n\r\n";
-            // 
-            // FormularioGasto
+            // FormularioModuloGasto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(821, 706);
-            Controls.Add(txtAtencion);
             Controls.Add(txtDescripcion);
             Controls.Add(label7);
             Controls.Add(label2);
@@ -308,7 +292,7 @@
             Controls.Add(lblTitulo);
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
-            Name = "FormularioGasto";
+            Name = "FormularioModuloGasto";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Formulario de gastos";
             statusStrip1.ResumeLayout(false);
@@ -345,6 +329,5 @@
         private Label label2;
         private Label label7;
         private TextBox txtDescripcion;
-        private TextBox txtAtencion;
     }
 }

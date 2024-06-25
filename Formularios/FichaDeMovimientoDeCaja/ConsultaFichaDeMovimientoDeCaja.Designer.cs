@@ -57,11 +57,7 @@
             label15 = new Label();
             label16 = new Label();
             label17 = new Label();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            button7 = new Button();
+            btnPagoAProveedores = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
@@ -85,7 +81,7 @@
             label7 = new Label();
             label6 = new Label();
             label5 = new Label();
-            button1 = new Button();
+            btnBuscar = new Button();
             btnGasto = new Button();
             btnVario = new Button();
             btnCobranza = new Button();
@@ -168,8 +164,8 @@
             DataGridViewFicha.RowHeadersWidth = 51;
             DataGridViewFicha.Size = new Size(1924, 472);
             DataGridViewFicha.TabIndex = 2;
+            DataGridViewFicha.CellClick += DataGridViewFicha_CellClick;
             DataGridViewFicha.CellContentClick += DataGridViewEntrada_CellContentClick;
-            DataGridViewFicha.RowPrePaint += DataGridViewFicha_RowPrePaint;
             // 
             // lblTitulo
             // 
@@ -238,11 +234,6 @@
             pnlFiltersAndSearchBar.Controls.Add(label7);
             pnlFiltersAndSearchBar.Controls.Add(label6);
             pnlFiltersAndSearchBar.Controls.Add(label5);
-            pnlFiltersAndSearchBar.Controls.Add(button1);
-            pnlFiltersAndSearchBar.Controls.Add(btnGasto);
-            pnlFiltersAndSearchBar.Controls.Add(btnVario);
-            pnlFiltersAndSearchBar.Controls.Add(btnCobranza);
-            pnlFiltersAndSearchBar.Controls.Add(btnPagoProveedor);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoCheque);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoBanco);
             pnlFiltersAndSearchBar.Controls.Add(txtSaldoEfectivo);
@@ -267,6 +258,11 @@
             // panel3
             // 
             panel3.BackColor = Color.Black;
+            panel3.Controls.Add(btnPagoProveedor);
+            panel3.Controls.Add(btnCobranza);
+            panel3.Controls.Add(btnVario);
+            panel3.Controls.Add(btnGasto);
+            panel3.Controls.Add(btnBuscar);
             panel3.Controls.Add(PanelColourVarios);
             panel3.Controls.Add(label24);
             panel3.Controls.Add(PanelColourCobranza);
@@ -282,11 +278,7 @@
             panel3.Controls.Add(label15);
             panel3.Controls.Add(label16);
             panel3.Controls.Add(label17);
-            panel3.Controls.Add(button3);
-            panel3.Controls.Add(button4);
-            panel3.Controls.Add(button5);
-            panel3.Controls.Add(button6);
-            panel3.Controls.Add(button7);
+            panel3.Controls.Add(btnPagoAProveedores);
             panel3.Controls.Add(textBox1);
             panel3.Controls.Add(textBox2);
             panel3.Controls.Add(textBox3);
@@ -465,65 +457,17 @@
             label17.TabIndex = 31;
             label17.Text = "Saldo total";
             // 
-            // button3
+            // btnPagoAProveedores
             // 
-            button3.BackColor = Color.Black;
-            button3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button3.ForeColor = SystemColors.Window;
-            button3.Location = new Point(1647, 379);
-            button3.Name = "button3";
-            button3.Size = new Size(189, 69);
-            button3.TabIndex = 30;
-            button3.Text = "BUSCAR";
-            button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            button4.BackColor = Color.Black;
-            button4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button4.ForeColor = SystemColors.Window;
-            button4.Location = new Point(658, 379);
-            button4.Name = "button4";
-            button4.Size = new Size(189, 69);
-            button4.TabIndex = 28;
-            button4.Text = "GASTOS";
-            button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.Black;
-            button5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button5.ForeColor = SystemColors.Window;
-            button5.Location = new Point(444, 379);
-            button5.Name = "button5";
-            button5.Size = new Size(189, 69);
-            button5.TabIndex = 29;
-            button5.Text = "VARIOS";
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            button6.BackColor = Color.Black;
-            button6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button6.ForeColor = SystemColors.Window;
-            button6.Location = new Point(226, 379);
-            button6.Name = "button6";
-            button6.Size = new Size(189, 69);
-            button6.TabIndex = 26;
-            button6.Text = "COBRANZA";
-            button6.UseVisualStyleBackColor = false;
-            // 
-            // button7
-            // 
-            button7.BackColor = Color.Black;
-            button7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button7.ForeColor = SystemColors.Window;
-            button7.Location = new Point(12, 379);
-            button7.Name = "button7";
-            button7.Size = new Size(189, 69);
-            button7.TabIndex = 27;
-            button7.Text = "PAGO PROVEEDORES";
-            button7.UseVisualStyleBackColor = false;
+            btnPagoAProveedores.BackColor = Color.Black;
+            btnPagoAProveedores.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btnPagoAProveedores.ForeColor = SystemColors.Window;
+            btnPagoAProveedores.Location = new Point(12, 379);
+            btnPagoAProveedores.Name = "btnPagoAProveedores";
+            btnPagoAProveedores.Size = new Size(189, 69);
+            btnPagoAProveedores.TabIndex = 27;
+            btnPagoAProveedores.Text = "PAGO PROVEEDORES";
+            btnPagoAProveedores.UseVisualStyleBackColor = false;
             // 
             // textBox1
             // 
@@ -760,18 +704,18 @@
             label5.TabIndex = 31;
             label5.Text = "Saldo total";
             // 
-            // button1
+            // btnBuscar
             // 
-            button1.BackColor = Color.Black;
-            button1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
-            button1.ForeColor = SystemColors.Window;
-            button1.Location = new Point(1647, 379);
-            button1.Name = "button1";
-            button1.Size = new Size(189, 69);
-            button1.TabIndex = 30;
-            button1.Text = "BUSCAR";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnBuscar.BackColor = Color.Black;
+            btnBuscar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
+            btnBuscar.ForeColor = SystemColors.Window;
+            btnBuscar.Location = new Point(1647, 379);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(189, 69);
+            btnBuscar.TabIndex = 30;
+            btnBuscar.Text = "BUSCAR";
+            btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += button1_Click;
             // 
             // btnGasto
             // 
@@ -953,7 +897,7 @@
         private TextBox txtSaldoBanco;
         private TextBox txtSaldoEfectivo;
         private TextBox txtSaldoTotal;
-        private Button button1;
+        private Button btnBuscar;
         private Label label8;
         private Label label7;
         private Label label6;
@@ -979,11 +923,7 @@
         private Label label15;
         private Label label16;
         private Label label17;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
+        private Button btnPagoAProveedores;
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
