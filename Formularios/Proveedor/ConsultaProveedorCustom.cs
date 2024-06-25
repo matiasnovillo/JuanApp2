@@ -380,7 +380,8 @@ namespace JuanApp2.Formularios.Proveedor
                         Debe = compra.DebeOHaber == true ? compra.Subtotal : 0,
                         Haber = compra.DebeOHaber == true ? 0 : compra.Subtotal,
                         Saldo = SaldoTotalCompra,
-                        Vencimiento = FechaMasDiaDepagoDe0
+                        Vencimiento = FechaMasDiaDepagoDe0,
+                        DateTimeLastModification = compra.DateTimeLastModification
                     };
                     lstconsultaProveedorDTO.Add(consultaProveedorDTO);
                 }
@@ -412,11 +413,17 @@ namespace JuanApp2.Formularios.Proveedor
                         Debe = 0,
                         Haber = moduloproveedor.DineroTotal,
                         Saldo = SaldoTotalModuloProveedor,
-                        Vencimiento = moduloproveedor.Fecha.AddDays(0)
+                        Vencimiento = moduloproveedor.Fecha.AddDays(0),
+                        DateTimeLastModification = moduloproveedor.DateTimeLastModification
                     };
                     lstconsultaProveedorDTO.Add(consultaProveedorDTO);
                 }
                 #endregion
+
+                lstconsultaProveedorDTO = lstconsultaProveedorDTO
+                    .AsQueryable()
+                    .OrderBy(x => x.DateTimeLastModification)
+                    .ToList();
 
                 foreach (consultaProveedorDTO consultaProveedorDTO in lstconsultaProveedorDTO)
                 {
@@ -550,20 +557,6 @@ namespace JuanApp2.Formularios.Proveedor
             }
         }
 
-        private void DataGridViewCompra_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            string Referencia = DataGridViewCompra.Rows[e.RowIndex].Cells[3].Value.ToString();
-
-            if (Referencia == "COMPRA")
-            {
-                DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForCompra;
-            }
-            else
-            {
-                DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForPagoAProveedores;
-            }
-        }
-
         private void PanelColourCobranza_MouseClick(object sender, MouseEventArgs e)
         {
             try
@@ -594,6 +587,36 @@ namespace JuanApp2.Formularios.Proveedor
                 }
             }
             catch (Exception) { throw; }
+        }
+
+        private void DataGridViewCompra_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string Referencia = DataGridViewCompra.Rows[e.RowIndex].Cells[3].Value.ToString();
+                if (Referencia == "COMPRA")
+                {
+                    if (DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForCompra)
+                    {
+                        DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForCompra;
+                    }
+                }
+                else
+                {
+                    if (DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor == ColorForPagoAProveedores)
+                    {
+                        DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        DataGridViewCompra.Rows[e.RowIndex].DefaultCellStyle.BackColor = ColorForPagoAProveedores;
+                    }
+                }
+            } 
         }
     }
 }

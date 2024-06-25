@@ -158,7 +158,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     txtDescripcion.Focus();
                 }
@@ -170,7 +170,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     txtUnidad.Focus();
                 }
@@ -182,7 +182,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     txtKilogramo.Focus();
                 }
@@ -194,7 +194,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     txtPrecio.Focus();
                 }
@@ -206,7 +206,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     txtSubtotal.Focus();
                 }
@@ -218,7 +218,7 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.KeyChar == (char)Keys.Space)
+                if (e.KeyChar == (char)Keys.Enter)
                 {
                     btnGuardar.Focus();
                 }

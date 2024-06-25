@@ -126,8 +126,8 @@
             DataGridViewCompra.RowHeadersWidth = 51;
             DataGridViewCompra.Size = new Size(1924, 449);
             DataGridViewCompra.TabIndex = 2;
+            DataGridViewCompra.CellClick += DataGridViewCompra_CellClick;
             DataGridViewCompra.CellContentClick += DataGridViewEntrada_CellContentClick;
-            DataGridViewCompra.RowPrePaint += DataGridViewCompra_RowPrePaint;
             // 
             // lblTitulo
             // 

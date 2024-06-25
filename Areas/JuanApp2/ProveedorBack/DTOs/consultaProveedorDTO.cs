@@ -19,6 +19,7 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.DTOs
         public decimal Haber { get; set; }
         public decimal Saldo { get; set; }
         public DateTime Vencimiento { get; set; }
+        public DateTime DateTimeLastModification { get; set; }
 
     }
 }
