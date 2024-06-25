@@ -117,7 +117,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 DateTimePickerFechaInicio.Value = NowIn030DaysBefore.AddDays(-30);
                 DateTimePickerFechaFin.Value = NowIn2359;
 
-                numericUpDownRegistrosPorPagina.Value = 500;
+                txtRegistrosPorPagina.Value = 500;
 
                 _lstTipoDeMovimiento = _tipodemovimientoRepository.GetAll();
 
@@ -259,10 +259,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 //COBRANZA - PROVEEDOR - VARIOS - GASTOS
                 List<fichaDeMovimientoDeCajaDTO> lstFichaDeMovimientoDeCajaDTO = [];
 
-                decimal SaldoEfectivo = 0;
-                decimal SaldoBanco = 0;
-                decimal SaldoCheque = 0;
-
                 #region Cobranza
                 List<JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
                 if (string.IsNullOrEmpty(txtBuscar.Text))
@@ -272,7 +268,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
-                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                         .ToList();
                 }
                 else
@@ -287,7 +283,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                             .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                             x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                             .OrderBy(x => x.DateTimeLastModification)
-                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                             .ToList();
                     }
                 }
@@ -308,14 +304,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     };
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
-
-                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "COBRANZA" ||
-                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
-                    {
-                        SaldoEfectivo += cobranza.DineroEfectivo;
-                        SaldoBanco += cobranza.DineroBanco;
-                        SaldoCheque += cobranza.DineroCheque;
-                    }
                 }
                 #endregion
 
@@ -328,7 +316,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                     x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                     .OrderBy(x => x.DateTimeLastModification)
-                    .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                    .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                     .ToList();
                 }
                 else
@@ -349,7 +337,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                             .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                             x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                             .OrderBy(x => x.DateTimeLastModification)
-                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                             .ToList();
                     }
                     else
@@ -365,7 +353,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                             .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                             x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                             .OrderBy(x => x.DateTimeLastModification)
-                            .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                            .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                             .ToList();
                     }
                 }
@@ -386,14 +374,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     };
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
-
-                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "PAGO PROVEEDORES" ||
-                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
-                    {
-                        SaldoEfectivo -= moduloproveedor.DineroEfectivo;
-                        SaldoBanco -= moduloproveedor.DineroBanco;
-                        SaldoCheque -= moduloproveedor.DineroCheque;
-                    }
                 }
                 #endregion
 
@@ -406,7 +386,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
-                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                         .ToList();
                 }
                 else
@@ -422,7 +402,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
-                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                         .ToList();
                 }
 
@@ -441,23 +421,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
 
-                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "VARIOS" ||
-                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
-                    {
-                        if (modulovario.DebeOHaber == true)
-                        {
-                            SaldoEfectivo += modulovario.DineroEfectivo;
-                            SaldoBanco += modulovario.DineroBanco;
-                            SaldoCheque += modulovario.DineroCheque;
-                        }
-                        else
-                        {
-                            SaldoEfectivo -= modulovario.DineroEfectivo;
-                            SaldoBanco -= modulovario.DineroBanco;
-                            SaldoCheque -= modulovario.DineroCheque;
-                        }
-                    }
-
 
                 }
                 #endregion
@@ -471,7 +434,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
-                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                         .ToList();
                 }
                 else
@@ -487,7 +450,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         .Where(x => x.DateTimeLastModification <= DateTimePickerFechaFin.Value &&
                         x.DateTimeLastModification >= DateTimePickerFechaInicio.Value)
                         .OrderBy(x => x.DateTimeLastModification)
-                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .Take(Convert.ToInt32(txtRegistrosPorPagina.Value))
                         .ToList();
                 }
 
@@ -505,14 +468,6 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     };
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
-
-                    if (cmbTipoDeMovimiento.SelectedItem.ToString() == "GASTOS" ||
-                        cmbTipoDeMovimiento.SelectedItem.ToString() == "TODOS")
-                    {
-                        SaldoEfectivo -= modulogasto.DineroEfectivo;
-                        SaldoBanco -= modulogasto.DineroBanco;
-                        SaldoCheque -= modulogasto.DineroCheque;
-                    }
                 }
                 #endregion
 
@@ -630,38 +585,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 {
                     txtSaldoTotal.BackColor = Color.Green;
                 }
-                //SaldoEfectivo
-                if (SaldoEfectivo < 0)
-                {
-                    txtSaldoEfectivo.BackColor = Color.Red;
-                }
-                else
-                {
-                    txtSaldoEfectivo.BackColor = Color.Green;
-                }
-                //SaldoBanco
-                if (SaldoBanco < 0)
-                {
-                    txtSaldoBanco.BackColor = Color.Red;
-                }
-                else
-                {
-                    txtSaldoBanco.BackColor = Color.Green;
-                }
-                //SaldoCheque
-                if (SaldoCheque < 0)
-                {
-                    txtSaldoCheque.BackColor = Color.Red;
-                }
-                else
-                {
-                    txtSaldoCheque.BackColor = Color.Green;
-                }
 
                 txtSaldoTotal.Text = $@"${SaldoTotal.ToString("N2")}";
-                txtSaldoEfectivo.Text = $@"${SaldoEfectivo.ToString("N2")}";
-                txtSaldoBanco.Text = $@"${SaldoBanco.ToString("N2")}";
-                txtSaldoCheque.Text = $@"${SaldoCheque.ToString("N2")}";
 
                 DataGridViewFicha.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 statusLabel.Text = $@"";
