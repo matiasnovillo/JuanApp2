@@ -107,12 +107,17 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 DataGridViewFicha.DefaultCellStyle.Font = new Font("Arial", 11);
 
                 //DateTimePickers
-                DateTime now = DateTime.Now;
-                DateTime NowIn030DaysBefore = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
-                DateTime NowIn2359 = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
+                DateTime Today = DateTime.Today;
+                Today = new(Today.Year, Today.Month, Today.Day, 0, 0, 0);
 
-                DateTimePickerFechaInicio.Value = NowIn030DaysBefore.AddDays(-30);
-                DateTimePickerFechaFin.Value = NowIn2359;
+                // Calcular el lunes de la semana actual
+                DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
+
+                // Calcular el domingo de la semana actual
+                DateTime Sunday = Monday.AddDays(6);
+
+                DateTimePickerFechaInicio.Value = Monday;
+                DateTimePickerFechaFin.Value = Sunday;
 
                 txtRegistrosPorPagina.Value = 500;
 

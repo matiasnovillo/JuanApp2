@@ -1,5 +1,3 @@
-using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
-using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,14 +23,11 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
                 if (_modulogastoId > 0)
                 {
-                    JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = _modulogastoRepository
+                    Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = _modulogastoRepository
                                                                         .GetByModuloGastoId(_modulogastoId);
 
                     DateTimePickerFecha.Value = ModuloGasto.Fecha;
                     txtDescripcion.Text = ModuloGasto.Descripcion;
-                    txtDineroBanco.Value = ModuloGasto.DineroBanco;
-                    txtDineroCheque.Value = ModuloGasto.DineroCheque;
-                    txtDineroEfectivo.Value = ModuloGasto.DineroEfectivo;
                     txtDineroTotal.Value = ModuloGasto.DineroTotal;
                 }
 
@@ -50,18 +45,16 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
         {
             try
             {
-                decimal DineroTotalDeSuma = txtDineroBanco.Value + txtDineroCheque.Value + txtDineroEfectivo.Value;
-
-                if (DineroTotalDeSuma != txtDineroTotal.Value)
+                if (txtDescripcion.Text == "")
                 {
-                    statusLabel.Text = "la suma de cada dinero no coincide con el total";
+                    statusLabel.Text = "Descripción es requerido";
                     return;
                 }
 
                 if (_modulogastoId == 0)
                 {
                     //Agregar
-                    JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = new()
+                    Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = new()
                     {
                         ModuloGastoId = 0,
                         Active = true,
@@ -71,9 +64,9 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                         DateTimeLastModification = DateTime.Now,
                         Descripcion = txtDescripcion.Text,
                         Fecha = DateTimePickerFecha.Value,
-                        DineroBanco = txtDineroBanco.Value,
-                        DineroCheque = txtDineroCheque.Value,
-                        DineroEfectivo = txtDineroEfectivo.Value,
+                        DineroBanco = 0,
+                        DineroCheque = 0,
+                        DineroEfectivo = 0,
                         DineroTotal = txtDineroTotal.Value
                     };
                     _modulogastoRepository.Add(ModuloGasto);
@@ -81,14 +74,11 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 else
                 {
                     //Actualizar
-                    JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = _modulogastoRepository
+                    Areas.JuanApp2.ModuloGastoBack.Entities.ModuloGasto ModuloGasto = _modulogastoRepository
                         .GetByModuloGastoId(_modulogastoId);
 
                     ModuloGasto.Fecha = DateTimePickerFecha.Value;
                     ModuloGasto.Descripcion = txtDescripcion.Text;
-                    ModuloGasto.DineroBanco = txtDineroBanco.Value;
-                    ModuloGasto.DineroCheque = txtDineroCheque.Value;
-                    ModuloGasto.DineroEfectivo = txtDineroEfectivo.Value;
                     ModuloGasto.DineroTotal = txtDineroTotal.Value;
                     ModuloGasto.UserLastModificationId = 1;
                     ModuloGasto.DateTimeLastModification = DateTime.Now;
@@ -101,64 +91,13 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
             catch (Exception) { throw; }
         }
 
-        private void txtDineroBanco_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroBanco.Text = $@"Dinero en banco = {txtDineroBanco.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroBanco.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-                    
-                    txtDineroCheque.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void txtDineroCheque_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroCheque.Text = $@"Dinero en cheque = {txtDineroCheque.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroCheque.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-                    
-                    txtDineroEfectivo.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
-        private void txtDineroEfectivo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    lblDineroEfectivo.Text = $@"Dinero en efectivo = {txtDineroEfectivo.Value.ToString("N2")}";
-
-                    txtDineroTotal.Value += txtDineroEfectivo.Value;
-                    lblDineroTotal.Text = $@"Dinero total = {txtDineroTotal.Value.ToString("N2")}";
-                    
-                    btnGuardar.Focus();
-                }
-            }
-            catch (Exception) { throw; }
-        }
-
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    txtDineroBanco.Focus();
+                    txtDineroTotal.Focus();
                 }
             }
             catch (Exception) { throw; }
