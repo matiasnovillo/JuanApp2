@@ -289,7 +289,7 @@
             // 
             // PanelColor
             // 
-            PanelColor.BackColor = Color.White;
+            PanelColor.BackColor = Color.Yellow;
             PanelColor.Location = new Point(748, 151);
             PanelColor.Name = "PanelColor";
             PanelColor.Size = new Size(122, 31);

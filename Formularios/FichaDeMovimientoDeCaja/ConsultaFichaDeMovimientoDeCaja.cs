@@ -133,7 +133,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 cmbTipoDeMovimiento.SelectedIndex = 0;
 
                 //Color for rows
-                Color = Color.White;
+                Color = Color.Yellow;
                 PanelColor.BackColor = Color;
 
                 GetTabla();
