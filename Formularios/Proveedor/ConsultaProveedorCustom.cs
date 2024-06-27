@@ -104,6 +104,8 @@ namespace JuanApp2.Formularios.Proveedor
                 colBorrar.UseColumnTextForButtonValue = true;
                 DataGridViewCompra.Columns.Add(colBorrar);
 
+                DataGridViewCompra.Columns[10].DefaultCellStyle.ForeColor = Color.Red;
+
                 WindowState = FormWindowState.Maximized;
 
                 DataGridViewCompra.AutoGenerateColumns = false;

@@ -72,22 +72,54 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
         private void btnBorrarTodoNota1_Click(object sender, EventArgs e)
         {
-            txtNota1.Text = "";
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar esta nota?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                txtNota1.Text = "";
+            }  
         }
 
         private void btnBorrarTodoNota2_Click(object sender, EventArgs e)
         {
-            txtNota2.Text = "";
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar esta nota?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                txtNota2.Text = "";
+            }
         }
 
         private void btnBorrarTodoNota3_Click(object sender, EventArgs e)
         {
-            txtNota3.Text = "";
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar esta nota?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                txtNota3.Text = "";
+            }
         }
 
         private void btnBorrarTodoNota4_Click(object sender, EventArgs e)
         {
-            txtNota4.Text = "";
+            DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar esta nota?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                txtNota4.Text = "";
+            }
         }
     }
 }
