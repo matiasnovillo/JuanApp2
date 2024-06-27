@@ -20,6 +20,8 @@ using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.Entities;
 using JuanApp2.Areas.JuanApp2.TipoDeMovimientoBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.NotaBack.Entities;
 using JuanApp2.Areas.JuanApp2.NotaBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Entities;
+using JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -33,6 +35,7 @@ namespace JuanApp2.DatabaseContexts
         public DbSet<Cobrador> Cobrador { get; set; }
         public DbSet<Cobranza> Cobranza { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
+        public DbSet<ProveedorIngreso> ProveedorIngreso { get; set; }
         public DbSet<Compra> Compra { get; set; }
         public DbSet<ModuloVario> ModuloVario { get; set; }
         public DbSet<ModuloGasto> ModuloGasto { get; set; }
@@ -92,6 +95,8 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.Entity<Cobranza>().ToTable("JuanApp2.Cobranza");
                 modelBuilder.ApplyConfiguration(new ProveedorConfiguration());
                 modelBuilder.Entity<Proveedor>().ToTable("JuanApp2.Proveedor");
+                modelBuilder.ApplyConfiguration(new ProveedorIngresoConfiguration());
+                modelBuilder.Entity<ProveedorIngreso>().ToTable("JuanApp2.ProveedorIngreso");
                 modelBuilder.ApplyConfiguration(new ModuloProveedorConfiguration());
                 modelBuilder.Entity<ModuloProveedor>().ToTable("JuanApp2.ModuloProveedor");
                 modelBuilder.ApplyConfiguration(new ModuloVarioConfiguration());
