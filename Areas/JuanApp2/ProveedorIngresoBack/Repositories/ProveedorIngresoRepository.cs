@@ -23,19 +23,10 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Repositories
     public class ProveedorIngresoRepository : IProveedorIngresoRepository
     {
         protected readonly JuanApp2Context _context;
-        private readonly IMemoryCache _memoryCache;
-        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
 
-        public ProveedorIngresoRepository(JuanApp2Context context, IMemoryCache memoryCache)
+        public ProveedorIngresoRepository(JuanApp2Context context)
         {
             _context = context;
-            _memoryCache = memoryCache;
-
-            _memoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-                SlidingExpiration = TimeSpan.FromMinutes(2)
-            };
         }
 
         public IQueryable<ProveedorIngreso> AsQueryable()
@@ -61,18 +52,9 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Repositories
         {
             try
             {
-                //Look in cache first
-                if (!_memoryCache.TryGetValue($@"JuanApp2.ProveedorIngreso.ProveedorIngresoId={proveedoringresoId}", out ProveedorIngreso? proveedoringreso))
-                {
-                    //If not exist in cache, look in DB
-                    proveedoringreso = _context.ProveedorIngreso
+                ProveedorIngreso proveedoringreso = _context.ProveedorIngreso
                                 .FirstOrDefault(x => x.ProveedorIngresoId == proveedoringresoId);
-                    
-                    if (proveedoringreso != null)
-                    {
-                        _memoryCache.Set(proveedoringresoId, proveedoringreso, _memoryCacheEntryOptions);
-                    }
-                }
+
                 return proveedoringreso;
             }
             catch (Exception) { throw; }
@@ -132,16 +114,9 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Repositories
         {
             try
             {
-                EntityEntry<ProveedorIngreso> ProveedorIngresoToAdd = _context.ProveedorIngreso.Add(proveedoringreso);
+                _context.ProveedorIngreso.Add(proveedoringreso);
 
                 bool result = _context.SaveChanges() > 0;
-
-                if (result)
-                {
-                    int AddedProveedorIngresoId = ProveedorIngresoToAdd.Entity.ProveedorIngresoId;
-
-                    _memoryCache.Set($@"JuanApp2.ProveedorIngreso.ProveedorIngresoId={AddedProveedorIngresoId}", proveedoringreso, _memoryCacheEntryOptions);
-                }
 
                 return result;
             }
@@ -155,11 +130,6 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Repositories
                 _context.ProveedorIngreso.Update(proveedoringreso);
 
                 bool result = _context.SaveChanges() > 0;
-
-                if (result)
-                {
-                    _memoryCache.Set($@"JuanApp2.ProveedorIngreso.ProveedorIngresoId={proveedoringreso.ProveedorIngresoId}", proveedoringreso, _memoryCacheEntryOptions);
-                }
 
                 return result;
             }
@@ -175,11 +145,6 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Repositories
                         .ExecuteDelete();
 
                 bool result = _context.SaveChanges() > 0;
-
-                if (result)
-                {
-                    _memoryCache.Remove($@"JuanApp2.ProveedorIngreso.ProveedorIngresoId={proveedoringresoId}");
-                }
 
                 return result;
             }

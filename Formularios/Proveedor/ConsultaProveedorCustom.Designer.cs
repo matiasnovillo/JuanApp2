@@ -42,6 +42,9 @@
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            PanelColourIngreso = new Panel();
+            label5 = new Label();
+            btnIngresar = new Button();
             PanelColourPagoAProveedores = new Panel();
             label8 = new Label();
             PanelColourCompra = new Panel();
@@ -58,6 +61,7 @@
             btnAgregarCompra = new Button();
             ColorDialogForCompra = new ColorDialog();
             ColorDialogForPagoAProveedores = new ColorDialog();
+            ColorDialogForIngreso = new ColorDialog();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataGridViewCompra).BeginInit();
@@ -191,6 +195,9 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(PanelColourIngreso);
+            pnlFiltersAndSearchBar.Controls.Add(label5);
+            pnlFiltersAndSearchBar.Controls.Add(btnIngresar);
             pnlFiltersAndSearchBar.Controls.Add(PanelColourPagoAProveedores);
             pnlFiltersAndSearchBar.Controls.Add(label8);
             pnlFiltersAndSearchBar.Controls.Add(PanelColourCompra);
@@ -219,10 +226,43 @@
             pnlFiltersAndSearchBar.Size = new Size(1924, 553);
             pnlFiltersAndSearchBar.TabIndex = 17;
             // 
+            // PanelColourIngreso
+            // 
+            PanelColourIngreso.BackColor = Color.Yellow;
+            PanelColourIngreso.Location = new Point(1347, 160);
+            PanelColourIngreso.Name = "PanelColourIngreso";
+            PanelColourIngreso.Size = new Size(193, 31);
+            PanelColourIngreso.TabIndex = 45;
+            PanelColourIngreso.Click += PanelColourIngreso_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.8F);
+            label5.ForeColor = SystemColors.Window;
+            label5.Location = new Point(1347, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(174, 25);
+            label5.TabIndex = 46;
+            label5.Text = "Color para INGRESO";
+            // 
+            // btnIngresar
+            // 
+            btnIngresar.BackColor = Color.Black;
+            btnIngresar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnIngresar.ForeColor = SystemColors.Window;
+            btnIngresar.Location = new Point(1275, 342);
+            btnIngresar.Name = "btnIngresar";
+            btnIngresar.Size = new Size(189, 84);
+            btnIngresar.TabIndex = 44;
+            btnIngresar.Text = "INGRESAR";
+            btnIngresar.UseVisualStyleBackColor = false;
+            btnIngresar.Click += btnIngresar_Click;
+            // 
             // PanelColourPagoAProveedores
             // 
             PanelColourPagoAProveedores.BackColor = Color.IndianRed;
-            PanelColourPagoAProveedores.Location = new Point(1070, 160);
+            PanelColourPagoAProveedores.Location = new Point(1051, 160);
             PanelColourPagoAProveedores.Name = "PanelColourPagoAProveedores";
             PanelColourPagoAProveedores.Size = new Size(290, 31);
             PanelColourPagoAProveedores.TabIndex = 42;
@@ -233,7 +273,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10.8F);
             label8.ForeColor = SystemColors.Window;
-            label8.Location = new Point(1070, 132);
+            label8.Location = new Point(1051, 132);
             label8.Name = "label8";
             label8.Size = new Size(290, 25);
             label8.TabIndex = 43;
@@ -244,7 +284,7 @@
             PanelColourCompra.BackColor = Color.FromArgb(128, 255, 128);
             PanelColourCompra.Location = new Point(871, 160);
             PanelColourCompra.Name = "PanelColourCompra";
-            PanelColourCompra.Size = new Size(193, 31);
+            PanelColourCompra.Size = new Size(174, 31);
             PanelColourCompra.TabIndex = 40;
             PanelColourCompra.MouseClick += PanelColourCobranza_MouseClick;
             // 
@@ -264,7 +304,7 @@
             btnExportarAExcel.BackColor = Color.Black;
             btnExportarAExcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnExportarAExcel.ForeColor = SystemColors.Window;
-            btnExportarAExcel.Location = new Point(1272, 342);
+            btnExportarAExcel.Location = new Point(1048, 342);
             btnExportarAExcel.Name = "btnExportarAExcel";
             btnExportarAExcel.Size = new Size(189, 84);
             btnExportarAExcel.TabIndex = 30;
@@ -415,5 +455,9 @@
         private Label label12;
         private ColorDialog ColorDialogForCompra;
         private ColorDialog ColorDialogForPagoAProveedores;
+        private Button btnIngresar;
+        private Panel PanelColourIngreso;
+        private Label label5;
+        private ColorDialog ColorDialogForIngreso;
     }
 }

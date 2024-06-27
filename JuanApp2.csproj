@@ -55,6 +55,9 @@
     <Compile Update="Formularios\Proveedor\FormularioCompra.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\Proveedor\FormularioProveedorIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\Proveedor\FormularioProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,9 +67,7 @@
     <Compile Update="Formularios\Cobranza\FormularioCobranza.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Formularios\Cobrador\ConsultaCobrador.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Formularios\Cobrador\ConsultaCobrador.cs" />
     <Compile Update="Formularios\Cobrador\FormularioCobrador.cs">
       <SubType>Form</SubType>
     </Compile>
