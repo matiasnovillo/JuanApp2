@@ -1,4 +1,4 @@
-﻿namespace JuanApp2.Formularios.Proveedor
+﻿namespace JuanApp2.Formularios.Gasto
 {
     partial class ConsultaGasto
     {
@@ -34,7 +34,7 @@
             menuItemMain = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             statusLabel = new ToolStripStatusLabel();
-            DataGridViewProveedor = new DataGridView();
+            DataGridViewGasto = new DataGridView();
             lblTitulo = new Label();
             btnBuscar = new Button();
             lblBarraDeBusqueda = new Label();
@@ -43,9 +43,13 @@
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            label3 = new Label();
+            label2 = new Label();
+            DateTimePickerFechaFin = new DateTimePicker();
+            DateTimePickerFechaInicio = new DateTimePicker();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DataGridViewProveedor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewGasto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).BeginInit();
             pnlFiltersAndSearchBar.SuspendLayout();
             SuspendLayout();
@@ -56,7 +60,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1257, 27);
+            toolStrip1.Size = new Size(1924, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -83,7 +87,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 1029);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1257, 26);
+            statusStrip1.Size = new Size(1924, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -93,21 +97,21 @@
             statusLabel.Size = new Size(92, 20);
             statusLabel.Text = "Información:";
             // 
-            // DataGridViewProveedor
+            // DataGridViewGasto
             // 
-            DataGridViewProveedor.AllowUserToAddRows = false;
-            DataGridViewProveedor.AllowUserToDeleteRows = false;
-            DataGridViewProveedor.BackgroundColor = Color.Black;
-            DataGridViewProveedor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DataGridViewProveedor.Dock = DockStyle.Bottom;
-            DataGridViewProveedor.GridColor = Color.FromArgb(41, 48, 57);
-            DataGridViewProveedor.Location = new Point(0, 459);
-            DataGridViewProveedor.Name = "DataGridViewProveedor";
-            DataGridViewProveedor.ReadOnly = true;
-            DataGridViewProveedor.RowHeadersWidth = 51;
-            DataGridViewProveedor.Size = new Size(1257, 570);
-            DataGridViewProveedor.TabIndex = 2;
-            DataGridViewProveedor.CellContentClick += DataGridViewEntrada_CellContentClick;
+            DataGridViewGasto.AllowUserToAddRows = false;
+            DataGridViewGasto.AllowUserToDeleteRows = false;
+            DataGridViewGasto.BackgroundColor = Color.Black;
+            DataGridViewGasto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewGasto.Dock = DockStyle.Bottom;
+            DataGridViewGasto.GridColor = Color.FromArgb(41, 48, 57);
+            DataGridViewGasto.Location = new Point(0, 459);
+            DataGridViewGasto.Name = "DataGridViewGasto";
+            DataGridViewGasto.ReadOnly = true;
+            DataGridViewGasto.RowHeadersWidth = 51;
+            DataGridViewGasto.Size = new Size(1924, 570);
+            DataGridViewGasto.TabIndex = 2;
+            DataGridViewGasto.CellContentClick += DataGridViewEntrada_CellContentClick;
             // 
             // lblTitulo
             // 
@@ -125,7 +129,7 @@
             btnBuscar.BackColor = Color.Black;
             btnBuscar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnBuscar.ForeColor = SystemColors.Window;
-            btnBuscar.Location = new Point(1043, 228);
+            btnBuscar.Location = new Point(1723, 228);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(189, 84);
             btnBuscar.TabIndex = 4;
@@ -140,9 +144,9 @@
             lblBarraDeBusqueda.ForeColor = SystemColors.Window;
             lblBarraDeBusqueda.Location = new Point(12, 251);
             lblBarraDeBusqueda.Name = "lblBarraDeBusqueda";
-            lblBarraDeBusqueda.Size = new Size(428, 23);
+            lblBarraDeBusqueda.Size = new Size(347, 23);
             lblBarraDeBusqueda.TabIndex = 9;
-            lblBarraDeBusqueda.Text = "Barra de búsqueda (Busque por nombre de proveedor)";
+            lblBarraDeBusqueda.Text = "Barra de búsqueda (Busque por descripcion)";
             // 
             // txtBuscar
             // 
@@ -157,7 +161,7 @@
             btnAgregar.BackColor = Color.Black;
             btnAgregar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnAgregar.ForeColor = SystemColors.Window;
-            btnAgregar.Location = new Point(829, 228);
+            btnAgregar.Location = new Point(1509, 228);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(189, 84);
             btnAgregar.TabIndex = 11;
@@ -167,19 +171,19 @@
             // 
             // numericUpDownRegistrosPorPagina
             // 
-            numericUpDownRegistrosPorPagina.Location = new Point(12, 184);
+            numericUpDownRegistrosPorPagina.Location = new Point(1686, 87);
             numericUpDownRegistrosPorPagina.Maximum = new decimal(new int[] { 1410065407, 2, 0, 0 });
             numericUpDownRegistrosPorPagina.Minimum = new decimal(new int[] { 500, 0, 0, 0 });
             numericUpDownRegistrosPorPagina.Name = "numericUpDownRegistrosPorPagina";
             numericUpDownRegistrosPorPagina.Size = new Size(150, 38);
             numericUpDownRegistrosPorPagina.TabIndex = 15;
-            numericUpDownRegistrosPorPagina.Value = new decimal(new int[] { 500, 0, 0, 0 });
+            numericUpDownRegistrosPorPagina.Value = new decimal(new int[] { 2000, 0, 0, 0 });
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(12, 140);
+            label1.Location = new Point(1686, 43);
             label1.Name = "label1";
             label1.Size = new Size(226, 31);
             label1.TabIndex = 16;
@@ -188,6 +192,10 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(label3);
+            pnlFiltersAndSearchBar.Controls.Add(label2);
+            pnlFiltersAndSearchBar.Controls.Add(DateTimePickerFechaFin);
+            pnlFiltersAndSearchBar.Controls.Add(DateTimePickerFechaInicio);
             pnlFiltersAndSearchBar.Controls.Add(lblTitulo);
             pnlFiltersAndSearchBar.Controls.Add(label1);
             pnlFiltersAndSearchBar.Controls.Add(btnBuscar);
@@ -200,16 +208,50 @@
             pnlFiltersAndSearchBar.ForeColor = Color.Goldenrod;
             pnlFiltersAndSearchBar.Location = new Point(0, 27);
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
-            pnlFiltersAndSearchBar.Size = new Size(1257, 432);
+            pnlFiltersAndSearchBar.Size = new Size(1924, 432);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = SystemColors.Window;
+            label3.Location = new Point(442, 141);
+            label3.Name = "label3";
+            label3.Size = new Size(137, 31);
+            label3.TabIndex = 25;
+            label3.Text = "Fecha de fin";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.ForeColor = SystemColors.Window;
+            label2.Location = new Point(12, 141);
+            label2.Name = "label2";
+            label2.Size = new Size(166, 31);
+            label2.TabIndex = 24;
+            label2.Text = "Fecha de inicio";
+            // 
+            // DateTimePickerFechaFin
+            // 
+            DateTimePickerFechaFin.Location = new Point(442, 175);
+            DateTimePickerFechaFin.Name = "DateTimePickerFechaFin";
+            DateTimePickerFechaFin.Size = new Size(363, 38);
+            DateTimePickerFechaFin.TabIndex = 23;
+            // 
+            // DateTimePickerFechaInicio
+            // 
+            DateTimePickerFechaInicio.Location = new Point(12, 175);
+            DateTimePickerFechaInicio.Name = "DateTimePickerFechaInicio";
+            DateTimePickerFechaInicio.Size = new Size(363, 38);
+            DateTimePickerFechaInicio.TabIndex = 22;
             // 
             // ConsultaGasto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1257, 1055);
+            ClientSize = new Size(1924, 1055);
             Controls.Add(pnlFiltersAndSearchBar);
-            Controls.Add(DataGridViewProveedor);
+            Controls.Add(DataGridViewGasto);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -220,7 +262,7 @@
             toolStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)DataGridViewProveedor).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewGasto).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownRegistrosPorPagina).EndInit();
             pnlFiltersAndSearchBar.ResumeLayout(false);
             pnlFiltersAndSearchBar.PerformLayout();
@@ -235,7 +277,7 @@
         private ToolStripMenuItem menuItemMain;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel statusLabel;
-        private DataGridView DataGridViewProveedor;
+        private DataGridView DataGridViewGasto;
         private Label lblTitulo;
         private Button btnBuscar;
         private Label lblBarraDeBusqueda;
@@ -244,5 +286,9 @@
         private NumericUpDown numericUpDownRegistrosPorPagina;
         private Label label1;
         private Panel pnlFiltersAndSearchBar;
+        private Label label3;
+        private Label label2;
+        private DateTimePicker DateTimePickerFechaFin;
+        private DateTimePicker DateTimePickerFechaInicio;
     }
 }

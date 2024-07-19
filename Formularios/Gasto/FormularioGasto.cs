@@ -1,42 +1,41 @@
+using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JuanApp2.Formularios.Proveedor
+namespace JuanApp2.Formularios.Gasto
 {
     public partial class FormularioGasto : Form
     {
-        private readonly IProveedorRepository _proveedorRepository;
-        private readonly int _proveedorId;
+        private readonly IGastoRepository _gastoRepository;
+        private readonly int _gastoId;
 
         public FormularioGasto(IServiceProvider serviceProvider,
-            int proveedorId)
+            int gastoId)
         {
             try
             {
-                _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
+                _gastoRepository = serviceProvider.GetRequiredService<IGastoRepository>();
 
-                _proveedorId = proveedorId;
+                _gastoId = gastoId;
 
                 InitializeComponent();
 
-                if (_proveedorId > 0)
-                {
-                    JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository
-                                                                        .GetByProveedorId(_proveedorId);
+                DateTimePickerFecha.Value = DateTime.Now;
+                txtImporte.Value = 0;
 
-                    txtNombreCompleto.Text = Proveedor.NombreCompleto;
-                    txtCelular.Text = Proveedor.Celular;
-                    txtPaginaWeb.Text = Proveedor.PaginaWeb;
-                    txtDireccion.Text = Proveedor.Direccion;
+                if (_gastoId > 0)
+                {
+                    Areas.JuanApp2.GastoBack.Entities.Gasto Gasto = _gastoRepository
+                                                                        .GetByGastoId(_gastoId);
+
+                    txtDescripcion.Text = Gasto.Descripcion;
+                    txtImporte.Value = Gasto.Importe;
+                    DateTimePickerFecha.Value = Gasto.Fecha;
                 }
 
                 statusLabel.Text = "";
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            catch (Exception) { throw; }
         }
 
         private void menuItemMain_Click(object sender, EventArgs e)
@@ -48,70 +47,48 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (string.IsNullOrEmpty(txtNombreCompleto.Text))
+                if (string.IsNullOrEmpty(txtDescripcion.Text))
                 {
                     statusLabel.Text = "Faltan datos a completar";
                 }
                 else
                 {
-                    if (_proveedorId == 0)
+                    if (_gastoId == 0)
                     {
                         //Agregar
-                        JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorTest = _proveedorRepository
-                            .AsQueryable()
-                            .Where(x => x.NombreCompleto == txtNombreCompleto.Text)
-                            .FirstOrDefault();
-
-                        if (ProveedorTest == null)
+                        Areas.JuanApp2.GastoBack.Entities.Gasto Gasto = new()
                         {
-                            JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = new()
-                            {
-                                ProveedorId = 0,
-                                Active = true,
-                                UserCreationId = 1,
-                                UserLastModificationId = 1,
-                                DateTimeCreation = DateTime.Now,
-                                DateTimeLastModification = DateTime.Now,
-                                NombreCompleto = txtNombreCompleto.Text,
-                                Celular = txtCelular.Text,
-                                Direccion = txtDireccion.Text,
-                                PaginaWeb = txtPaginaWeb.Text
-                            };
-                            _proveedorRepository.Add(Proveedor);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Este proveedor ya existe. No se guardará como nuevo",
-                                "Atención",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                        }
-
+                            GastoId = 0,
+                            Active = true,
+                            UserCreationId = 1,
+                            UserLastModificationId = 1,
+                            DateTimeCreation = DateTime.Now,
+                            DateTimeLastModification = DateTime.Now,
+                            Descripcion = txtDescripcion.Text,
+                            Fecha = DateTimePickerFecha.Value,
+                            Importe = txtImporte.Value
+                        };
+                        _gastoRepository.Add(Gasto);
                     }
                     else
                     {
                         //Actualizar
-                        JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor Proveedor = _proveedorRepository
-                            .GetByProveedorId(_proveedorId);
+                        Areas.JuanApp2.GastoBack.Entities.Gasto Gasto = _gastoRepository
+                            .GetByGastoId(_gastoId);
 
-                        Proveedor.NombreCompleto = txtNombreCompleto.Text;
-                        Proveedor.Celular = txtCelular.Text;
-                        Proveedor.PaginaWeb = txtPaginaWeb.Text;
-                        Proveedor.Direccion = txtDireccion.Text;
-                        Proveedor.UserLastModificationId = 1;
-                        Proveedor.DateTimeLastModification = DateTime.Now;
+                        Gasto.Descripcion = txtDescripcion.Text;
+                        Gasto.Fecha = DateTimePickerFecha.Value;
+                        Gasto.Importe = txtImporte.Value;
+                        Gasto.UserLastModificationId = 1;
+                        Gasto.DateTimeLastModification = DateTime.Now;
 
-                        _proveedorRepository.Update(Proveedor);
+                        _gastoRepository.Update(Gasto);
                     }
 
                     Hide();
                 }
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            catch (Exception) { throw; }
         }
     }
 }

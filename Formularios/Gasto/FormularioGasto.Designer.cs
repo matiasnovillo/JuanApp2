@@ -1,4 +1,4 @@
-﻿namespace JuanApp2.Formularios.Proveedor
+﻿namespace JuanApp2.Formularios.Gasto
 {
     partial class FormularioGasto
     {
@@ -38,15 +38,14 @@
             btnGuardar = new Button();
             label1 = new Label();
             label2 = new Label();
-            txtNombreCompleto = new TextBox();
-            txtCelular = new TextBox();
+            txtDescripcion = new TextBox();
+            DateTimePickerFecha = new DateTimePicker();
             label3 = new Label();
-            txtPaginaWeb = new TextBox();
+            txtImporte = new NumericUpDown();
             label4 = new Label();
-            txtDireccion = new TextBox();
-            label5 = new Label();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtImporte).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -66,7 +65,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { statusLabel });
             statusStrip1.Location = new Point(0, 542);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(821, 26);
+            statusStrip1.Size = new Size(620, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -84,7 +83,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { dropDownButton });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(821, 27);
+            toolStrip1.Size = new Size(620, 27);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -110,7 +109,7 @@
             btnGuardar.BackColor = Color.Black;
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = SystemColors.Window;
-            btnGuardar.Location = new Point(629, 450);
+            btnGuardar.Location = new Point(424, 450);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 78);
             btnGuardar.TabIndex = 11;
@@ -134,92 +133,69 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 157);
+            label2.Location = new Point(44, 253);
             label2.Name = "label2";
-            label2.Size = new Size(187, 28);
+            label2.Size = new Size(127, 28);
             label2.TabIndex = 25;
-            label2.Text = "Nombre completo *";
+            label2.Text = "Descripcion *";
             // 
-            // txtNombreCompleto
+            // txtDescripcion
             // 
-            txtNombreCompleto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNombreCompleto.Location = new Point(29, 188);
-            txtNombreCompleto.Name = "txtNombreCompleto";
-            txtNombreCompleto.Size = new Size(295, 34);
-            txtNombreCompleto.TabIndex = 26;
+            txtDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcion.Location = new Point(44, 284);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(295, 34);
+            txtDescripcion.TabIndex = 26;
             // 
-            // txtCelular
+            // DateTimePickerFecha
             // 
-            txtCelular.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCelular.Location = new Point(29, 280);
-            txtCelular.Name = "txtCelular";
-            txtCelular.Size = new Size(295, 34);
-            txtCelular.TabIndex = 28;
+            DateTimePickerFecha.Font = new Font("Segoe UI", 12F);
+            DateTimePickerFecha.Location = new Point(44, 183);
+            DateTimePickerFecha.Name = "DateTimePickerFecha";
+            DateTimePickerFecha.Size = new Size(295, 34);
+            DateTimePickerFecha.TabIndex = 27;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(29, 249);
+            label3.Location = new Point(44, 152);
             label3.Name = "label3";
-            label3.Size = new Size(72, 28);
-            label3.TabIndex = 27;
-            label3.Text = "Celular";
+            label3.Size = new Size(75, 28);
+            label3.TabIndex = 28;
+            label3.Text = "Fecha *";
             // 
-            // txtPaginaWeb
+            // txtImporte
             // 
-            txtPaginaWeb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPaginaWeb.Location = new Point(29, 374);
-            txtPaginaWeb.Name = "txtPaginaWeb";
-            txtPaginaWeb.Size = new Size(295, 34);
-            txtPaginaWeb.TabIndex = 30;
+            txtImporte.Font = new Font("Segoe UI", 12F);
+            txtImporte.Location = new Point(44, 388);
+            txtImporte.Name = "txtImporte";
+            txtImporte.Size = new Size(295, 34);
+            txtImporte.TabIndex = 29;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(29, 343);
+            label4.Location = new Point(44, 357);
             label4.Name = "label4";
-            label4.Size = new Size(111, 28);
-            label4.TabIndex = 29;
-            label4.Text = "Pagina web";
-            // 
-            // txtDireccion
-            // 
-            txtDireccion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDireccion.Location = new Point(399, 188);
-            txtDireccion.Multiline = true;
-            txtDireccion.Name = "txtDireccion";
-            txtDireccion.ScrollBars = ScrollBars.Vertical;
-            txtDireccion.Size = new Size(295, 220);
-            txtDireccion.TabIndex = 32;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(399, 157);
-            label5.Name = "label5";
-            label5.Size = new Size(94, 28);
-            label5.TabIndex = 31;
-            label5.Text = "Direccion";
+            label4.Size = new Size(95, 28);
+            label4.TabIndex = 30;
+            label4.Text = "Importe *";
             // 
             // FormularioGasto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(821, 568);
-            Controls.Add(txtDireccion);
-            Controls.Add(label5);
-            Controls.Add(txtPaginaWeb);
+            ClientSize = new Size(620, 568);
             Controls.Add(label4);
-            Controls.Add(txtCelular);
+            Controls.Add(txtImporte);
             Controls.Add(label3);
-            Controls.Add(txtNombreCompleto);
+            Controls.Add(DateTimePickerFecha);
+            Controls.Add(txtDescripcion);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnGuardar);
@@ -235,6 +211,7 @@
             statusStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)txtImporte).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -250,12 +227,10 @@
         private ToolStripMenuItem menuItemMain;
         private Label label1;
         private Label label2;
-        private TextBox txtNombreCompleto;
-        private TextBox txtCelular;
+        private TextBox txtDescripcion;
+        private DateTimePicker DateTimePickerFecha;
         private Label label3;
-        private TextBox txtPaginaWeb;
+        private NumericUpDown txtImporte;
         private Label label4;
-        private TextBox txtDireccion;
-        private Label label5;
     }
 }

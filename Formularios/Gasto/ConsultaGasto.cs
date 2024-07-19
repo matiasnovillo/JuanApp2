@@ -1,12 +1,13 @@
-﻿using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
+﻿using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
 
-namespace JuanApp2.Formularios.Proveedor
+namespace JuanApp2.Formularios.Gasto
 {
     public partial class ConsultaGasto : Form
     {
-        private readonly IProveedorRepository _proveedorRepository;
+        private readonly IGastoRepository _gastoRepository;
         private readonly ServiceProvider _serviceProvider;
 
         public ConsultaGasto(ServiceProvider serviceProvider)
@@ -15,42 +16,47 @@ namespace JuanApp2.Formularios.Proveedor
             {
                 _serviceProvider = serviceProvider;
 
-                _proveedorRepository = serviceProvider.GetRequiredService<IProveedorRepository>();
+                _gastoRepository = serviceProvider.GetRequiredService<IGastoRepository>();
 
                 InitializeComponent();
 
                 DataGridViewTextBoxColumn col0 = new();
-                col0.DataPropertyName = "ProveedorId";
+                col0.DataPropertyName = "GastoId";
                 col0.HeaderText = "ID del sistema";
-                DataGridViewProveedor.Columns.Add(col0);
+                DataGridViewGasto.Columns.Add(col0);
 
                 DataGridViewTextBoxColumn col1 = new();
-                col1.DataPropertyName = "NombreCompleto";
-                col1.HeaderText = "Nombre completo";
-                DataGridViewProveedor.Columns.Add(col1);
+                col1.DataPropertyName = "Fecha";
+                col1.HeaderText = "Fecha";
+                DataGridViewGasto.Columns.Add(col1);
 
                 DataGridViewTextBoxColumn col2 = new();
-                col2.DataPropertyName = "Celular";
-                col2.HeaderText = "Celular";
-                DataGridViewProveedor.Columns.Add(col2);
+                col2.DataPropertyName = "Descripcion";
+                col2.HeaderText = "Descripcion";
+                DataGridViewGasto.Columns.Add(col2);
+
+                DataGridViewTextBoxColumn col3 = new();
+                col3.DataPropertyName = "Importe";
+                col3.HeaderText = "Importe";
+                DataGridViewGasto.Columns.Add(col3);
 
                 DataGridViewButtonColumn colActualizar = new();
                 colActualizar.HeaderText = "Actualizar";
                 colActualizar.Text = "Actualizar";
                 colActualizar.UseColumnTextForButtonValue = true;
-                DataGridViewProveedor.Columns.Add(colActualizar);
+                DataGridViewGasto.Columns.Add(colActualizar);
 
                 DataGridViewButtonColumn colBorrar = new();
                 colBorrar.HeaderText = "Borrar";
                 colBorrar.Text = "Borrar";
                 colBorrar.UseColumnTextForButtonValue = true;
-                DataGridViewProveedor.Columns.Add(colBorrar);
+                DataGridViewGasto.Columns.Add(colBorrar);
 
                 WindowState = FormWindowState.Maximized;
 
-                DataGridViewProveedor.AutoGenerateColumns = false;
+                DataGridViewGasto.AutoGenerateColumns = false;
 
-                numericUpDownRegistrosPorPagina.Value = 500;
+                numericUpDownRegistrosPorPagina.Value = 2000;
 
                 GetTabla();
             }
@@ -82,19 +88,19 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                if (e.ColumnIndex == 3)
+                if (e.ColumnIndex == 4)
                 {
                     //Actualizar
-                    int ProveedorId = Convert.ToInt32(DataGridViewProveedor.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    int GastoId = Convert.ToInt32(DataGridViewGasto.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                    FormularioGasto FormularioProveedor = new(_serviceProvider,
-                    ProveedorId);
+                    FormularioGasto FormularioGasto = new(_serviceProvider,
+                    GastoId);
 
-                    FormularioProveedor.ShowDialog();
+                    FormularioGasto.ShowDialog();
 
                     GetTabla();
                 }
-                else if (e.ColumnIndex == 4)
+                else if (e.ColumnIndex == 5)
                 {
                     //Borrar
                     DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar este registro?",
@@ -104,9 +110,9 @@ namespace JuanApp2.Formularios.Proveedor
 
                     if (result == DialogResult.Yes)
                     {
-                        int ProveedorId = Convert.ToInt32(DataGridViewProveedor.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        int GastoId = Convert.ToInt32(DataGridViewGasto.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                        _proveedorRepository.DeleteByProveedorId(ProveedorId);
+                        _gastoRepository.DeleteByGastoId(GastoId);
 
                         GetTabla();
                     }
@@ -123,13 +129,13 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                List<JuanApp2.Areas.JuanApp2.ProveedorBack.Entities.Proveedor> lstProveedor = [];
+                List<Areas.JuanApp2.GastoBack.Entities.Gasto> lstGasto = [];
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
-                    lstProveedor = _proveedorRepository
+                    lstGasto = _gastoRepository
                     .AsQueryable()
-                    .OrderBy(x => x.NombreCompleto)
+                    .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
@@ -140,17 +146,17 @@ namespace JuanApp2.Formularios.Proveedor
                         .Trim(), @"\s+", " ")
                         .Split(" ");
 
-                    lstProveedor = _proveedorRepository
+                    lstGasto = _gastoRepository
                     .AsQueryable()
-                    .Where(x => words.All(word => x.NombreCompleto.Contains(word)))
-                    .OrderBy(x => x.NombreCompleto)
+                    .Where(x => words.All(word => x.Descripcion.Contains(word)))
+                    .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
 
-                DataGridViewProveedor.DataSource = lstProveedor;
+                DataGridViewGasto.DataSource = lstGasto;
 
-                statusLabel.Text = $@"Información: Cantidad de proveedores listados: {lstProveedor.Count}";
+                statusLabel.Text = $@"Información: Cantidad de gastos listados: {lstGasto.Count}";
             }
             catch (Exception)
             {
