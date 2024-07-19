@@ -22,6 +22,8 @@ using JuanApp2.Areas.JuanApp2.NotaBack.Entities;
 using JuanApp2.Areas.JuanApp2.NotaBack.EntitiesConfiguration;
 using JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.Entities;
 using JuanApp2.Areas.JuanApp2.ProveedorIngresoBack.EntitiesConfiguration;
+using JuanApp2.Areas.JuanApp2.GastoBack.Entities;
+using JuanApp2.Areas.JuanApp2.GastoBack.EntitiesConfiguration;
 
 namespace JuanApp2.DatabaseContexts
 {
@@ -42,6 +44,7 @@ namespace JuanApp2.DatabaseContexts
         public DbSet<ModuloProveedor> ModuloProveedor { get; set; }
         public DbSet<TipoDeMovimiento> TipoDeMovimiento { get; set; }
         public DbSet<Nota> Nota { get; set; }
+        public DbSet<Gasto> Gasto { get; set; }
 
         public JuanApp2Context(IConfiguration configuration)
         {
@@ -107,6 +110,8 @@ namespace JuanApp2.DatabaseContexts
                 modelBuilder.Entity<TipoDeMovimiento>().ToTable("JuanApp2.TipoDeMovimiento");
                 modelBuilder.ApplyConfiguration(new NotaConfiguration());
                 modelBuilder.Entity<Nota>().ToTable("JuanApp2.Nota");
+                modelBuilder.ApplyConfiguration(new GastoConfiguration());
+                modelBuilder.Entity<Gasto>().ToTable("JuanApp2.Gasto");
             }
             catch (Exception) { throw; }
         }

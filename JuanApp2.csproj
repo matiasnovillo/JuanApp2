@@ -46,6 +46,12 @@
     <Compile Update="Formularios\FichaDeMovimientoDeCaja\FormularioModuloVario.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\Gasto\ConsultaGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\Gasto\FormularioGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\Proveedor\ConsultaProveedor.cs">
       <SubType>Form</SubType>
     </Compile>

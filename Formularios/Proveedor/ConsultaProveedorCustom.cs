@@ -118,14 +118,20 @@ namespace JuanApp2.Formularios.Proveedor
                 DataGridViewCompra.AutoGenerateColumns = false;
                 DataGridViewCompra.DefaultCellStyle.Font = new Font("Arial", 11);
 
-                numericUpDownRegistrosPorPagina.Value = 500;
+                numericUpDownRegistrosPorPagina.Value = 2000;
 
-                DateTime now = DateTime.Now;
-                DateTime NowIn030DaysBefore = new(now.Year, now.Month, now.Day, 0, 0, 0);
-                DateTime NowIn2359 = new(now.Year, now.Month, now.Day, 23, 59, 59);
+                //DateTimePickers
+                DateTime Today = DateTime.Today;
+                Today = new(Today.Year, Today.Month, Today.Day, 0, 0, 0);
 
-                DateTimePickerFechaInicio.Value = NowIn030DaysBefore.AddDays(-30);
-                DateTimePickerFechaFin.Value = NowIn2359;
+                DateTime TodayToFin = new(Today.Year, Today.Month, Today.Day, 23, 59, 59);
+
+                // Calcular el lunes y domingo de la semana actual
+                DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
+                DateTime Sunday = Monday.AddDays(6);
+
+                DateTimePickerFechaInicio.Value = Today.AddMonths(-2);
+                DateTimePickerFechaFin.Value = Sunday;
 
                 _lstProveedor = _proveedorRepository.GetAll();
 

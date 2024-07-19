@@ -4,6 +4,8 @@ using JuanApp2.Areas.JuanApp2.CobranzaBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CobranzaBack.Repositories;
 using JuanApp2.Areas.JuanApp2.CompraBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.CompraBack.Repositories;
+using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.GastoBack.Repositories;
 using JuanApp2.Areas.JuanApp2.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Repositories;
@@ -61,6 +63,7 @@ namespace JuanApp
             services.AddScoped<ITipoDeMovimientoRepository, TipoDeMovimientoRepository>();
             services.AddScoped<INotaRepository, NotaRepository>();
             services.AddScoped<IProveedorIngresoRepository, ProveedorIngresoRepository>();
+            services.AddScoped<IGastoRepository, GastoRepository>();
 
             var serviceProvider = services.BuildServiceProvider();
 

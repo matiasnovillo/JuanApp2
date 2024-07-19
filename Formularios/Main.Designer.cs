@@ -43,6 +43,7 @@
             btnCobranza = new Button();
             btnCaja = new Button();
             pictureBox1 = new PictureBox();
+            btnGastos = new Button();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -98,6 +99,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
+            panel1.Controls.Add(btnGastos);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnProveedorMain);
             panel1.Controls.Add(btnCobradores);
@@ -204,7 +206,7 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = JuanApp2.Properties.Resources.LogoDark;
+            pictureBox1.Image = Properties.Resources.LogoDark;
             pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
             pictureBox1.Location = new Point(69, 54);
             pictureBox1.Name = "pictureBox1";
@@ -212,6 +214,19 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
+            // 
+            // btnGastos
+            // 
+            btnGastos.BackColor = Color.Black;
+            btnGastos.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnGastos.ForeColor = SystemColors.Window;
+            btnGastos.Location = new Point(819, 307);
+            btnGastos.Name = "btnGastos";
+            btnGastos.Size = new Size(203, 148);
+            btnGastos.TabIndex = 15;
+            btnGastos.Text = "GASTOS";
+            btnGastos.UseVisualStyleBackColor = false;
+            btnGastos.Click += btnGastos_Click;
             // 
             // Main
             // 
@@ -251,5 +266,6 @@
         private Button btnCobradores;
         private Button btnProveedorMain;
         private Label label1;
+        private Button btnGastos;
     }
 }

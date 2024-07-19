@@ -4,6 +4,9 @@
     <Compile Update="Formularios\AcercaDe.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\Cobrador\ConsultaCobrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\FichaDeMovimientoDeCaja\ConsultaFichaDeMovimientoDeCaja.cs">
       <SubType>Form</SubType>
     </Compile>

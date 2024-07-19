@@ -110,16 +110,16 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 DateTime Today = DateTime.Today;
                 Today = new(Today.Year, Today.Month, Today.Day, 0, 0, 0);
 
-                // Calcular el lunes de la semana actual
-                DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
+                DateTime TodayToFin = new(Today.Year, Today.Month, Today.Day, 23, 59, 59);
 
-                // Calcular el domingo de la semana actual
+                // Calcular el lunes y domingo de la semana actual
+                DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
                 DateTime Sunday = Monday.AddDays(6);
 
-                DateTimePickerFechaInicio.Value = Monday;
+                DateTimePickerFechaInicio.Value = Today.AddMonths(-2);
                 DateTimePickerFechaFin.Value = Sunday;
 
-                txtRegistrosPorPagina.Value = 500;
+                txtRegistrosPorPagina.Value = 2000;
 
                 _lstTipoDeMovimiento = _tipodemovimientoRepository.GetAll();
 
