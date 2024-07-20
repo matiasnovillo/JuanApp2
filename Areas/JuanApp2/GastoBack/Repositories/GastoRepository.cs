@@ -6,6 +6,7 @@ using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
 using JuanApp2.DatabaseContexts;
 using System.Text.RegularExpressions;
 using System.Data;
+using DocumentFormat.OpenXml.Bibliography;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -23,19 +24,10 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
     public class GastoRepository : IGastoRepository
     {
         protected readonly JuanApp2Context _context;
-        private readonly IMemoryCache _memoryCache;
-        private readonly MemoryCacheEntryOptions _memoryCacheEntryOptions;
 
-        public GastoRepository(JuanApp2Context context, IMemoryCache memoryCache)
+        public GastoRepository(JuanApp2Context context)
         {
             _context = context;
-            _memoryCache = memoryCache;
-
-            _memoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-                SlidingExpiration = TimeSpan.FromMinutes(2)
-            };
         }
 
         public IQueryable<Gasto> AsQueryable()
@@ -61,19 +53,9 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
         {
             try
             {
-                //Look in cache first
-                if (!_memoryCache.TryGetValue($@"JuanApp2.Gasto.GastoId={gastoId}", out Gasto? gasto))
-                {
-                    //If not exist in cache, look in DB
-                    gasto = _context.Gasto
+                Gasto Gasto = _context.Gasto
                                 .FirstOrDefault(x => x.GastoId == gastoId);
-                    
-                    if (gasto != null)
-                    {
-                        _memoryCache.Set(gastoId, gasto, _memoryCacheEntryOptions);
-                    }
-                }
-                return gasto;
+                return Gasto;
             }
             catch (Exception) { throw; }
         }
@@ -83,24 +65,6 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
             try
             {
                 return _context.Gasto.ToList();
-            }
-            catch (Exception) { throw; }
-        }
-
-        public List<Gasto> GetAllByGastoIdForModal(string textToSearch)
-        {
-            try
-            {
-                var query = from gasto in _context.Gasto
-                            select new { Gasto = gasto };
-
-                // Extraemos los resultados en listas separadas
-                List<Gasto> lstGasto = query.Select(result => result.Gasto)
-                        .Where(x => x.GastoId.ToString().Contains(textToSearch))
-                        .OrderByDescending(p => p.DateTimeLastModification)
-                        .ToList();
-
-                return lstGasto;
             }
             catch (Exception) { throw; }
         }
@@ -136,13 +100,6 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
 
                 bool result = _context.SaveChanges() > 0;
 
-                if (result)
-                {
-                    int AddedGastoId = GastoToAdd.Entity.GastoId;
-
-                    _memoryCache.Set($@"JuanApp2.Gasto.GastoId={AddedGastoId}", gasto, _memoryCacheEntryOptions);
-                }
-
                 return result;
             }
             catch (Exception) { throw; }
@@ -155,11 +112,6 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
                 _context.Gasto.Update(gasto);
 
                 bool result = _context.SaveChanges() > 0;
-
-                if (result)
-                {
-                    _memoryCache.Set($@"JuanApp2.Gasto.GastoId={gasto.GastoId}", gasto, _memoryCacheEntryOptions);
-                }
 
                 return result;
             }
@@ -175,11 +127,6 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Repositories
                         .ExecuteDelete();
 
                 bool result = _context.SaveChanges() > 0;
-
-                if (result)
-                {
-                    _memoryCache.Remove($@"JuanApp2.Gasto.GastoId={gastoId}");
-                }
 
                 return result;
             }

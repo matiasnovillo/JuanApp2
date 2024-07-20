@@ -86,7 +86,7 @@ namespace JuanApp2.Formularios
 
         private void btnProveedorMain_Click(object sender, EventArgs e)
         {
-            Proveedor.ConsultaGasto ConsultaProveedorMain = new(_serviceProvider);
+            Proveedor.ConsultaProveedor ConsultaProveedorMain = new(_serviceProvider);
 
             ConsultaProveedorMain.ShowDialog();
         }
@@ -100,7 +100,9 @@ namespace JuanApp2.Formularios
 
         private void btnGastos_Click(object sender, EventArgs e)
         {
+            Gasto.ConsultaGasto ConsultaGasto = new(_serviceProvider);
 
+            ConsultaGasto.ShowDialog();
         }
     }
 }

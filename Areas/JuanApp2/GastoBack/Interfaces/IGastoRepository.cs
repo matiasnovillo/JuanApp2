@@ -26,8 +26,6 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Interfaces
         List<Gasto?> GetAll();
 
         List<Gasto?> GetAllByGastoId(List<int> lstGastoChecked);
-
-        List<Gasto> GetAllByGastoIdForModal(string textToSearch);
         #endregion
 
         #region Non-Queries

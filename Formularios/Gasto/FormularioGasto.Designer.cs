@@ -170,6 +170,7 @@
             // 
             txtImporte.Font = new Font("Segoe UI", 12F);
             txtImporte.Location = new Point(44, 388);
+            txtImporte.Maximum = new decimal(new int[] { 1874919423, 2328306, 0, 0 });
             txtImporte.Name = "txtImporte";
             txtImporte.Size = new Size(295, 34);
             txtImporte.TabIndex = 29;

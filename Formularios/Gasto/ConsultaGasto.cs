@@ -1,4 +1,10 @@
-﻿using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using JuanApp2.Areas.JuanApp2.DTOs;
+using JuanApp2.Areas.JuanApp2.GastoBack.Entities;
+using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities;
+using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.ProveedorBack.DTOs;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
@@ -8,6 +14,7 @@ namespace JuanApp2.Formularios.Gasto
     public partial class ConsultaGasto : Form
     {
         private readonly IGastoRepository _gastoRepository;
+        private readonly IModuloGastoRepository _modulogastoRepository;
         private readonly ServiceProvider _serviceProvider;
 
         public ConsultaGasto(ServiceProvider serviceProvider)
@@ -17,6 +24,7 @@ namespace JuanApp2.Formularios.Gasto
                 _serviceProvider = serviceProvider;
 
                 _gastoRepository = serviceProvider.GetRequiredService<IGastoRepository>();
+                _modulogastoRepository = serviceProvider.GetRequiredService<IModuloGastoRepository>();
 
                 InitializeComponent();
 
@@ -24,6 +32,11 @@ namespace JuanApp2.Formularios.Gasto
                 col0.DataPropertyName = "GastoId";
                 col0.HeaderText = "ID del sistema";
                 DataGridViewGasto.Columns.Add(col0);
+
+                DataGridViewTextBoxColumn col4 = new();
+                col4.DataPropertyName = "Referencia";
+                col4.HeaderText = "Referencia";
+                DataGridViewGasto.Columns.Add(col4);
 
                 DataGridViewTextBoxColumn col1 = new();
                 col1.DataPropertyName = "Fecha";
@@ -58,6 +71,19 @@ namespace JuanApp2.Formularios.Gasto
 
                 numericUpDownRegistrosPorPagina.Value = 2000;
 
+                //DateTimePickers
+                DateTime Today = DateTime.Today;
+                Today = new(Today.Year, Today.Month, Today.Day, 0, 0, 0);
+
+                DateTime TodayToFin = new(Today.Year, Today.Month, Today.Day, 23, 59, 59);
+
+                // Calcular el lunes y domingo de la semana actual
+                DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
+                DateTime Sunday = Monday.AddDays(6);
+
+                DateTimePickerFechaInicio.Value = Today.AddMonths(-2);
+                DateTimePickerFechaFin.Value = Sunday;
+
                 GetTabla();
             }
             catch (Exception)
@@ -88,19 +114,28 @@ namespace JuanApp2.Formularios.Gasto
         {
             try
             {
-                if (e.ColumnIndex == 4)
+                string Referencia = DataGridViewGasto.Rows[e.RowIndex].Cells[1].Value.ToString();
+                int GastoId = Convert.ToInt32(DataGridViewGasto.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                if (e.ColumnIndex == 5)
                 {
                     //Actualizar
-                    int GastoId = Convert.ToInt32(DataGridViewGasto.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    if (Referencia == "")
+                    {
+                        FormularioGasto FormularioGasto = new(_serviceProvider, GastoId);
 
-                    FormularioGasto FormularioGasto = new(_serviceProvider,
-                    GastoId);
+                        FormularioGasto.ShowDialog();
+                    }
+                    else
+                    {
+                        FichaDeMovimientoDeCaja.FormularioModuloGasto FormularioModuloGasto = new(_serviceProvider, GastoId);
 
-                    FormularioGasto.ShowDialog();
+                        FormularioModuloGasto.ShowDialog();
+                    }
 
                     GetTabla();
                 }
-                else if (e.ColumnIndex == 5)
+                else if (e.ColumnIndex == 6)
                 {
                     //Borrar
                     DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar este registro?",
@@ -110,9 +145,14 @@ namespace JuanApp2.Formularios.Gasto
 
                     if (result == DialogResult.Yes)
                     {
-                        int GastoId = Convert.ToInt32(DataGridViewGasto.Rows[e.RowIndex].Cells[0].Value.ToString());
-
-                        _gastoRepository.DeleteByGastoId(GastoId);
+                        if (Referencia == "")
+                        {
+                            _gastoRepository.DeleteByGastoId(GastoId);
+                        }
+                        else
+                        {
+                            _modulogastoRepository.DeleteByModuloGastoId(GastoId);
+                        }
 
                         GetTabla();
                     }
@@ -129,12 +169,17 @@ namespace JuanApp2.Formularios.Gasto
         {
             try
             {
+                List<gastoDTO> lstgastoDTO = [];
+
+                #region Gasto (modulo)
                 List<Areas.JuanApp2.GastoBack.Entities.Gasto> lstGasto = [];
 
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
                     lstGasto = _gastoRepository
                     .AsQueryable()
+                    .Where(x => x.Fecha >= DateTimePickerFechaInicio.Value &&
+                    x.Fecha <= DateTimePickerFechaFin.Value)
                     .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
@@ -148,13 +193,91 @@ namespace JuanApp2.Formularios.Gasto
 
                     lstGasto = _gastoRepository
                     .AsQueryable()
+                    .Where(x => x.Fecha >= DateTimePickerFechaInicio.Value &&
+                    x.Fecha <= DateTimePickerFechaFin.Value)
                     .Where(x => words.All(word => x.Descripcion.Contains(word)))
                     .OrderBy(x => x.Fecha)
                     .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
                     .ToList();
                 }
 
-                DataGridViewGasto.DataSource = lstGasto;
+                foreach (Areas.JuanApp2.GastoBack.Entities.Gasto gasto in lstGasto)
+                {
+                    gastoDTO gastoDTO = new gastoDTO()
+                    {
+                        ID = gasto.GastoId,
+                        Descripcion = gasto.Descripcion,
+                        Fecha = gasto.Fecha,
+                        Importe = gasto.Importe,
+                        Referencia = ""
+                    };
+
+                    lstgastoDTO.Add(gastoDTO);
+                }
+                #endregion
+
+                #region Gastos (ModuloGasto)
+                List<ModuloGasto> lstModuloGasto = [];
+
+                if (string.IsNullOrEmpty(txtBuscar.Text))
+                {
+                    lstModuloGasto = _modulogastoRepository
+                        .AsQueryable()
+                        .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                        x.Fecha >= DateTimePickerFechaInicio.Value)
+                        .OrderBy(x => x.DateTimeLastModification)
+                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .ToList();
+                }
+                else
+                {
+                    string[] words = Regex
+                       .Replace(txtBuscar.Text
+                       .Trim(), @"\s+", " ")
+                       .Split(" ");
+
+                    lstModuloGasto = _modulogastoRepository
+                        .AsQueryable()
+                        .Where(x => words.Any(word => x.Descripcion.Contains(word)))
+                        .Where(x => x.Fecha <= DateTimePickerFechaFin.Value &&
+                        x.Fecha >= DateTimePickerFechaInicio.Value)
+                        .OrderBy(x => x.DateTimeLastModification)
+                        .Take(Convert.ToInt32(numericUpDownRegistrosPorPagina.Value))
+                        .ToList();
+                }
+
+                foreach (ModuloGasto modulogasto in lstModuloGasto)
+                {
+                    gastoDTO gastoDTO = new gastoDTO()
+                    {
+                        ID = modulogasto.ModuloGastoId,
+                        Descripcion = modulogasto.Descripcion,
+                        Fecha = modulogasto.Fecha,
+                        Importe = modulogasto.DineroTotal,
+                        Referencia = "Ficha de caja"
+                    };
+
+                    lstgastoDTO.Add(gastoDTO);
+                }
+                #endregion
+
+                lstgastoDTO = lstgastoDTO
+                    .AsQueryable()
+                    .OrderBy(x => x.Fecha)
+                    .ToList();
+
+                DataGridViewGasto.Rows.Clear();
+
+                foreach (gastoDTO gasto in lstgastoDTO)
+                {
+                    DataGridViewGasto.Rows.Add(gasto.ID.ToString(),
+                            gasto.Referencia,
+                            gasto.Fecha.ToString("dd/MM/yyyy HH:mm"),
+                            gasto.Descripcion,
+                            $@"${gasto.Importe.ToString("N2")}",
+                            "",
+                            "");
+                }
 
                 statusLabel.Text = $@"Información: Cantidad de gastos listados: {lstGasto.Count}";
             }
