@@ -2,11 +2,13 @@
 using JuanApp2.Areas.JuanApp2.DTOs;
 using JuanApp2.Areas.JuanApp2.GastoBack.Entities;
 using JuanApp2.Areas.JuanApp2.GastoBack.Interfaces;
+using JuanApp2.Areas.JuanApp2.GastoBack.Services;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Entities;
 using JuanApp2.Areas.JuanApp2.ModuloGastoBack.Interfaces;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.DTOs;
 using JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System.Data;
 using System.Text.RegularExpressions;
 
 namespace JuanApp2.Formularios.Gasto
@@ -14,6 +16,7 @@ namespace JuanApp2.Formularios.Gasto
     public partial class ConsultaGasto : Form
     {
         private readonly IGastoRepository _gastoRepository;
+        private readonly IGastoService _gastoService;
         private readonly IModuloGastoRepository _modulogastoRepository;
         private readonly ServiceProvider _serviceProvider;
 
@@ -24,6 +27,7 @@ namespace JuanApp2.Formularios.Gasto
                 _serviceProvider = serviceProvider;
 
                 _gastoRepository = serviceProvider.GetRequiredService<IGastoRepository>();
+                _gastoService = serviceProvider.GetRequiredService<IGastoService>();
                 _modulogastoRepository = serviceProvider.GetRequiredService<IModuloGastoRepository>();
 
                 InitializeComponent();
@@ -52,6 +56,11 @@ namespace JuanApp2.Formularios.Gasto
                 col3.DataPropertyName = "Importe";
                 col3.HeaderText = "Importe";
                 DataGridViewGasto.Columns.Add(col3);
+
+                DataGridViewTextBoxColumn col5 = new();
+                col5.DataPropertyName = "Saldo";
+                col5.HeaderText = "Saldo negativo";
+                DataGridViewGasto.Columns.Add(col5);
 
                 DataGridViewButtonColumn colActualizar = new();
                 colActualizar.HeaderText = "Actualizar";
@@ -165,7 +174,7 @@ namespace JuanApp2.Formularios.Gasto
             }
         }
 
-        private void GetTabla()
+        private List<gastoDTO> GetTabla()
         {
             try
             {
@@ -268,24 +277,39 @@ namespace JuanApp2.Formularios.Gasto
 
                 DataGridViewGasto.Rows.Clear();
 
+                decimal Saldo = 0;
+
                 foreach (gastoDTO gasto in lstgastoDTO)
                 {
+                    Saldo += gasto.Importe;
+
                     DataGridViewGasto.Rows.Add(gasto.ID.ToString(),
                             gasto.Referencia,
                             gasto.Fecha.ToString("dd/MM/yyyy HH:mm"),
                             gasto.Descripcion,
                             $@"${gasto.Importe.ToString("N2")}",
+                            $@"${Saldo.ToString("N2")}",
                             "",
                             "");
                 }
 
                 statusLabel.Text = $@"Información: Cantidad de gastos listados: {lstGasto.Count}";
-            }
-            catch (Exception)
-            {
 
-                throw;
+                txtSaldoTotal.Text = $@"${Saldo.ToString("N2")}";
+
+                //Diseño
+                if (Saldo <= 0)
+                {
+                    txtSaldoTotal.BackColor = Color.Green;
+                }
+                else
+                {
+                    txtSaldoTotal.BackColor = Color.Red;
+                }
+
+                return lstgastoDTO;
             }
+            catch (Exception) { throw; }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -315,6 +339,54 @@ namespace JuanApp2.Formularios.Gasto
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        private void btnExportarAExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog FolderBrowserDialog = new FolderBrowserDialog();
+                if (FolderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string SelectedPath = $@"{FolderBrowserDialog.SelectedPath}\\Gastos_{DateTime.Now.ToString("dd_MM_yyyy__HH_mm")}.xlsx";
+
+                    List<gastoDTO> lstgastoDTO = GetTabla();
+                    DataTable dtgastoDTO = new();
+
+                    dtgastoDTO.Columns.Add("ID", typeof(string));
+                    dtgastoDTO.Columns.Add("Referencia", typeof(string));
+                    dtgastoDTO.Columns.Add("Fecha", typeof(string));
+                    dtgastoDTO.Columns.Add("Descripcion", typeof(string));
+                    dtgastoDTO.Columns.Add("Importe", typeof(string));
+                    dtgastoDTO.Columns.Add("SaldoNegativo", typeof(string));
+
+                    decimal Saldo = 0;
+
+                    foreach (gastoDTO gastoDTO in lstgastoDTO)
+                    {
+                        Saldo += gastoDTO.Importe;
+
+                        dtgastoDTO.Rows.Add(
+                            gastoDTO.ID.ToString(),
+                            gastoDTO.Referencia,
+                            gastoDTO.Fecha.ToString("dd/MM/yyyy"),
+                            gastoDTO.Descripcion,
+                            $@"${gastoDTO.Importe.ToString("N2")}",
+                            $@"${Saldo.ToString("N2")}"
+                            );
+                    }
+
+
+                    _gastoService.ExportToExcel(SelectedPath, dtgastoDTO);
+
+                    MessageBox.Show($@"Generación de Excel realizada correctamente", "Información");
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

@@ -43,6 +43,9 @@
             numericUpDownRegistrosPorPagina = new NumericUpDown();
             label1 = new Label();
             pnlFiltersAndSearchBar = new Panel();
+            btnExportarAExcel = new Button();
+            label4 = new Label();
+            txtSaldoTotal = new TextBox();
             label3 = new Label();
             label2 = new Label();
             DateTimePickerFechaFin = new DateTimePicker();
@@ -192,6 +195,9 @@
             // pnlFiltersAndSearchBar
             // 
             pnlFiltersAndSearchBar.BackColor = Color.Black;
+            pnlFiltersAndSearchBar.Controls.Add(btnExportarAExcel);
+            pnlFiltersAndSearchBar.Controls.Add(label4);
+            pnlFiltersAndSearchBar.Controls.Add(txtSaldoTotal);
             pnlFiltersAndSearchBar.Controls.Add(label3);
             pnlFiltersAndSearchBar.Controls.Add(label2);
             pnlFiltersAndSearchBar.Controls.Add(DateTimePickerFechaFin);
@@ -210,6 +216,36 @@
             pnlFiltersAndSearchBar.Name = "pnlFiltersAndSearchBar";
             pnlFiltersAndSearchBar.Size = new Size(1924, 432);
             pnlFiltersAndSearchBar.TabIndex = 17;
+            // 
+            // btnExportarAExcel
+            // 
+            btnExportarAExcel.BackColor = Color.Black;
+            btnExportarAExcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnExportarAExcel.ForeColor = SystemColors.Window;
+            btnExportarAExcel.Location = new Point(1294, 228);
+            btnExportarAExcel.Name = "btnExportarAExcel";
+            btnExportarAExcel.Size = new Size(189, 84);
+            btnExportarAExcel.TabIndex = 31;
+            btnExportarAExcel.Text = "EXPORTAR A EXCEL";
+            btnExportarAExcel.UseVisualStyleBackColor = false;
+            btnExportarAExcel.Click += btnExportarAExcel_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.ForeColor = SystemColors.Window;
+            label4.Location = new Point(871, 141);
+            label4.Name = "label4";
+            label4.Size = new Size(219, 31);
+            label4.TabIndex = 27;
+            label4.Text = "Saldo total negativo";
+            // 
+            // txtSaldoTotal
+            // 
+            txtSaldoTotal.Location = new Point(871, 178);
+            txtSaldoTotal.Name = "txtSaldoTotal";
+            txtSaldoTotal.Size = new Size(253, 38);
+            txtSaldoTotal.TabIndex = 26;
             // 
             // label3
             // 
@@ -290,5 +326,8 @@
         private Label label2;
         private DateTimePicker DateTimePickerFechaFin;
         private DateTimePicker DateTimePickerFechaInicio;
+        private TextBox txtSaldoTotal;
+        private Label label4;
+        private Button btnExportarAExcel;
     }
 }

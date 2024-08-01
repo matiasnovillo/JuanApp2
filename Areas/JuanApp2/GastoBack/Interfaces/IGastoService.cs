@@ -17,11 +17,5 @@ namespace JuanApp2.Areas.JuanApp2.GastoBack.Interfaces
     public interface IGastoService
     {
         void ExportToExcel(string path, DataTable dtGasto);
-
-        void ExportToCSV(string path, List<Gasto> lstGasto);
-
-        void ExportToPDF(string path, List<Gasto> lstGasto);
-
-        List<Gasto> ImportExcel(string path, int userId);
     }
 }
