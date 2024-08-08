@@ -42,7 +42,7 @@
             DateTimePickerFecha = new DateTimePicker();
             label3 = new Label();
             txtImporte = new NumericUpDown();
-            label4 = new Label();
+            lblImporte = new Label();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtImporte).BeginInit();
@@ -174,17 +174,18 @@
             txtImporte.Name = "txtImporte";
             txtImporte.Size = new Size(295, 34);
             txtImporte.TabIndex = 29;
+            txtImporte.KeyPress += txtImporte_KeyPress;
             // 
-            // label4
+            // lblImporte
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(44, 357);
-            label4.Name = "label4";
-            label4.Size = new Size(95, 28);
-            label4.TabIndex = 30;
-            label4.Text = "Importe *";
+            lblImporte.AutoSize = true;
+            lblImporte.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblImporte.ForeColor = Color.White;
+            lblImporte.Location = new Point(44, 357);
+            lblImporte.Name = "lblImporte";
+            lblImporte.Size = new Size(95, 28);
+            lblImporte.TabIndex = 30;
+            lblImporte.Text = "Importe *";
             // 
             // FormularioGasto
             // 
@@ -192,7 +193,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(620, 568);
-            Controls.Add(label4);
+            Controls.Add(lblImporte);
             Controls.Add(txtImporte);
             Controls.Add(label3);
             Controls.Add(DateTimePickerFecha);
@@ -232,6 +233,6 @@
         private DateTimePicker DateTimePickerFecha;
         private Label label3;
         private NumericUpDown txtImporte;
-        private Label label4;
+        private Label lblImporte;
     }
 }

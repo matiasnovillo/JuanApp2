@@ -90,5 +90,19 @@ namespace JuanApp2.Formularios.Gasto
             }
             catch (Exception) { throw; }
         }
+
+        private void txtImporte_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    lblImporte.Text = $@"Importe * {txtImporte.Value.ToString("N2")}";
+
+                    btnGuardar.Focus();
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
