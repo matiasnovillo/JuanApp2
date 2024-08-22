@@ -5,6 +5,7 @@ using JuanApp2.DatabaseContexts;
 using System.Text.RegularExpressions;
 using System.Data;
 using JuanApp2.Areas.JuanApp2.CobradorBack.Entities;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -71,6 +72,17 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Repositories
                     .FirstOrDefault();
 
                 return Proveedor;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public List<Proveedor?> GetAllByProveedorIdWithIDsList(List<int> lstIDs)
+        {
+            try
+            {
+                return _context.Proveedor
+                            .Where(x => lstIDs.Contains(x.ProveedorId))
+                            .ToList();
             }
             catch (Exception) { throw; }
         }

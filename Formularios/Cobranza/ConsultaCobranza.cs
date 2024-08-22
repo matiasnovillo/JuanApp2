@@ -188,17 +188,35 @@ namespace JuanApp2.Formularios.Cobranza
 
                 DataGridViewCobranza.Rows.Clear();
 
+                //This has been done in this way to avoid hundred of calls to the DB
+                List<int> lstCobradorDataGridViewIDs = [];
                 foreach (Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
                 {
-                    Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorDataGridView = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
+                    lstCobradorDataGridViewIDs.Add(cobranza.CobradorId);
+                }
 
-                    DataGridViewCobranza.Rows.Add(cobranza.CobranzaId.ToString(),
-                        cobranza.DateTimeLastModification.ToString("dd/MM/yyyy HH:mm"),
-                        CobradorDataGridView.NombreCompleto,
-                        $@"${cobranza.DineroTotal.ToString("N2")}",
-                        $@"${cobranza.DineroEfectivo.ToString("N2")}",
-                        $@"${cobranza.DineroBanco.ToString("N2")}",
-                        $@"${cobranza.DineroCheque.ToString("N2")}",
+                List<Areas.JuanApp2.CobradorBack.Entities.Cobrador> lstCobradorDataGridView = _cobradorRepository
+                    .GetAllByCobradorIdWithIDsList(lstCobradorDataGridViewIDs);
+
+                for (int i = 0; i < lstCobranza.Count; i++)
+                {
+                    string CobradorNombreCompleto = "";
+
+                    for (int j = 0; j < lstCobradorDataGridView.Count; j++)
+                    {
+                        if (lstCobranza[i].CobradorId == lstCobradorDataGridView[j].CobradorId)
+                        {
+                            CobradorNombreCompleto = lstCobradorDataGridView[j].NombreCompleto;
+                        }
+                    }
+
+                    DataGridViewCobranza.Rows.Add(lstCobranza[i].CobranzaId.ToString(),
+                        lstCobranza[i].DateTimeLastModification.ToString("dd/MM/yyyy HH:mm"),
+                        CobradorNombreCompleto,
+                        $@"${lstCobranza[i].DineroTotal.ToString("N2")}",
+                        $@"${lstCobranza[i].DineroEfectivo.ToString("N2")}",
+                        $@"${lstCobranza[i].DineroBanco.ToString("N2")}",
+                        $@"${lstCobranza[i].DineroCheque.ToString("N2")}",
                         "",
                         "");
                 }

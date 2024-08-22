@@ -4,6 +4,7 @@ using JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces;
 using JuanApp2.DatabaseContexts;
 using System.Text.RegularExpressions;
 using System.Data;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 /*
  * GUID:e6c09dfe-3a3e-461b-b3f9-734aee05fc7b
@@ -52,6 +53,17 @@ namespace JuanApp2.Areas.JuanApp2.CobradorBack.Repositories
             {
                 return _context.Cobrador
                             .FirstOrDefault(x => x.CobradorId == cobradorId);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public List<Cobrador?> GetAllByCobradorIdWithIDsList(List<int> lstIDs)
+        {
+            try
+            {
+                return _context.Cobrador
+                            .Where(x => lstIDs.Contains(x.CobradorId))
+                            .ToList();
             }
             catch (Exception) { throw; }
         }

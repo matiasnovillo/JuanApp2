@@ -25,6 +25,8 @@ namespace JuanApp2.Areas.JuanApp2.CobradorBack.Interfaces
 
         List<Cobrador?> GetAll();
 
+        List<Cobrador?> GetAllByCobradorIdWithIDsList(List<int> lstIDs);
+
         List<Cobrador?> GetAllByCobradorId(List<int> lstCobradorChecked);
 
         List<Cobrador> GetAllByCobradorIdForModal(string textToSearch);

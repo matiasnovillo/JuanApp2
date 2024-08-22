@@ -31,6 +31,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
         private List<TipoDeMovimiento> _lstTipoDeMovimiento;
         private Color Color;
+        private bool IsFirstExecutionOfWindowsForm = true;
 
         public ConsultaFichaDeMovimientoDeCaja(ServiceProvider serviceProvider)
         {
@@ -116,7 +117,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
                 DateTime Sunday = Monday.AddDays(6);
 
-                DateTimePickerFechaInicio.Value = Today.AddMonths(-2);
+                DateTimePickerFechaInicio.Value = Today.AddMonths(-3); //3 MONTHS BEFORE
                 DateTimePickerFechaFin.Value = Sunday;
 
                 txtRegistrosPorPagina.Value = 2000;
@@ -137,6 +138,8 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 PanelColor.BackColor = Color;
 
                 GetTabla();
+
+                IsFirstExecutionOfWindowsForm = false;
             }
             catch (Exception)
             {
@@ -259,7 +262,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 List<fichaDeMovimientoDeCajaDTO> lstFichaDeMovimientoDeCajaDTO = [];
 
                 #region Cobranza
-                List<JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
+                List<Areas.JuanApp2.CobranzaBack.Entities.Cobranza> lstCobranza = [];
                 if (string.IsNullOrEmpty(txtBuscar.Text))
                 {
                     lstCobranza = _cobranzaRepository
@@ -272,7 +275,7 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                 }
                 else
                 {
-                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
+                    Areas.JuanApp2.CobradorBack.Entities.Cobrador Cobrador = _cobradorRepository.GetByNombreCompleto(txtBuscar.Text);
 
                     if (Cobrador != null)
                     {
@@ -287,18 +290,36 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     }
                 }
 
-                foreach (JuanApp2.Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
+                //This has been done in this way to avoid hundred of calls to the DB
+                List<int> lstCobradorCustomIDs = [];
+                foreach (Areas.JuanApp2.CobranzaBack.Entities.Cobranza cobranza in lstCobranza)
                 {
-                    JuanApp2.Areas.JuanApp2.CobradorBack.Entities.Cobrador CobradorCustom = _cobradorRepository.GetByCobradorId(cobranza.CobradorId);
+                    lstCobradorCustomIDs.Add(cobranza.CobradorId);
+                }
 
+                List<Areas.JuanApp2.CobradorBack.Entities.Cobrador> lstCobradorCustom = _cobradorRepository
+                    .GetAllByCobradorIdWithIDsList(lstCobradorCustomIDs);
+
+                for (int i = 0; i < lstCobranza.Count; i++)
+                {
+                    string CobradorNombreCompleto = "";
+
+                    for (int j = 0; j < lstCobradorCustom.Count; j++)
+                    {
+                        if (lstCobranza[i].CobradorId == lstCobradorCustom[j].CobradorId)
+                        {
+                            CobradorNombreCompleto = lstCobradorCustom[j].NombreCompleto;
+                        }
+                    }
+                    
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
-                        ID = cobranza.CobranzaId,
-                        Fecha = cobranza.DateTimeLastModification,
+                        ID = lstCobranza[i].CobranzaId,
+                        Fecha = lstCobranza[i].DateTimeLastModification,
                         Referencia = "COBRANZA",
                         Proveedor = "",
-                        Descripcion = CobradorCustom.NombreCompleto,
-                        Debe = cobranza.DineroTotal,
+                        Descripcion = CobradorNombreCompleto,
+                        Debe = lstCobranza[i].DineroTotal,
                         Haber = 0
                     };
 
@@ -357,19 +378,37 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
                     }
                 }
 
+                //This has been done in this way to avoid hundred of calls to the DB
+                List<int> lstProveedorCustomIDs = [];
                 foreach (ModuloProveedor moduloproveedor in lstModuloProveedor)
                 {
-                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorCustom = _proveedorRepository.GetByProveedorId(moduloproveedor.ProveedorId);
+                    lstProveedorCustomIDs.Add(moduloproveedor.ProveedorId);
+                }
+
+                List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> lstProveedorCustom = _proveedorRepository
+                    .GetAllByProveedorIdWithIDsList(lstProveedorCustomIDs);
+
+                for (int i = 0; i < lstModuloProveedor.Count; i++)
+                {
+                    string ProveedorNombreCompleto = "";
+
+                    for (int j = 0; j < lstProveedorCustom.Count; j++)
+                    {
+                        if (lstModuloProveedor[i].ProveedorId == lstProveedorCustom[j].ProveedorId)
+                        {
+                            ProveedorNombreCompleto = lstProveedorCustom[j].NombreCompleto;
+                        }
+                    }
 
                     fichaDeMovimientoDeCajaDTO fichaDeMovimientoDeCajaDTO = new()
                     {
-                        ID = moduloproveedor.ModuloProveedorId,
-                        Fecha = moduloproveedor.DateTimeLastModification,
+                        ID = lstModuloProveedor[i].ModuloProveedorId,
+                        Fecha = lstModuloProveedor[i].DateTimeLastModification,
                         Referencia = "PAGO PROVEEDORES",
-                        Proveedor = ProveedorCustom.NombreCompleto,
-                        Descripcion = moduloproveedor.Descripcion,
+                        Proveedor = ProveedorNombreCompleto,
+                        Descripcion = lstModuloProveedor[i].Descripcion,
                         Debe = 0,
-                        Haber = moduloproveedor.DineroTotal
+                        Haber = lstModuloProveedor[i].DineroTotal
                     };
 
                     lstFichaDeMovimientoDeCajaDTO.Add(fichaDeMovimientoDeCajaDTO);
@@ -642,7 +681,10 @@ namespace JuanApp2.Formularios.FichaDeMovimientoDeCaja
 
         private void cmbTipoDeMovimiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GetTabla();
+            if (!IsFirstExecutionOfWindowsForm)
+            {
+                GetTabla();
+            }
         }
 
         private void btnExportarAExcel_Click(object sender, EventArgs e)

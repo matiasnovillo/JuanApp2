@@ -57,14 +57,24 @@ namespace JuanApp2.DatabaseContexts
             {
                 string ConnectionString = "";
 #if DEBUG
-                ConnectionString = "data source =.; " +
-                   "initial catalog = JuanApp2; " +
-                   "Integrated Security = SSPI;" +
-                   " MultipleActiveResultSets=True;" +
-                   "Pooling=false;" +
-                   "Persist Security Info=True;" +
-                   "App=EntityFramework;" +
-                   "TrustServerCertificate=True;";
+                string IP = "192.168.28.14";
+                string Server = "sql4.baehost.com";
+
+                ConnectionString = "Password=1vb&10tD5;" +
+                    "Persist Security Info=True;" +
+                    "User ID=fiyista1_JuanApp2Admin;" +
+                    "Initial Catalog=fiyista1_JuanApp2;" +
+                    "Data Source=sql4.baehost.com;" +
+                    "TrustServerCertificate=True";
+
+                //ConnectionString = "data source =.; " +
+                //   "initial catalog = JuanApp2; " +
+                //   "Integrated Security = SSPI;" +
+                //   " MultipleActiveResultSets=True;" +
+                //   "Pooling=false;" +
+                //   "Persist Security Info=True;" +
+                //   "App=EntityFramework;" +
+                //   "TrustServerCertificate=True;";
 #else
                 string IP = "192.168.28.14";
                 string Server = "sql4.baehost.com";

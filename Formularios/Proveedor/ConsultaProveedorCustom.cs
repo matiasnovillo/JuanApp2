@@ -29,6 +29,7 @@ namespace JuanApp2.Formularios.Proveedor
         private Color ColorForCompra;
         private Color ColorForPagoAProveedores;
         private Color ColorForIngreso;
+        private bool IsFirstExecutionOfWindowsForm = true;
 
         public ConsultaProveedorCustom(ServiceProvider serviceProvider)
         {
@@ -130,7 +131,7 @@ namespace JuanApp2.Formularios.Proveedor
                 DateTime Monday = Today.AddDays(-(int)Today.DayOfWeek + (int)DayOfWeek.Monday);
                 DateTime Sunday = Monday.AddDays(6);
 
-                DateTimePickerFechaInicio.Value = Today.AddMonths(-2);
+                DateTimePickerFechaInicio.Value = Today.AddMonths(-12); //1 YEAR BEFORE
                 DateTimePickerFechaFin.Value = Sunday;
 
                 _lstProveedor = _proveedorRepository.GetAll();
@@ -154,6 +155,8 @@ namespace JuanApp2.Formularios.Proveedor
                 PanelColourIngreso.BackColor = ColorForIngreso;
 
                 GetTabla();
+
+                IsFirstExecutionOfWindowsForm = false;
             }
             catch (Exception) { throw; }
         }
@@ -541,23 +544,41 @@ namespace JuanApp2.Formularios.Proveedor
                     .OrderBy(x => x.DateTimeLastModification)
                     .ToList();
 
+                //This has been done in this way to avoid hundred of calls to the DB
+                List<int> lstProveedorDataGridViewIDs = [];
                 foreach (consultaProveedorDTO consultaProveedorDTO in lstconsultaProveedorDTO)
                 {
-                    Areas.JuanApp2.ProveedorBack.Entities.Proveedor ProveedorDataGridView = _proveedorRepository.GetByProveedorId(consultaProveedorDTO.ProveedorId);
+                    lstProveedorDataGridViewIDs.Add(consultaProveedorDTO.ProveedorId);
+                }
 
-                    SaldoTotal += consultaProveedorDTO.Debe - consultaProveedorDTO.Haber;
+                List<Areas.JuanApp2.ProveedorBack.Entities.Proveedor> lstProveedorDataGridView = _proveedorRepository
+                    .GetAllByProveedorIdWithIDsList(lstProveedorDataGridViewIDs);
 
-                    DataGridViewCompra.Rows.Add(consultaProveedorDTO.Id.ToString(),
-                        consultaProveedorDTO.Fecha.ToString("dd/MM/yyyy"),
-                        ProveedorDataGridView.NombreCompleto,
-                        consultaProveedorDTO.Referencia,
-                        consultaProveedorDTO.Descripcion,
-                        (consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" || consultaProveedorDTO.Referencia == "INGRESO") ? "" : consultaProveedorDTO.Kilogramo,
-                        (consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" || consultaProveedorDTO.Referencia == "INGRESO") ? "" : $@"${consultaProveedorDTO.Precio.ToString("N2")}",
-                        consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" ? "" : $@"${consultaProveedorDTO.Debe.ToString("N2")}",
-                        $@"${consultaProveedorDTO.Haber.ToString("N2")}",
+                for (int i = 0; i < lstconsultaProveedorDTO.Count; i++)
+                {
+                    string ProveedorNombreCompleto = "";
+
+                    for (int j = 0; j < lstProveedorDataGridView.Count; j++)
+                    {
+                        if (lstconsultaProveedorDTO[i].ProveedorId == lstProveedorDataGridView[j].ProveedorId)
+                        {
+                            ProveedorNombreCompleto = lstProveedorDataGridView[j].NombreCompleto;
+                        }
+                    }
+
+                    SaldoTotal += lstconsultaProveedorDTO[i].Debe - lstconsultaProveedorDTO[i].Haber;
+
+                    DataGridViewCompra.Rows.Add(lstconsultaProveedorDTO[i].Id.ToString(),
+                        lstconsultaProveedorDTO[i].Fecha.ToString("dd/MM/yyyy"),
+                        ProveedorNombreCompleto,
+                        lstconsultaProveedorDTO[i].Referencia,
+                        lstconsultaProveedorDTO[i].Descripcion,
+                        (lstconsultaProveedorDTO[i].Referencia == "PAGO A PROVEEDORES" || lstconsultaProveedorDTO[i].Referencia == "INGRESO") ? "" : lstconsultaProveedorDTO[i].Kilogramo,
+                        (lstconsultaProveedorDTO[i].Referencia == "PAGO A PROVEEDORES" || lstconsultaProveedorDTO[i].Referencia == "INGRESO") ? "" : $@"${lstconsultaProveedorDTO[i].Precio.ToString("N2")}",
+                        lstconsultaProveedorDTO[i].Referencia == "PAGO A PROVEEDORES" ? "" : $@"${lstconsultaProveedorDTO[i].Debe.ToString("N2")}",
+                        $@"${lstconsultaProveedorDTO[i].Haber.ToString("N2")}",
                         $@"${SaldoTotal.ToString("N2")}",
-                        (consultaProveedorDTO.Referencia == "PAGO A PROVEEDORES" || consultaProveedorDTO.Referencia == "INGRESO") ? "" : consultaProveedorDTO.Vencimiento.ToString("dd/MM/yyyy"),
+                        (lstconsultaProveedorDTO[i].Referencia == "PAGO A PROVEEDORES" || lstconsultaProveedorDTO[i].Referencia == "INGRESO") ? "" : lstconsultaProveedorDTO[i].Vencimiento.ToString("dd/MM/yyyy"),
                         "",
                         "");
                 }
@@ -610,7 +631,10 @@ namespace JuanApp2.Formularios.Proveedor
         {
             try
             {
-                GetTabla();
+                if (!IsFirstExecutionOfWindowsForm)
+                {
+                    GetTabla();
+                }
             }
             catch (Exception) { throw; }
         }

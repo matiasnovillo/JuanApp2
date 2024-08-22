@@ -25,6 +25,8 @@ namespace JuanApp2.Areas.JuanApp2.ProveedorBack.Interfaces
 
         Proveedor? GetByNombreCompleto(string nombreCompleto);
 
+        List<Proveedor?> GetAllByProveedorIdWithIDsList(List<int> lstIDs);
+
         List<Proveedor?> GetAll();
 
         List<Proveedor?> GetAllByProveedorId(List<int> lstProveedorChecked);
