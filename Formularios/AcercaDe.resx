@@ -1135,6 +1135,22 @@
         YII=
 </value>
   </data>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>PAMPA Y BRASA
+
+APLICACIÓN ERP DE CARÁCTER GERENCIAL PARA GESTIONAR FLUJOS DE DINERO.
+
+Año: 2024 | Versión: 1.48
+Creada por Matías Alejandro Novillo
+
+SITIO PROFESIONAL
+www.fiyistack.com
+
+PERFIL IT EN LINKEDIN Y TORRE.AI
+www.linkedin.com/in/matiasnovillo
+www.torre.ai/matiasalejandronovillo
+</value>
+  </data>
   <data name="pictureBox2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAABGdBTUEAALGPC/xhBQAA/8dJREFUeF7s
